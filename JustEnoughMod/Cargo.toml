@@ -11,6 +11,6 @@ opt-level = 1
 opt-level = 3
 
 [dependencies]
-core = { path = "../JustEnoughMod-core" }
+JustEnoughMod_core = { path = "../JustEnoughMod_core" }
 bevy = { version = "0.12", features = [ "wayland" ] }
 libloading = "0.8.1"

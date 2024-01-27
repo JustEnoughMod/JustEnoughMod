@@ -1,5 +1,5 @@
 [package]
-name = "JustEnoughMod-core"
+name = "JustEnoughMod_core"
 version = "0.0.0"
 edition = "2021"
 license = "MIT"

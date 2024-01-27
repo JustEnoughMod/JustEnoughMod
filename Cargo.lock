@@ -6,13 +6,13 @@ version = 3
 name = "JustEnoughMod"
 version = "0.0.0"
 dependencies = [
- "JustEnoughMod-core",
+ "JustEnoughMod_core",
  "bevy",
  "libloading 0.8.1",
 ]
 
 [[package]]
-name = "JustEnoughMod-core"
+name = "JustEnoughMod_core"
 version = "0.0.0"
 
 [[package]]
