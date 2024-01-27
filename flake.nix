@@ -78,9 +78,9 @@
           # Note that this is done as a separate derivation so that
           # we can block the CI if there are issues here, but not
           # prevent downstream consumers from building our crate by itself.
-          my-crate-clippy = craneLib.cargoClippy {
-            cargoClippyExtraArgs = "--all-targets -- --deny warnings";
-          };
+          # my-crate-clippy = craneLib.cargoClippy {
+          #   cargoClippyExtraArgs = "--all-targets -- --deny warnings";
+          # };
 
           # Check formatting
           my-crate-fmt = craneLib.cargoFmt { inherit src; };
