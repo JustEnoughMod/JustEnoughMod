@@ -1,8 +1,8 @@
 [workspace]
 
 members = [
-    "app",
-    "lib",
+    "JustEnoughMod",
+    "JustEnoughMod-core",
 ]
 
 resolver = "2"
