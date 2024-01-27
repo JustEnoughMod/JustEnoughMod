@@ -3,6 +3,7 @@
 members = [
     "JustEnoughMod",
     "JustEnoughMod_core",
+    "JustEnoughMod_base",
 ]
 
 resolver = "2"

@@ -1,14 +1,12 @@
-/// The `PluginRegistrar` is defined by the application and passed to `plugin_entry`. It's used
-/// for a plugin module to register itself with the application.
-pub trait PluginRegistrar {
-    fn register_plugin(&mut self, plugin: Box<dyn Plugin>);
+struct JustEnoughMod_base;
+
+impl JustEnoughMod_core::Plugin for JustEnoughMod_base {
+    fn init(&self) {
+        println!("JustEnoughMod_base::init")
+    }
 }
 
-/// `Plugin` is implemented by a plugin library for one or more types. As you need additional
-/// callbacks, they can be defined here. These are first class Rust trait objects, so you have the
-/// full flexibility of that system. The main thing you'll lose access to is generics, but that's
-/// expected with a plugin system
-pub trait Plugin {
-    /// This is a callback routine implemented by the plugin.
-    fn init(&self);
+#[no_mangle]
+pub fn plugin_entry(registrar: &mut dyn JustEnoughMod_core::PluginRegistrar) {
+    registrar.register_plugin(Box::new(JustEnoughMod_base));
 }

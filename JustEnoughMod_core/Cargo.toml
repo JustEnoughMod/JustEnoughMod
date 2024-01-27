@@ -1,13 +1,9 @@
 [package]
-name = "JustEnoughMod_base"
-description = "The base plugin for JustEnoughMod"
+name = "JustEnoughMod_core"
+description = "The core libary for JustEnoughMod"
 version = "0.0.1"
 authors = ["LDprg <lukas_4dr@gmx.at>"]
 edition = "2021"
 license = "MIT"
 
-[lib]
-crate-type = ["dylib"]
-
 [dependencies]
-#JustEnoughMod_core = { path = "../JustEnoughMod_core" }

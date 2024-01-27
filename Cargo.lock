@@ -12,6 +12,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "JustEnoughMod_base"
+version = "0.0.1"
+dependencies = [
+ "JustEnoughMod_core",
+]
+
+[[package]]
 name = "JustEnoughMod_core"
 version = "0.0.1"
 
