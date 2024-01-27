@@ -6,12 +6,6 @@ authors = ["LDprg <lukas_4dr@gmx.at>"]
 edition = "2021"
 license = "MIT"
 
-[profile.dev]
-opt-level = 1
-
-[profile.dev.pacakge."*"]
-opt-level = 3
-
 [dependencies]
 just_enough_mod_core = { path = "../just_enough_mod_core" }
 bevy = { version = "0.12", features = [ "wayland" ] }
