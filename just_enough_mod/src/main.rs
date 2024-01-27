@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 use libloading::Library;
 
-use JustEnoughMod_core::{Plugin, PluginRegistrar};
+use just_enough_mod_core::{Plugin, PluginRegistrar};
 
 struct Registrar {
     plugins: Vec<Box<dyn Plugin>>,

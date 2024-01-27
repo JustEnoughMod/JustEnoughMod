@@ -1,5 +1,5 @@
 [package]
-name = "JustEnoughMod_core"
+name = "just_enough_mod_core"
 description = "The core libary for JustEnoughMod"
 version = "0.0.1"
 authors = ["LDprg <lukas_4dr@gmx.at>"]

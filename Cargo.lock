@@ -3,26 +3,6 @@
 version = 3
 
 [[package]]
-name = "JustEnoughMod"
-version = "0.0.1"
-dependencies = [
- "JustEnoughMod_core",
- "bevy",
- "libloading 0.8.1",
-]
-
-[[package]]
-name = "JustEnoughMod_base"
-version = "0.0.1"
-dependencies = [
- "JustEnoughMod_core",
-]
-
-[[package]]
-name = "JustEnoughMod_core"
-version = "0.0.1"
-
-[[package]]
 name = "ab_glyph"
 version = "0.2.23"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2117,6 +2097,26 @@ checksum = "9a1d36f1235bc969acba30b7f5990b864423a6068a10f7c90ae8f0112e3a59d1"
 dependencies = [
  "wasm-bindgen",
 ]
+
+[[package]]
+name = "just_enough_mod"
+version = "0.0.1"
+dependencies = [
+ "bevy",
+ "just_enough_mod_core",
+ "libloading 0.8.1",
+]
+
+[[package]]
+name = "just_enough_mod_base"
+version = "0.0.1"
+dependencies = [
+ "just_enough_mod_core",
+]
+
+[[package]]
+name = "just_enough_mod_core"
+version = "0.0.1"
 
 [[package]]
 name = "khronos-egl"

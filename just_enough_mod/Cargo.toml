@@ -1,5 +1,5 @@
 [package]
-name = "JustEnoughMod"
+name = "just_enough_mod"
 description = "JustEnoughMod a game dedicated for modding"
 version = "0.0.1"
 authors = ["LDprg <lukas_4dr@gmx.at>"]
@@ -13,6 +13,6 @@ opt-level = 1
 opt-level = 3
 
 [dependencies]
-JustEnoughMod_core = { path = "../JustEnoughMod_core" }
+just_enough_mod_core = { path = "../just_enough_mod_core" }
 bevy = { version = "0.12", features = [ "wayland" ] }
 libloading = "0.8.1"
