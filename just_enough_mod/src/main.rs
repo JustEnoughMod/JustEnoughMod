@@ -31,6 +31,10 @@ fn main() {
         }
     }
     
+    for plugin in registrar.plugins {
+        plugin.init();
+    }
+
     App::new()
         .insert_resource(ClearColor(Color::BLACK))
         .add_plugins(DefaultPlugins)
