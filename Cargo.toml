@@ -1,14 +1,8 @@
-[package]
-name = "JustEnoughMod"
-version = "0.1.0"
-edition = "2021"
-license = "MIT"
+[workspace]
 
-[profile.dev]
-opt-level = 1
+members = [
+    "app",
+    "lib",
+]
 
-[profile.dev.pacakge."*"]
-opt-level = 3
-
-[dependencies]
-bevy = { version = "0.12", features = [ "wayland" ] }
+resolver = "2"

@@ -49,9 +49,11 @@
         # Build the actual crate itself, reusing the dependency
         # artifacts from above.
         my-crate = craneLib.buildPackage rec {
-          pname = "JustEnoughMod";
-          src = ./.;
+          inherit src;
 
+          pname = "JustEnoughMod";
+          version = "0.0.0";
+          
           nativeBuildInputs = buildDeps;
           buildInputs = runtimeDeps;
 
