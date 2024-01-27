@@ -1,6 +1,8 @@
 [package]
 name = "JustEnoughMod"
+description = "JustEnoughMod a game dedicated for modding"
 version = "0.0.1"
+authors = ["LDprg <lukas_4dr@gmx.at>"]
 edition = "2021"
 license = "MIT"
 
