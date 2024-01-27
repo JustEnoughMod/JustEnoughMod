@@ -4,7 +4,7 @@ version = 3
 
 [[package]]
 name = "JustEnoughMod"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "JustEnoughMod_core",
  "bevy",
@@ -13,7 +13,7 @@ dependencies = [
 
 [[package]]
 name = "JustEnoughMod_core"
-version = "0.0.0"
+version = "0.0.1"
 
 [[package]]
 name = "ab_glyph"

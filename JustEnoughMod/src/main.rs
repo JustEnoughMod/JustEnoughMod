@@ -19,12 +19,12 @@ fn main() {
     };
 
     for path in std::env::args_os().skip(1) {
-        // In this code, we never close the shared library - if you need to be able to unload the
-        // library, that will require more work.
-        let lib = Box::leak(Box::new(Library::new(path).unwrap()));
         // NOTE: You need to do something to ensure you're only loading "safe" code. Out of scope
         // for this code.
         unsafe {
+            // In this code, we never close the shared library - if you need to be able to unload the
+            // library, that will require more work.
+            let lib = Box::leak(Box::new(Library::new(path).unwrap()));
             let func: libloading::Symbol<unsafe extern "C" fn(&mut dyn PluginRegistrar) -> ()> =
                 lib.get(b"plugin_entry").unwrap();
             func(&mut registrar);
