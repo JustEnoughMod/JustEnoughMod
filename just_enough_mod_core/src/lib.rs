@@ -1,3 +1,5 @@
+use bevy::prelude::*;
+
 /// The `PluginRegistrar` is defined by the application and passed to `plugin_entry`. It's used
 /// for a plugin module to register itself with the application.
 pub trait PluginRegistrar {
@@ -11,4 +13,5 @@ pub trait PluginRegistrar {
 pub trait Plugin {
     /// This is a callback routine implemented by the plugin.
     fn init(&self);
+    fn bevy_init(&self, sched: Option<&mut Schedule>);
 }

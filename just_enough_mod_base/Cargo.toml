@@ -12,3 +12,4 @@ crate-type = ["dylib"]
 
 [dependencies]
 just_enough_mod_core = { path = "../just_enough_mod_core" }
+bevy = { version = "0.12", features = [ "wayland" ] }

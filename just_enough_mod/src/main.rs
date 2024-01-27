@@ -31,16 +31,21 @@ fn main() {
         }
     }
     
-    for plugin in registrar.plugins {
+    for plugin in &registrar.plugins {
         plugin.init();
     }
 
-    App::new()
-        .insert_resource(ClearColor(Color::BLACK))
-        .add_plugins(DefaultPlugins)
-        .add_systems(Startup, setup)
-        .add_systems(Update, rotate)
-        .run();
+    let mut app = App::new();
+    app
+    .insert_resource(ClearColor(Color::BLACK))
+    .add_plugins(DefaultPlugins)
+    .add_systems(Startup, setup);
+
+    for plugin in &registrar.plugins {
+       plugin.bevy_init(app.get_schedule_mut(Update));
+    }
+
+    app.run();
 }
 
 fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
@@ -52,10 +57,4 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         texture: asset_server.load("bevy.png"),
         ..default()
     });
-}
-
-fn rotate(mut query: Query<&mut Transform, With<Sprite>>, time: Res<Time>) {
-    for mut bevy in &mut query {
-        bevy.rotate_local_z(-time.delta_seconds());
-    }
 }
