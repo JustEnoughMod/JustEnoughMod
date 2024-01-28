@@ -1,9 +1,17 @@
 use bevy::prelude::*;
+use just_enough_mod_core::JEMPlugin;
+
 pub struct BasePlugin;
 
 impl Plugin for BasePlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(Update, rotate).add_systems(Startup, setup);
+    }
+}
+
+impl JEMPlugin for BasePlugin {
+    fn test(&self) {
+        println!("test");
     }
 }
 

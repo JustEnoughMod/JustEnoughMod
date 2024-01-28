@@ -2125,10 +2125,19 @@ name = "just_enough_mod"
 version = "0.0.1"
 dependencies = [
  "bevy",
+ "just_enough_mod_core",
 ]
 
 [[package]]
 name = "just_enough_mod_base"
+version = "0.0.1"
+dependencies = [
+ "bevy",
+ "just_enough_mod_core",
+]
+
+[[package]]
+name = "just_enough_mod_core"
 version = "0.0.1"
 dependencies = [
  "bevy",

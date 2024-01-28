@@ -1,4 +1,5 @@
 use bevy::prelude::*;
+use just_enough_mod_core::JEMPlugin;
 
 fn main() {
     let mut app = App::new();
@@ -12,6 +13,8 @@ fn main() {
             app.load_plugin(path);
         }
     }
+
+    app.get_added_plugins::<Box<JEMPlugin>>()[0].test();
 
     app.run();
 }

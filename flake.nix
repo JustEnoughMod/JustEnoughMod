@@ -44,7 +44,7 @@
         pname = "just_enough_mod";
         version = "0.0.0";
 
-        buildDeps = (with pkgs; [ pkg-config makeWrapper clang lld ]);
+        buildDeps = (with pkgs; [ pkg-config makeWrapper clang lld mold ]);
 
         runtimeDeps = (with pkgs;
           [ libxkbcommon alsa-lib udev vulkan-loader wayland ]
@@ -102,12 +102,16 @@
           # Inherit inputs from checks.
           checks = self.checks.${system};
 
+          RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
           # Additional dev-shell environment variables can be set directly
           LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath runtimeDeps}";
 
           # Extra inputs can be added here; cargo and rustc are provided by default.
-          packages = [
-            # pkgs.ripgrep
+          packages = with pkgs; [
+          ];
+
+          nativeBuildInputs = with pkgs; [
+              pkg-config
           ];
         };
       });
