@@ -44,7 +44,7 @@
         pname = "just_enough_mod";
         version = "0.0.0";
 
-        buildDeps = (with pkgs; [ pkg-config makeWrapper clang lld mold ]);
+        buildDeps = (with pkgs; [ pkg-config makeWrapper clang lld ]);
 
         runtimeDeps = (with pkgs;
           [ libxkbcommon alsa-lib udev vulkan-loader wayland ]
@@ -62,8 +62,7 @@
             wrapProgram $out/bin/${pname} \
               --prefix LD_LIBRARY_PATH : ${
                 pkgs.lib.makeLibraryPath runtimeDeps
-              } \
-              --prefix XCURSOR_THEME : "Adwaita"
+              } 
             mkdir -p $out/bin/assets
             cp -a just_enough_mod/assets $out/bin
           '';
@@ -104,10 +103,7 @@
           checks = self.checks.${system};
 
           # Additional dev-shell environment variables can be set directly
-          RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
-          RUSTFLAGS = "-Clink-arg=-fuse-ld=${pkgs.mold}/bin/mold -Zshare-generics=y";
           LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath runtimeDeps}";
-          XCURSOR_THEME = "Adwaita";
 
           # Extra inputs can be added here; cargo and rustc are provided by default.
           packages = [
