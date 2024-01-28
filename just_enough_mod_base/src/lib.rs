@@ -1,18 +1,9 @@
 use bevy::prelude::*;
-use just_enough_mod_core::{Plugin, PluginRegistrar};
+pub struct BasePlugin;
 
-struct JustEnoughModBase;
-
-impl Plugin for JustEnoughModBase {
-    fn init(&self) {
-        println!("JustEnoughModBase::init")
-    }
-
-    fn bevy_init(&self, app: &mut App) {
-        app
-        .add_systems(Update, rotate)
-        .add_systems(Startup, setup);
-
+impl Plugin for BasePlugin {
+    fn build(&self, app: &mut App) {
+        app.add_systems(Update, rotate).add_systems(Startup, setup);
     }
 }
 
@@ -34,6 +25,6 @@ fn rotate(mut query: Query<&mut Transform, With<Sprite>>, time: Res<Time>) {
 }
 
 #[no_mangle]
-pub fn plugin_entry(registrar: &mut dyn PluginRegistrar) {
-    registrar.register_plugin(Box::new(JustEnoughModBase));
+pub fn _bevy_create_plugin() -> *mut dyn Plugin {
+    return Box::into_raw(Box::new(BasePlugin));
 }

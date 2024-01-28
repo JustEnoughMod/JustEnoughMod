@@ -522,6 +522,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "bevy_dynamic_plugin"
+version = "0.12.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "79613b6fadc5cc0d42761fb9b3bb42cb4c0505bc27a5673ebb39d49914078ec2"
+dependencies = [
+ "bevy_app",
+ "libloading 0.8.1",
+ "thiserror",
+]
+
+[[package]]
 name = "bevy_ecs"
 version = "0.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -674,6 +685,7 @@ dependencies = [
  "bevy_core_pipeline",
  "bevy_derive",
  "bevy_diagnostic",
+ "bevy_dynamic_plugin",
  "bevy_ecs",
  "bevy_gilrs",
  "bevy_gizmos",
@@ -2113,20 +2125,10 @@ name = "just_enough_mod"
 version = "0.0.1"
 dependencies = [
  "bevy",
- "just_enough_mod_core",
- "libloading 0.8.1",
 ]
 
 [[package]]
 name = "just_enough_mod_base"
-version = "0.0.1"
-dependencies = [
- "bevy",
- "just_enough_mod_core",
-]
-
-[[package]]
-name = "just_enough_mod_core"
 version = "0.0.1"
 dependencies = [
  "bevy",

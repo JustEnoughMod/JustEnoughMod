@@ -1,7 +1,6 @@
 [workspace]
 members = [
     "just_enough_mod",
-    "just_enough_mod_core",
     "just_enough_mod_base",
 ]
 
