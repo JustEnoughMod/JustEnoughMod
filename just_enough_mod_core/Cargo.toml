@@ -7,4 +7,4 @@ edition = "2021"
 license = "MIT"
 
 [dependencies]
-bevy = { version = "0.12", features = [ "wayland" ] }
+bevy = { version = "0.12", features = [ "wayland", "dynamic_linking" ] }

@@ -9,10 +9,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    fenix = {
-      url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.rust-analyzer-src.follows = "";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+      };
     };
 
     flake-utils.url = "github:numtide/flake-utils";
@@ -23,14 +25,20 @@
     };
   };
 
-  outputs = { self, nixpkgs, crane, fenix, flake-utils, advisory-db, ... }:
+  outputs = { self, nixpkgs, crane, rust-overlay, flake-utils, advisory-db, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [ (import rust-overlay) ];
+        };
 
-        inherit (pkgs) lib;
+        rustToolchain = pkgs.rust-bin.selectLatestNightlyWith (toolchain: toolchain.default.override {
+          extensions = [ "rust-src" ];
+          targets = [ "x86_64-unknown-linux-gnu" ];
+        });
 
-        craneLib = crane.lib.${system};
+        craneLib = (crane.mkLib pkgs).overrideToolchain rustToolchain;
         src = craneLib.cleanCargoSource (craneLib.path ./.);
 
         pname = "just_enough_mod";
@@ -41,13 +49,6 @@
         runtimeDeps = (with pkgs;
           [ libxkbcommon alsa-lib udev vulkan-loader wayland ]
           ++ (with xorg; [ libXcursor libXrandr libXi libX11 ]));
-
-        craneLibLLvmTools = craneLib.overrideToolchain
-          (fenix.packages.${system}.complete.withComponents [
-            "cargo"
-            "llvm-tools"
-            "rustc"
-          ]);
 
         # Build the actual crate itself, reusing the dependency
         # artifacts from above.
@@ -104,7 +105,7 @@
 
           # Additional dev-shell environment variables can be set directly
           RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
-          RUSTFLAGS = "-Clink-arg=-fuse-ld=${pkgs.mold}/bin/mold";
+          RUSTFLAGS = "-Clink-arg=-fuse-ld=${pkgs.mold}/bin/mold -Zshare-generics=y";
           LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath runtimeDeps}";
           XCURSOR_THEME = "Adwaita";
 
