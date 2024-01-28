@@ -13,5 +13,5 @@ pub trait PluginRegistrar {
 pub trait Plugin {
     /// This is a callback routine implemented by the plugin.
     fn init(&self);
-    fn bevy_init(&self, sched: Option<&mut Schedule>);
+    fn bevy_init(&self, app: &mut App);
 }

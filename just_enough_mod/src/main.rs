@@ -1,5 +1,5 @@
 use bevy::prelude::*;
-use libloading::Library;
+// use libloading::Library;
 
 use just_enough_mod_core::{Plugin, PluginRegistrar};
 
@@ -14,47 +14,35 @@ impl PluginRegistrar for Registrar {
 }
 
 fn main() {
-    let mut registrar = Registrar {
-        plugins: Vec::new(),
-    };
+    // let mut registrar = Registrar {
+    //     plugins: Vec::new(),
+    // };
 
-    for path in std::env::args_os().skip(1) {
-        // NOTE: You need to do something to ensure you're only loading "safe" code. Out of scope
-        // for this code.
-        unsafe {
-            // In this code, we never close the shared library - if you need to be able to unload the
-            // library, that will require more work.
-            let lib = Box::leak(Box::new(Library::new(path).unwrap()));
-            let func: libloading::Symbol<unsafe extern "C" fn(&mut dyn PluginRegistrar) -> ()> =
-                lib.get(b"plugin_entry").unwrap();
-            func(&mut registrar);
-        }
-    }
+    // for path in std::env::args_os().skip(1) {
+    //     // NOTE: You need to do something to ensure you're only loading "safe" code. Out of scope
+    //     // for this code.
+    //     unsafe {
+    //         // In this code, we never close the shared library - if you need to be able to unload the
+    //         // library, that will require more work.
+    //         let lib = Box::leak(Box::new(Library::new(path).unwrap()));
+    //         let func: libloading::Symbol<unsafe extern "C" fn(&mut dyn PluginRegistrar) -> ()> =
+    //             lib.get(b"plugin_entry").unwrap();
+    //         func(&mut registrar);
+    //     }
+    // }
     
-    for plugin in &registrar.plugins {
-        plugin.init();
-    }
+    // for plugin in &registrar.plugins {
+    //     plugin.init();
+    // }
 
     let mut app = App::new();
     app
     .insert_resource(ClearColor(Color::BLACK))
-    .add_plugins(DefaultPlugins)
-    .add_systems(Startup, setup);
-
-    for plugin in &registrar.plugins {
-       plugin.bevy_init(app.get_schedule_mut(Update));
-    }
+    .add_plugins(DefaultPlugins);
+    
+    // for plugin in &registrar.plugins {
+    //    plugin.bevy_init(&mut app);
+    // }
 
     app.run();
-}
-
-fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
-    // Camera
-    commands.spawn(Camera2dBundle::default());
-
-    // Sprite
-    commands.spawn(SpriteBundle {
-        texture: asset_server.load("bevy.png"),
-        ..default()
-    });
 }

@@ -33,7 +33,10 @@
         craneLib = crane.lib.${system};
         src = craneLib.cleanCargoSource (craneLib.path ./.);
 
-        buildDeps = (with pkgs; [ pkg-config makeWrapper clang mold ]);
+        pname = "just_enough_mod";
+        version = "0.0.0";
+
+        buildDeps = (with pkgs; [ pkg-config makeWrapper clang lld mold ]);
 
         runtimeDeps = (with pkgs;
           [ libxkbcommon alsa-lib udev vulkan-loader wayland ]
@@ -49,11 +52,8 @@
         # Build the actual crate itself, reusing the dependency
         # artifacts from above.
         my-crate = craneLib.buildPackage rec {
-          inherit src;
+          inherit src pname version;
 
-          pname = "JustEnoughMod";
-          version = "0.0.0";
-          
           nativeBuildInputs = buildDeps;
           buildInputs = runtimeDeps;
 
@@ -64,7 +64,7 @@
               } \
               --prefix XCURSOR_THEME : "Adwaita"
             mkdir -p $out/bin/assets
-            cp -a assets $out/bin
+            cp -a just_enough_mod/assets $out/bin
           '';
         };
       in {
@@ -83,19 +83,18 @@
           # };
 
           # Check formatting
-          my-crate-fmt = craneLib.cargoFmt { inherit src; };
+          my-crate-fmt = craneLib.cargoFmt { inherit src pname version; };
 
           # Audit dependencies
-          my-crate-audit = craneLib.cargoAudit { inherit src advisory-db; };
+          my-crate-audit =
+            craneLib.cargoAudit { inherit src pname version advisory-db; };
 
           # Audit licenses
-          my-crate-deny = craneLib.cargoDeny { inherit src; };
+          my-crate-deny = craneLib.cargoDeny { inherit src pname version; };
 
         };
 
-        packages = {
-          default = my-crate;
-        };
+        packages = { default = my-crate; };
 
         apps.default = flake-utils.lib.mkApp { drv = my-crate; };
 
@@ -105,6 +104,7 @@
 
           # Additional dev-shell environment variables can be set directly
           RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
+          RUSTFLAGS = "-Clink-arg=-fuse-ld=${pkgs.mold}/bin/mold";
           LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath runtimeDeps}";
           XCURSOR_THEME = "Adwaita";
 
