@@ -19,6 +19,7 @@ fn main() {
     };
 
     for path in std::env::args_os().skip(1) {
+        println!("Loading: {:?}", path);
         // NOTE: You need to do something to ensure you're only loading "safe" code. Out of scope
         // for this code.
         unsafe {
@@ -37,7 +38,6 @@ fn main() {
 
     let mut app = App::new();
     app
-    .insert_resource(ClearColor(Color::BLACK))
     .add_plugins(DefaultPlugins);
     
     for plugin in &registrar.plugins {

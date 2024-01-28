@@ -9,7 +9,6 @@ impl Plugin for JustEnoughModBase {
     }
 
     fn bevy_init(&self, app: &mut App) {
-        // app.get_schedule_mut(Update).expect("shoudl be here").add_systems(rotate);
         app
         .add_systems(Update, rotate)
         .add_systems(Startup, setup);
