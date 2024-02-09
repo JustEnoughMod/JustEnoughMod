@@ -30,8 +30,8 @@
             };
             sdl = prev.fetchgit {
               url = "https://github.com/libsdl-org/SDL";
-              rev = "1143bdc35130e68c90c9b1a3a2069399b7f6143a";
-              sha256 = "sha256-whNLa8ZCgfLXwnXnp4EczNWfMqvlO71eQnagpmW7p+c=";
+              rev = "859844eae358447be8d66e6da59b6fb3df0ed778";
+              sha256 = "sha256-uKL9/T6vCEqMqmD3Q3rCMtKPRJZ4fRYVUr+4628/Ajg=";
               fetchSubmodules = true;
             };
           in stdenv.mkDerivation rec {
@@ -43,7 +43,7 @@
             enableParallelBuilding = true;
 
             nativeBuildInputs = [ pkg-config cmake ninja git ];
-            buildInputs = [ xorg.libX11 xorg.libXrandr libGL SDL2 spirv-tools ];
+            buildInputs = [ xorg.libX11 xorg.libXrandr xorg.libXext libGL ];
 
             preConfigure = ''
               cp -r ${bgfx} vendor/bgfx

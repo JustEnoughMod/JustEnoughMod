@@ -4,12 +4,11 @@ project(JustEnoughMod)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
-find_package(SDL2 REQUIRED)
-
 file(GLOB SRC "src/*.c" "src/*.cpp" "src/*.h" "src/*.hpp")
 add_executable(${PROJECT_NAME} ${SRC})
 
 add_subdirectory("vendor/bgfx")
+add_subdirectory("vendor/sdl")
 
 target_include_directories(${PROJECT_NAME} PUBLIC "src")
 # target_include_directories(${PROJECT_NAME} PUBLIC "vendor/bgfx")
