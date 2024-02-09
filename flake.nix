@@ -22,11 +22,10 @@
 
         JustEnoughMod = with final;
           let
-            bgfx = prev.fetchFromGitHub {
-              owner = "bkaradzic";
-              repo = "bgfx.cmake";
+            bgfx = prev.fetchgit {
+              url = "https://github.com/bkaradzic/bgfx.cmake";
               rev = "v1.125.8678-462";
-              sha256 = "sha256-hXdnwzgqZKzdOE0NrbGQxRZzU9jJRTUPzgIAGLxyZPE=";
+              sha256 = "sha256-whNLa8ZCgfLXwnXnp4EczNWfMqvlO71eQnagpmW7p+c=";
               fetchSubmodules = true;
             };
           in stdenv.mkDerivation rec {
@@ -35,10 +34,10 @@
 
             src = ./.;
 
-            enableParallelBuilding = true;
+            enableParallelBuilding = false;
 
             nativeBuildInputs = [ pkg-config cmake ninja git ];
-            buildInputs = [ xorg.libX11 libGL ];
+            buildInputs = [ xorg.libX11 xorg.libXrandr libGL SDL2 ];
 
             preConfigure = ''
               cp -r ${bgfx} vendor/bgfx
