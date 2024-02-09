@@ -2,9 +2,6 @@
 #include <bgfx/platform.h>
 #include <bx/math.h>
 
-// #define SDL_VIDEO_DRIVER_X11
-#define SDL_VIDEO_DRIVER_WAYLAND
-
 #include <SDL.h>
 #include <SDL_syswm.h>
 
@@ -47,11 +44,17 @@ int main(int argc, char **argv)
 #elif BX_PLATFORM_OSX
     pd.nwh = wmi.info.cocoa.window;
 #elif BX_PLATFORM_LINUX
-    // pd.ndt = wmi.info.x11.display;
-    // pd.nwh = (void *)(uintptr_t)wmi.info.x11.window;
 
+#if defined(SDL_VIDEO_DRIVER_X11)
+    pd.ndt = wmi.info.x11.display;
+    pd.nwh = (void *)(uintptr_t)wmi.info.x11.window;
+#endif
+
+#if defined(SDL_VIDEO_DRIVER_WAYLAND)
     pd.ndt = wmi.info.wl.display;
     pd.nwh = (void *)(uintptr_t)wmi.info.wl.surface;
+#endif
+
 #endif
 
     bgfx::Init bgfx_init;
