@@ -3,7 +3,8 @@
 
   outputs = { self, nixpkgs }:
     let
-      lastModifiedDate = self.lastModifiedDate or self.lastModified or "19700101";
+      lastModifiedDate =
+        self.lastModifiedDate or self.lastModified or "19700101";
       version = builtins.substring 0 8 lastModifiedDate;
 
       supportedSystems =
@@ -16,31 +17,37 @@
           inherit system;
           overlays = [ self.overlay ];
         });
-
     in {
       overlay = final: prev: {
 
         JustEnoughMod = with final;
-          stdenv.mkDerivation rec {
+          let
+            bgfx = prev.fetchFromGitHub {
+              owner = "bkaradzic";
+              repo = "bgfx.cmake";
+              rev = "v1.125.8678-462";
+              sha256 = "sha256-hXdnwzgqZKzdOE0NrbGQxRZzU9jJRTUPzgIAGLxyZPE=";
+              fetchSubmodules = true;
+            };
+          in stdenv.mkDerivation rec {
             pname = "JustEnoughMod";
             inherit version;
 
             src = ./.;
 
-            nativeBuildInputs = [ cmake ];
-            buildInputs = [  ];
+            enableParallelBuilding = true;
 
-            configurePhase = ''
-              cmake .
-            '';
+            nativeBuildInputs = [ pkg-config cmake ninja git ];
+            buildInputs = [ xorg.libX11 libGL ];
 
-            buildPhase = ''
-              make
+            preConfigure = ''
+              cp -r ${bgfx} vendor/bgfx
+              chmod 777 -R vendor/bgfx
             '';
 
             installPhase = ''
               mkdir -p $out/bin
-              mv JustEnoughMod $out/bin
+              mv ${pname} $out/bin
             '';
           };
 
