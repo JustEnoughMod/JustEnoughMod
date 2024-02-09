@@ -71,5 +71,6 @@
         "variant": "cpp",
         "shared_mutex": "cpp"
     },
-    "cmake.configureOnOpen": true
+    "cmake.configureOnOpen": true,
+    "dotnet.defaultSolution": "disable"
 }

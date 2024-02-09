@@ -49,8 +49,8 @@
             preConfigure = ''
               cp -r ${bgfx} vendor/bgfx
               cp -r ${sdl} vendor/sdl
-              chmod 777 -R vendor/bgfx
-              chmod 777 -R vendor/sdl
+
+              chmod 777 -R vendor
             '';
 
             installPhase = ''
