@@ -34,7 +34,7 @@
               sha256 = "sha256-uKL9/T6vCEqMqmD3Q3rCMtKPRJZ4fRYVUr+4628/Ajg=";
               fetchSubmodules = true;
             };
-          in stdenv.mkDerivation rec {
+          in clangStdenv.mkDerivation rec {
             pname = "JustEnoughMod";
             inherit version;
 
@@ -42,8 +42,9 @@
 
             enableParallelBuilding = true;
 
-            nativeBuildInputs = [ pkg-config cmake ninja git ];
-            buildInputs = [ xorg.libX11 xorg.libXrandr xorg.libXext libGL ];
+            nativeBuildInputs = [ pkg-config cmake ninja git binutils mold];
+            buildInputs = [ xorg.libX11 xorg.libXScrnSaver xorg.libXinerama xorg.libXxf86vm xorg.libXi xorg.libICE xorg.libXrandr xorg.libXext xorg.libXcursor libGL alsa-lib audiofile dbus libdecor pipewire libpulseaudio udev
+            wayland libxkbcommon libdrm mesa ibus libiconv wayland-protocols libunwind libusb1 jack2 sndio ];
 
             preConfigure = ''
               cp -r ${bgfx} vendor/bgfx

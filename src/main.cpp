@@ -1,115 +1,102 @@
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_syswm.h>
 #include <bgfx/bgfx.h>
 #include <bgfx/platform.h>
-#include <bx/bx.h>
+#include <bx/math.h>
 
-void threadInit()
+#define SDL_VIDEO_DRIVER_X11
+
+#include <SDL.h>
+#include <SDL_syswm.h>
+
+#include <stdio.h>
+
+int main(int argc, char **argv)
 {
-    bgfx::init();
-    bgfx::reset(800, 600, BGFX_RESET_VSYNC);
-
-    // Enable debug text.
-    bgfx::setDebug(BGFX_DEBUG_TEXT /*| BGFX_DEBUG_STATS*/);
-
-    // Set view 0 clear state.
-    bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x303030ff, 1.0f, 0);
-}
-
-int counter = 0;
-
-int threadMain(void* hoge)
-{
-    while (1) {
-        bgfx::setViewRect(0, 0, 0, uint16_t(800), uint16_t(600));
-        bgfx::touch(0);
-        bgfx::dbgTextClear();
-        bgfx::dbgTextPrintf(0, 1, 0x4f, "Counter:%d", counter++);
-        bgfx::frame();
+    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    {
+        printf("SDL could not initialize. SDL_Error: %s\n", SDL_GetError());
+        return 1;
     }
-}
 
-inline bool sdlSetWindow(SDL_Window* _window)
-{
+    const int width = 800;
+    const int height = 600;
+    SDL_Window *window = SDL_CreateWindow(
+        "JustEnoughMod", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width,
+        height, SDL_WINDOW_SHOWN);
+
+    if (window == nullptr)
+    {
+        printf("Window could not be created. SDL_Error: %s\n", SDL_GetError());
+        return 1;
+    }
+
     SDL_SysWMinfo wmi;
     SDL_VERSION(&wmi.version);
-    if (!SDL_GetWindowWMInfo(_window, &wmi)) {
-        return false;
+    if (!SDL_GetWindowWMInfo(window, &wmi))
+    {
+        printf(
+            "SDL_SysWMinfo could not be retrieved. SDL_Error: %s\n",
+            SDL_GetError());
+        return 1;
     }
+    bgfx::renderFrame(); // single threaded mode
 
-    bgfx::PlatformData pd;
-#if BX_PLATFORM_LINUX || BX_PLATFORM_BSD
-    pd.ndt = wmi.info.x11.display;
-    pd.nwh = (void*)(uintptr_t)wmi.info.x11.window;
-#elif BX_PLATFORM_OSX
-    pd.ndt = NULL;
-    pd.nwh = wmi.info.cocoa.window;
-#elif BX_PLATFORM_WINDOWS
-    pd.ndt = NULL;
+    bgfx::PlatformData pd{};
+#if BX_PLATFORM_WINDOWS
     pd.nwh = wmi.info.win.window;
-#elif BX_PLATFORM_STEAMLINK
-    pd.ndt = wmi.info.vivante.display;
-    pd.nwh = wmi.info.vivante.window;
-#endif // BX_PLATFORM_
-    pd.context = NULL;
-    pd.backBuffer = NULL;
-    pd.backBufferDS = NULL;
-    bgfx::setPlatformData(pd);
+#elif BX_PLATFORM_OSX
+    pd.nwh = wmi.info.cocoa.window;
+#elif BX_PLATFORM_LINUX
+    pd.ndt = wmi.info.x11.display;
+    pd.nwh = (void *)(uintptr_t)wmi.info.x11.window;
+#endif
 
-    return true;
-}
+    bgfx::Init bgfx_init;
+    bgfx_init.type = bgfx::RendererType::Count; // auto choose renderer
+    bgfx_init.resolution.width = width;
+    bgfx_init.resolution.height = height;
+    bgfx_init.resolution.reset = BGFX_RESET_VSYNC;
+    bgfx_init.platformData = pd;
+    bgfx::init(bgfx_init);
 
-std::thread thread;
+    bgfx::setViewClear(
+        0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x443355FF, 1.0f, 0);
+    bgfx::setViewRect(0, 0, 0, width, height);
 
-int main(void)
-{
-    SDL_Init(0);
+    bgfx::setDebug(BGFX_DEBUG_TEXT /*| BGFX_DEBUG_STATS*/);
 
-    SDL_Window* window = SDL_CreateWindow("bgfx", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+    bool quit = false;
 
-    sdlSetWindow(window);
-    bgfx::renderFrame();
-
-    threadInit();
-    bgfx::frame();
-    
-    thread.init(threadMain);
-
-    bool exit = false;
-    SDL_Event event;
-    while (!exit) {
-        bgfx::renderFrame();
-
-        while (SDL_PollEvent(&event)) {
-
-            switch (event.type) {
-            case SDL_QUIT:
-                exit = true;
+    while (!quit)
+    {
+        for (SDL_Event current_event; SDL_PollEvent(&current_event) != 0;)
+        {
+            if (current_event.type == SDL_QUIT)
+            {
+                quit = true;
                 break;
-
-            case SDL_WINDOWEVENT: {
-                const SDL_WindowEvent& wev = event.window;
-                switch (wev.event) {
-                case SDL_WINDOWEVENT_RESIZED:
-                case SDL_WINDOWEVENT_SIZE_CHANGED:
-                    break;
-
-                case SDL_WINDOWEVENT_CLOSE:
-                    exit = true;
-                    break;
-                }
-            } break;
             }
         }
+
+        bgfx::touch(0);
+
+        bgfx::dbgTextClear();
+
+        const bgfx::Stats *stats = bgfx::getStats();
+
+        bgfx::dbgTextPrintf(0, 1, 0x0f, "Color can be changed with ANSI \x1b[9;me\x1b[10;ms\x1b[11;mc\x1b[12;ma\x1b[13;mp\x1b[14;me\x1b[0m code too.");
+
+        bgfx::dbgTextPrintf(80, 1, 0x0f, "\x1b[;0m    \x1b[;1m    \x1b[; 2m    \x1b[; 3m    \x1b[; 4m    \x1b[; 5m    \x1b[; 6m    \x1b[; 7m    \x1b[0m");
+        bgfx::dbgTextPrintf(80, 2, 0x0f, "\x1b[;8m    \x1b[;9m    \x1b[;10m    \x1b[;11m    \x1b[;12m    \x1b[;13m    \x1b[;14m    \x1b[;15m    \x1b[0m");
+
+        bgfx::dbgTextPrintf(0, 2, 0x0f, "Backbuffer %dW x %dH in pixels, debug text %dW x %dH in characters.", stats->width, stats->height, stats->textWidth, stats->textHeight);
+
+        bgfx::frame();
     }
 
     bgfx::shutdown();
 
-    while (bgfx::RenderFrame::NoContext != bgfx::renderFrame()) {
-    };
-
-    thread.shutdown();
-
     SDL_DestroyWindow(window);
     SDL_Quit();
+
+    return 0;
 }

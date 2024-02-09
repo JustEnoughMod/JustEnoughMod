@@ -4,7 +4,10 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/vendor/bgfx/bgfx/include"
+                "${workspaceFolder}/vendor/bgfx/bgfx/include",
+                "${workspaceFolder}/vendor/bgfx/bx/include",
+                "${workspaceFolder}/vendor/bgfx/bimg/include",
+                "${workspaceFolder}/vendor/sdl/include"
             ],
             "defines": [],
             "cStandard": "c23",
