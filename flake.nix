@@ -1,118 +1,116 @@
 {
-  description = "Build a cargo project";
+  description = "An over-engineered Hello World in C";
 
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+  # Nixpkgs / NixOS version to use.
+  inputs.nixpkgs.url = "nixpkgs/nixos-21.05";
 
-    crane = {
-      url = "github:ipetkov/crane";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+  outputs = { self, nixpkgs }:
+    let
 
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
-      };
-    };
+      # to work with older version of flakes
+      lastModifiedDate = self.lastModifiedDate or self.lastModified or "19700101";
 
-    flake-utils.url = "github:numtide/flake-utils";
+      # Generate a user-friendly version number.
+      version = builtins.substring 0 8 lastModifiedDate;
 
-    advisory-db = {
-      url = "github:rustsec/advisory-db";
-      flake = false;
-    };
-  };
+      # System types to support.
+      supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
 
-  outputs = { self, nixpkgs, crane, rust-overlay, flake-utils, advisory-db, ... }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = [ (import rust-overlay) ];
+      # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
+      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+
+      # Nixpkgs instantiated for supported system types.
+      nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; overlays = [ self.overlay ]; });
+
+    in
+
+    {
+
+      # A Nixpkgs overlay.
+      overlay = final: prev: {
+
+        hello = with final; stdenv.mkDerivation rec {
+          pname = "hello";
+          inherit version;
+
+          src = ./.;
+
+          nativeBuildInputs = [ autoreconfHook ];
         };
 
-        rustToolchain = pkgs.rust-bin.selectLatestNightlyWith (toolchain: toolchain.default.override {
-          extensions = [ "rust-src" ];
-          targets = [ "x86_64-unknown-linux-gnu" ];
+      };
+
+      # Provide some binary packages for selected system types.
+      packages = forAllSystems (system:
+        {
+          inherit (nixpkgsFor.${system}) hello;
         });
 
-        craneLib = (crane.mkLib pkgs).overrideToolchain rustToolchain;
-        src = craneLib.cleanCargoSource (craneLib.path ./.);
+      # The default package for 'nix build'. This makes sense if the
+      # flake provides only one package or there is a clear "main"
+      # package.
+      defaultPackage = forAllSystems (system: self.packages.${system}.hello);
 
-        pname = "just_enough_mod";
-        version = "0.0.0";
+      # A NixOS module, if applicable (e.g. if the package provides a system service).
+      nixosModules.hello =
+        { pkgs, ... }:
+        {
+          nixpkgs.overlays = [ self.overlay ];
 
-        buildDeps = (with pkgs; [ pkg-config makeWrapper clang lld mold ]);
+          environment.systemPackages = [ pkgs.hello ];
 
-        runtimeDeps = (with pkgs;
-          [ libxkbcommon alsa-lib udev vulkan-loader wayland ]
-          ++ (with xorg; [ libXcursor libXrandr libXi libX11 ]));
-
-        # Build the actual crate itself, reusing the dependency
-        # artifacts from above.
-        my-crate = craneLib.buildPackage rec {
-          inherit src pname version;
-
-          nativeBuildInputs = buildDeps;
-          buildInputs = runtimeDeps;
-
-          postInstall = ''
-            wrapProgram $out/bin/${pname} \
-              --prefix LD_LIBRARY_PATH : ${
-                pkgs.lib.makeLibraryPath runtimeDeps
-              } 
-            mkdir -p $out/bin/assets
-            cp -a just_enough_mod/assets $out/bin
-          '';
-        };
-      in {
-        checks = {
-          # Build the crate as part of `nix flake check` for convenience
-          inherit my-crate;
-
-          # Run clippy (and deny all warnings) on the crate source,
-          # again, resuing the dependency artifacts from above.
-          #
-          # Note that this is done as a separate derivation so that
-          # we can block the CI if there are issues here, but not
-          # prevent downstream consumers from building our crate by itself.
-          # my-crate-clippy = craneLib.cargoClippy {
-          #   cargoClippyExtraArgs = "--all-targets -- --deny warnings";
-          # };
-
-          # Check formatting
-          my-crate-fmt = craneLib.cargoFmt { inherit src pname version; };
-
-          # Audit dependencies
-          my-crate-audit =
-            craneLib.cargoAudit { inherit src pname version advisory-db; };
-
-          # Audit licenses
-          my-crate-deny = craneLib.cargoDeny { inherit src pname version; };
-
+          #systemd.services = { ... };
         };
 
-        packages = { default = my-crate; };
+      # Tests run by 'nix flake check' and by Hydra.
+      checks = forAllSystems
+        (system:
+          with nixpkgsFor.${system};
 
-        apps.default = flake-utils.lib.mkApp { drv = my-crate; };
+          {
+            inherit (self.packages.${system}) hello;
 
-        devShells.default = craneLib.devShell {
-          # Inherit inputs from checks.
-          checks = self.checks.${system};
+            # Additional tests, if applicable.
+            test = stdenv.mkDerivation {
+              pname = "hello-test";
+              inherit version;
 
-          RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
-          # Additional dev-shell environment variables can be set directly
-          LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath runtimeDeps}";
+              buildInputs = [ hello ];
 
-          # Extra inputs can be added here; cargo and rustc are provided by default.
-          packages = with pkgs; [
-          ];
+              dontUnpack = true;
 
-          nativeBuildInputs = with pkgs; [
-              pkg-config
-          ];
-        };
-      });
+              buildPhase = ''
+                echo 'running some integration tests'
+                [[ $(hello) = 'Hello Nixers!' ]]
+              '';
+
+              installPhase = "mkdir -p $out";
+            };
+          }
+
+          // lib.optionalAttrs stdenv.isLinux {
+            # A VM test of the NixOS module.
+            vmTest =
+              with import (nixpkgs + "/nixos/lib/testing-python.nix") {
+                inherit system;
+              };
+
+              makeTest {
+                nodes = {
+                  client = { ... }: {
+                    imports = [ self.nixosModules.hello ];
+                  };
+                };
+
+                testScript =
+                  ''
+                    start_all()
+                    client.wait_for_unit("multi-user.target")
+                    client.succeed("hello")
+                  '';
+              };
+          }
+        );
+
+    };
 }
