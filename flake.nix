@@ -24,7 +24,13 @@
           let
             bgfx = prev.fetchgit {
               url = "https://github.com/bkaradzic/bgfx.cmake";
-              rev = "v1.125.8678-462";
+              rev = "011e8efe231d3d9aba9caf634dbc86d85263d20e";
+              sha256 = "sha256-whNLa8ZCgfLXwnXnp4EczNWfMqvlO71eQnagpmW7p+c=";
+              fetchSubmodules = true;
+            };
+            sdl = prev.fetchgit {
+              url = "https://github.com/libsdl-org/SDL";
+              rev = "1143bdc35130e68c90c9b1a3a2069399b7f6143a";
               sha256 = "sha256-whNLa8ZCgfLXwnXnp4EczNWfMqvlO71eQnagpmW7p+c=";
               fetchSubmodules = true;
             };
@@ -34,14 +40,16 @@
 
             src = ./.;
 
-            enableParallelBuilding = false;
+            enableParallelBuilding = true;
 
             nativeBuildInputs = [ pkg-config cmake ninja git ];
-            buildInputs = [ xorg.libX11 xorg.libXrandr libGL SDL2 ];
+            buildInputs = [ xorg.libX11 xorg.libXrandr libGL SDL2 spirv-tools ];
 
             preConfigure = ''
               cp -r ${bgfx} vendor/bgfx
+              cp -r ${sdl} vendor/sdl
               chmod 777 -R vendor/bgfx
+              chmod 777 -R vendor/sdl
             '';
 
             installPhase = ''
