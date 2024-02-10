@@ -7,6 +7,10 @@ set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
 
 set(SDL_ESD OFF)
 set(SDL_RPI OFF)
+set(VIDEO_WAYLAND ON)
+set(VIDEO_X11 OFF)
+set(VIDEO_OPENGL OFF)
+set(VIDEO_OPENGLES OFF)
 
 file(GLOB SRC "src/*.cpp" "include/*.hpp")
 
@@ -26,9 +30,4 @@ target_link_libraries (${PROJECT_NAME} bx)
 # Runtime
 add_executable(${PROJECT_NAME}-bin "src/main.cpp")
 
-target_include_directories(${PROJECT_NAME}-bin PUBLIC "include")
-
-target_link_libraries (${PROJECT_NAME}-bin SDL2)
-target_link_libraries (${PROJECT_NAME}-bin bgfx)
-target_link_libraries (${PROJECT_NAME}-bin bimg)
-target_link_libraries (${PROJECT_NAME}-bin bx)
+target_link_libraries (${PROJECT_NAME}-bin ${PROJECT_NAME})

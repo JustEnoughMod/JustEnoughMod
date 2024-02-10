@@ -1,10 +1,10 @@
 # JustEnoughMod
 
-JustEnoughMod (JEM) is a rust based Minecraft like Game, but it is supposed to be modded.
+JustEnoughMod (JEM) is a Minecraft like Game, but it is supposed to be modded.
 
 ## How it works
 
-JustEnoughMod is a Minecraft like game based on mods. Every base component (except the mod loader itself) is just a mod that can be loaded into the game at runtime. This mod/plugin only system allows specifying uniform interfaces between the mods and keep redundancy at a minimal level. Also by the usage of rust you get the maximum of performance and great error handling (aka no crashes). No more long waiting times on startup and sudden crashes.
+JustEnoughMod is a Minecraft like game based on mods. Every base component (except the mod loader itself) is just a mod that can be loaded into the game at runtime. This mod/plugin only system allows specifying uniform interfaces between the mods and keep redundancy at a minimal level.
 
 ## What should a mod/plugin (not) do
 

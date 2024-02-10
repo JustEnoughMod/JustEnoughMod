@@ -1,75 +1,27 @@
-#include <bgfx/bgfx.h>
-#include <bgfx/platform.h>
-#include <bx/math.h>
-
-#include <SDL.h>
-#include <SDL_syswm.h>
+#include <JustEnoughMod.hpp>
 
 #include <stdio.h>
 
 int main(int argc, char **argv)
 {
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
-    {
-        printf("SDL could not initialize. SDL_Error: %s\n", SDL_GetError());
-        return 1;
-    }
-
-    const int width = 800;
+    const int width = 1000;
     const int height = 600;
-    SDL_Window *window = SDL_CreateWindow(
-        "JustEnoughMod", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width,
-        height, SDL_WINDOW_SHOWN);
 
-    if (window == nullptr)
-    {
-        printf("Window could not be created. SDL_Error: %s\n", SDL_GetError());
-        return 1;
-    }
-
-    SDL_SysWMinfo wmi;
-    SDL_VERSION(&wmi.version);
-    if (!SDL_GetWindowWMInfo(window, &wmi))
-    {
-        printf(
-            "SDL_SysWMinfo could not be retrieved. SDL_Error: %s\n",
-            SDL_GetError());
-        return 1;
-    }
-    bgfx::renderFrame(); // single threaded mode
-
-    bgfx::PlatformData pd{};
-#if BX_PLATFORM_WINDOWS
-    pd.nwh = wmi.info.win.window;
-#elif BX_PLATFORM_OSX
-    pd.nwh = wmi.info.cocoa.window;
-#elif BX_PLATFORM_LINUX
-
-#if defined(SDL_VIDEO_DRIVER_X11)
-    pd.ndt = wmi.info.x11.display;
-    pd.nwh = (void *)(uintptr_t)wmi.info.x11.window;
-#endif
-
-#if defined(SDL_VIDEO_DRIVER_WAYLAND)
-    pd.ndt = wmi.info.wl.display;
-    pd.nwh = (void *)(uintptr_t)wmi.info.wl.surface;
-#endif
-
-#endif
+    JEM::Window window("JustEnoughMods", width, height);
 
     bgfx::Init bgfx_init;
     bgfx_init.type = bgfx::RendererType::Count; // auto choose renderer
     bgfx_init.resolution.width = width;
     bgfx_init.resolution.height = height;
     bgfx_init.resolution.reset = BGFX_RESET_VSYNC;
-    bgfx_init.platformData = pd;
+    bgfx_init.platformData = window.getRendererBindings();
     bgfx::init(bgfx_init);
 
     bgfx::setViewClear(
         0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x443355FF, 1.0f, 0);
     bgfx::setViewRect(0, 0, 0, width, height);
 
-    bgfx::setDebug(BGFX_DEBUG_TEXT /*| BGFX_DEBUG_STATS*/);
+    bgfx::setDebug(BGFX_DEBUG_TEXT | BGFX_DEBUG_STATS);
 
     bool quit = false;
 
@@ -101,9 +53,6 @@ int main(int argc, char **argv)
     }
 
     bgfx::shutdown();
-
-    SDL_DestroyWindow(window);
-    SDL_Quit();
 
     return 0;
 }

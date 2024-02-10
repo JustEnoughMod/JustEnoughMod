@@ -42,9 +42,50 @@
 
             enableParallelBuilding = true;
 
-            nativeBuildInputs = [ pkg-config cmake ninja git binutils mold];
-            buildInputs = [ xorg.libX11 xorg.libXScrnSaver xorg.libXinerama xorg.libXxf86vm xorg.libXi xorg.libICE xorg.libXrandr xorg.libXext xorg.libXcursor libGL alsa-lib audiofile dbus libdecor pipewire libpulseaudio udev
-            wayland libxkbcommon libdrm mesa ibus libiconv wayland-protocols libunwind libusb1 jack2 sndio ];
+            nativeBuildInputs = [ pkg-config cmake ninja git binutils lld ];
+            buildInputs = [
+              alsa-lib
+              audiofile
+              dbus
+              egl-wayland
+              glslang
+              ibus
+              jack2
+              libGL
+              libdecor
+              libdrm
+              libiconv
+              libpulseaudio
+              libunwind
+              libusb1
+              libxkbcommon
+              mesa
+              pcre2
+              pipewire
+              shaderc
+              sndio
+              udev
+              util-linux
+              vulkan-headers
+              vulkan-loader
+              vulkan-tools
+              vulkan-validation-layers
+              wayland
+              wayland-protocols
+              wayland-scanner
+              xorg.libICE
+              xorg.libX11
+              xorg.libXScrnSaver
+              xorg.libXcursor
+              xorg.libXext
+              xorg.libXi
+              xorg.libXinerama
+              xorg.libXrandr
+              xorg.libXxf86vm
+            ];
+
+            VULKAN_SDK =
+              "${vulkan-validation-layers}/share/vulkan/explicit_layer.d";
 
             preConfigure = ''
               cp -r ${bgfx} vendor/bgfx
