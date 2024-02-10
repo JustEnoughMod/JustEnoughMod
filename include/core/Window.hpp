@@ -8,6 +8,7 @@
 #include <SDL_syswm.h>
 
 #include <memory>
+#include <any>
 
 // #include <wayland-egl.h>
 
@@ -17,7 +18,7 @@ namespace JEM
     {
     public:
         Window(std::string title, int width, int height)
-            : m_title(title), m_width(width), m_height(height)
+            : m_title(title)
         {
             if (m_count == 0)
             {
@@ -26,8 +27,8 @@ namespace JEM
             m_count++;
 
             m_window = std::shared_ptr<SDL_Window>(SDL_CreateWindow(
-                                                       m_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_width,
-                                                       m_height, SDL_WINDOW_SHOWN),
+                                                       m_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width,
+                                                       height, SDL_WINDOW_SHOWN),
                                                    SDL_DestroyWindow);
 
             if (m_window.get() == nullptr)
@@ -91,14 +92,35 @@ namespace JEM
             return pd;
         }
 
+        std::any pollEvent()
+        {
+            SDL_Event event;
+
+            if (SDL_PollEvent(&event))
+                return event;
+
+            return std::any();
+        }
+
+        std::pair<int, int> getSize() const
+        {
+            int width, height;
+
+            SDL_GetWindowSize(m_window.get(), &width, &height);
+
+            return {width, height};
+        }
+
         int getWidth() const
         {
-            return m_width;
+            auto [width, height] = getSize();
+            return width;
         }
 
         int getHeight() const
         {
-            return m_height;
+            auto [width, height] = getSize();
+            return height;
         }
 
         std::shared_ptr<SDL_Window> getNative() const
@@ -110,8 +132,6 @@ namespace JEM
         static unsigned int m_count;
         std::shared_ptr<SDL_Window> m_window;
         std::string m_title;
-        int m_width;
-        int m_height;
 
         static void init_sdl()
         {

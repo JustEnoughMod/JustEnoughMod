@@ -2,24 +2,11 @@
 
 #include <stdio.h>
 
-int main(int argc, char **argv)
+int main()
 {
-    const int width = 1000;
-    const int height = 600;
+    JEM::Window window("JustEnoughMods", 1000, 600);
 
-    JEM::Window window("JustEnoughMods", width, height);
-
-    bgfx::Init bgfx_init;
-    bgfx_init.type = bgfx::RendererType::Count; // auto choose renderer
-    bgfx_init.resolution.width = width;
-    bgfx_init.resolution.height = height;
-    bgfx_init.resolution.reset = BGFX_RESET_VSYNC;
-    bgfx_init.platformData = window.getRendererBindings();
-    bgfx::init(bgfx_init);
-
-    bgfx::setViewClear(
-        0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x443355FF, 1.0f, 0);
-    bgfx::setViewRect(0, 0, 0, width, height);
+    JEM::Renderer renderer(window);
 
     bgfx::setDebug(BGFX_DEBUG_TEXT | BGFX_DEBUG_STATS);
 
@@ -27,16 +14,24 @@ int main(int argc, char **argv)
 
     while (!quit)
     {
-        for (SDL_Event current_event; SDL_PollEvent(&current_event) != 0;)
+        while (true)
         {
-            if (current_event.type == SDL_QUIT)
-            {
-                quit = true;
+            std::any event = window.pollEvent();
+
+            if (!event.has_value())
                 break;
+
+            if (const auto sdlEvent = std::any_cast<SDL_Event>(&event))
+            {
+                if (sdlEvent->type == SDL_QUIT)
+                {
+                    quit = true;
+                    break;
+                }
             }
         }
 
-        bgfx::touch(0);
+        renderer.clear();
 
         bgfx::dbgTextClear();
 
@@ -49,10 +44,6 @@ int main(int argc, char **argv)
 
         bgfx::dbgTextPrintf(0, 2, 0x0f, "Backbuffer %dW x %dH in pixels, debug text %dW x %dH in characters.", stats->width, stats->height, stats->textWidth, stats->textHeight);
 
-        bgfx::frame();
+        renderer.draw();
     }
-
-    bgfx::shutdown();
-
-    return 0;
 }
