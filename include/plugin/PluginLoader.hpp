@@ -1,6 +1,6 @@
 #pragma once 
 
-#include <Plugin.hpp>
+#include <plugin/Plugin.hpp>
 
 #include <dylib.hpp>
 
