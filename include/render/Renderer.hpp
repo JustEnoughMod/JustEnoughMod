@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../core/Window.hpp"
+#include <core/Window.hpp>
 
 namespace JEM
 {
