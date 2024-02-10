@@ -15,10 +15,11 @@ set(VIDEO_OPENGLES OFF)
 file(GLOB SRC "src/*.cpp" "include/*.hpp")
 
 add_subdirectory("vendor/bgfx")
+add_subdirectory("vendor/dylib")
 add_subdirectory("vendor/sdl")
 
 # Libary
-add_library(${PROJECT_NAME} ${SRC} )
+add_library(${PROJECT_NAME} SHARED ${SRC} )
 
 target_include_directories(${PROJECT_NAME} PUBLIC "include")
 
@@ -26,6 +27,7 @@ target_link_libraries (${PROJECT_NAME} SDL2)
 target_link_libraries (${PROJECT_NAME} bgfx)
 target_link_libraries (${PROJECT_NAME} bimg)
 target_link_libraries (${PROJECT_NAME} bx)
+target_link_libraries (${PROJECT_NAME} dylib)
 
 # Runtime
 add_executable(${PROJECT_NAME}-bin "src/main.cpp")

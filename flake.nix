@@ -34,6 +34,12 @@
               sha256 = "sha256-uKL9/T6vCEqMqmD3Q3rCMtKPRJZ4fRYVUr+4628/Ajg=";
               fetchSubmodules = true;
             };
+            dylib = prev.fetchgit {
+              url = "https://github.com/martin-olivier/dylib";
+              rev = "d848a2fe1b0959443d1fcd7288dc4bc779e1f836";
+              sha256 = "sha256-Pax8KYypbGVIReQuiwZ2kdgQqFuFYuoLA6YZgQLVE4w=";
+              fetchSubmodules = true;
+            };
           in clangStdenv.mkDerivation rec {
             pname = "JustEnoughMod";
             inherit version;
@@ -90,6 +96,7 @@
             preConfigure = ''
               cp -r ${bgfx} vendor/bgfx
               cp -r ${sdl} vendor/sdl
+              cp -r ${dylib} vendor/dylib
 
               chmod 777 -R vendor
             '';

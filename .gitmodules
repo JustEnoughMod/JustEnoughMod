@@ -5,3 +5,6 @@
 [submodule "vendor/bgfx"]
 	path = vendor/bgfx
 	url = https://github.com/bkaradzic/bgfx.cmake.git
+[submodule "vendor/dylib"]
+	path = vendor/dylib
+	url = https://github.com/martin-olivier/dylib

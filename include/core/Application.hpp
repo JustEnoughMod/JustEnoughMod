@@ -1,6 +1,7 @@
 #pragma once
 
 #include <core/Window.hpp>
+#include <plugin/PluginLoader.hpp>
 #include <render/Renderer.hpp>
 
 namespace JEM
@@ -9,21 +10,21 @@ namespace JEM
     class Application
     {
     public:
+        Application()
+            : m_window("JustEnoughMods", 1000, 600), m_renderer(m_window)
+        {
+            m_pluginLoader.loadFile("./libJustEnoughModCore");
+        }
+
         void run()
         {
-            Window window("JustEnoughMods", 1000, 600);
-
-            Renderer renderer(window);
-
             bgfx::setDebug(BGFX_DEBUG_TEXT | BGFX_DEBUG_STATS);
 
-            bool quit = false;
-
-            while (!quit)
+            while (!m_quit)
             {
                 while (true)
                 {
-                    std::any event = window.pollEvent();
+                    std::any event = m_window.pollEvent();
 
                     if (!event.has_value())
                         break;
@@ -32,13 +33,13 @@ namespace JEM
                     {
                         if (sdlEvent->type == SDL_QUIT)
                         {
-                            quit = true;
+                            m_quit = true;
                             break;
                         }
                     }
                 }
 
-                renderer.clear();
+                m_renderer.clear();
 
                 bgfx::dbgTextClear();
 
@@ -51,8 +52,15 @@ namespace JEM
 
                 bgfx::dbgTextPrintf(0, 2, 0x0f, "Backbuffer %dW x %dH in pixels, debug text %dW x %dH in characters.", stats->width, stats->height, stats->textWidth, stats->textHeight);
 
-                renderer.draw();
+                m_renderer.draw();
             }
         }
+
+    private:
+        Window m_window;
+        Renderer m_renderer;
+        PluginLoader m_pluginLoader;
+
+        bool m_quit = false;
     };
 }

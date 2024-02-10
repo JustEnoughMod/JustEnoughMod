@@ -7,7 +7,8 @@
                 "${workspaceFolder}/vendor/bgfx/bgfx/include",
                 "${workspaceFolder}/vendor/bgfx/bx/include",
                 "${workspaceFolder}/vendor/bgfx/bimg/include",
-                "${workspaceFolder}/vendor/sdl/include"
+                "${workspaceFolder}/vendor/sdl/include",
+                "${workspaceFolder}/vendor/dylib/include"
             ],
             "defines": [],
             "cStandard": "c23",
