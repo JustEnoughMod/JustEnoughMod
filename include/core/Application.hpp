@@ -11,9 +11,12 @@ namespace JEM
     {
     public:
         Application()
-            : m_window("JustEnoughMods", 1000, 600), m_renderer(m_window)
         {
-            m_pluginLoader.loadFile("./libJustEnoughModCore");
+            m_window = std::make_shared<Window>("JustEnoughMods", 1000, 600);
+            m_renderer = std::make_shared<Renderer>(m_window);
+            m_pluginLoader = std::make_shared<PluginLoader>();
+
+            m_pluginLoader->loadFile("JustEnoughModCore");
         }
 
         void run()
@@ -24,7 +27,7 @@ namespace JEM
             {
                 while (true)
                 {
-                    std::any event = m_window.pollEvent();
+                    std::any event = m_window->pollEvent();
 
                     if (!event.has_value())
                         break;
@@ -39,7 +42,7 @@ namespace JEM
                     }
                 }
 
-                m_renderer.clear();
+                m_renderer->clear();
 
                 bgfx::dbgTextClear();
 
@@ -52,14 +55,14 @@ namespace JEM
 
                 bgfx::dbgTextPrintf(0, 2, 0x0f, "Backbuffer %dW x %dH in pixels, debug text %dW x %dH in characters.", stats->width, stats->height, stats->textWidth, stats->textHeight);
 
-                m_renderer.draw();
+                m_renderer->draw();
             }
         }
 
     private:
-        Window m_window;
-        Renderer m_renderer;
-        PluginLoader m_pluginLoader;
+        std::shared_ptr<Window> m_window;
+        std::shared_ptr<Renderer> m_renderer;
+        std::shared_ptr<PluginLoader> m_pluginLoader;
 
         bool m_quit = false;
     };

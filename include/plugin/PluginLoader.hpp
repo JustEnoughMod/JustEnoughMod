@@ -11,17 +11,23 @@ namespace JEM
     class PluginLoader {
     public:
         void loadFile(std::string path) {
-            dylib dylib(path);
+            auto lib = std::make_shared<dylib>("build", path.c_str());
+            
+            auto createPlugin = lib->get_function<Plugin*()>("_createPlugin");
 
-            auto createPlugin = dylib.get_function<std::shared_ptr<Plugin>(void)>("_createPlugin");
+            auto plugin = std::shared_ptr<Plugin>(createPlugin());
 
-            m_pluginVec.push_back(createPlugin());
+            plugin->load();
+
+            m_dylibVec.push_back(lib);
+            m_pluginVec.push_back(plugin);
         }
 
-        std::vector<std::shared_ptr<Plugin>> getNative() {
+        auto getNative() const {
             return m_pluginVec;
         }
     private:
+        std::vector<std::shared_ptr<dylib>> m_dylibVec; // add dylib object to vector so that the Plugin doesn't outlive the Loader
         std::vector<std::shared_ptr<Plugin>> m_pluginVec;
     };
 }

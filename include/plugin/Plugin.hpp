@@ -4,7 +4,7 @@
 
 #include <string>
 
-#define JEM_PLUGIN_DEF(plugin) std::shared_ptr<Plugin> _createPlugin() { return std::make_shared<plugin>(); }
+#define JEM_PLUGIN_DEF(plugin) extern "C" Plugin* _createPlugin() { return new plugin(); }
 
 namespace JEM
 {
@@ -18,5 +18,11 @@ namespace JEM
 
         virtual void init() = 0;
         virtual void update() = 0;
+
+        void load() {
+            printf("Loading Plugin %s with Version %s\n", getPluginName().c_str(), static_cast<std::string>(getPluginVersion()).c_str());
+        }
+
+        virtual ~Plugin() {}
     };
 }
