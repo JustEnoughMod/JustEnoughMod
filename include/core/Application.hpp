@@ -21,7 +21,8 @@ namespace JEM
 
         void run()
         {
-            for (auto plugin: m_pluginLoader->getNative()) {
+            for (auto plugin : m_pluginLoader->getNative())
+            {
                 plugin->init();
             }
 
@@ -29,24 +30,31 @@ namespace JEM
             {
                 while (true)
                 {
-                    std::any event = m_window->pollEvent();
+                    std::any anyEvent = m_window->pollEvent();
 
-                    if (!event.has_value())
+                    if (!anyEvent.has_value())
                         break;
 
-                    if (const auto sdlEvent = std::any_cast<SDL_Event>(&event))
+                    if (std::any_cast<ExitEvent>(&anyEvent))
+                        m_quit = true;
+                    else if (const auto event = std::any_cast<MouseButtonPressedEvent>(&anyEvent))
                     {
-                        if (sdlEvent->type == SDL_QUIT)
-                        {
-                            m_quit = true;
-                            break;
-                        }
+                        printf("Mouse Pressed Button: %i, Clicks: %i\n", event->button, event->clicks);
+                    }
+                    else if (const auto event = std::any_cast<MouseButtonReleasedEvent>(&anyEvent))
+                    {
+                        printf("Mouse Released Button: %i, Clicks: %i\n", event->button, event->clicks);
+                    }
+                    else if (const auto event = std::any_cast<MouseWheelEvent>(&anyEvent))
+                    {
+                        printf("Mouse Wheel Direction: %i, X: %f, Y: %f\n", event->direction, event->x, event->y);
                     }
                 }
 
                 m_renderer->clear();
 
-                for (auto plugin: m_pluginLoader->getNative()) {
+                for (auto plugin : m_pluginLoader->getNative())
+                {
                     plugin->update();
                 }
 

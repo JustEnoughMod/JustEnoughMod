@@ -1,5 +1,7 @@
 #pragma once
 
+#include <event/Event.hpp>
+
 #include <bgfx/bgfx.h>
 #include <bgfx/platform.h>
 #include <bx/math.h>
@@ -9,8 +11,6 @@
 
 #include <memory>
 #include <any>
-
-// #include <wayland-egl.h>
 
 namespace JEM
 {
@@ -66,27 +66,8 @@ namespace JEM
 #elif BX_PLATFORM_OSX
             pd.nwh = wmi.info.cocoa.window;
 #elif BX_PLATFORM_LINUX
-            // if (wmi.subsystem == SDL_SYSWM_WAYLAND)
-            // {
-            //     wl_egl_window *win_impl = (wl_egl_window*)SDL_GetWindowData(m_window.get(), "wl_egl_window");
-            //     if(!win_impl)
-            //     {
-            //         int width, height;
-            //         SDL_GetWindowSize(m_window.get(), &width, &height);
-            //         struct wl_surface* surface = wmi.info.wl.surface;
-            //         if(!surface)
-            //             exit(EXIT_FAILURE);
-            //         win_impl = wl_egl_window_create(surface, width, height);
-            //         SDL_SetWindowData(m_window.get(), "wl_egl_window", win_impl);
-            //     }
-
-            // pd.ndt = wmi.info.wl.display;
-            // pd.nwh = (void *)(uintptr_t)win_impl;
-            // }
-            // else {
             pd.ndt = wmi.info.x11.display;
             pd.nwh = (void *)(uintptr_t)wmi.info.x11.window;
-            // }
 #endif
 
             return pd;
@@ -96,8 +77,50 @@ namespace JEM
         {
             SDL_Event event;
 
-            if (SDL_PollEvent(&event))
-                return event;
+            if (SDL_PollEvent(&event)){
+                switch (event.type)
+                {
+                case SDL_QUIT: 
+                    return ExitEvent{};
+                case SDL_MOUSEMOTION:
+                    return MouseMoveEvent {
+                        .windowId = event.motion.windowID,
+                        .mouseId = event.motion.which,
+                        .x = event.motion.x,
+                        .y = event.motion.y,
+                        .dx = event.motion.xrel,
+                        .dy = event.motion.yrel,                      
+                    };
+                case SDL_MOUSEBUTTONDOWN:
+                    return MouseButtonPressedEvent {
+                        .windowId = event.button.windowID,
+                        .mouseId = event.button.which,
+                        .button = static_cast<Mouse>(event.button.button),
+                        .clicks = event.button.clicks,
+                        .x = event.button.x,
+                        .y = event.button.y,                    
+                    };
+                case SDL_MOUSEBUTTONUP:
+                    return MouseButtonReleasedEvent {
+                        .windowId = event.button.windowID,
+                        .mouseId = event.button.which,
+                        .button = static_cast<Mouse>(event.button.button),
+                        .clicks = event.button.clicks,
+                        .x = event.button.x,
+                        .y = event.button.y,                     
+                    };
+                case SDL_MOUSEWHEEL:
+                    return MouseWheelEvent {
+                        .windowId = event.wheel.windowID,
+                        .mouseId = event.wheel.which,
+                        .direction = static_cast<MouseWheel>(event.wheel.direction),
+                        .x = event.wheel.preciseX,
+                        .y = event.wheel.preciseY,                     
+                    };
+                default:
+                    break;
+                }
+            }
 
             return std::any();
         }

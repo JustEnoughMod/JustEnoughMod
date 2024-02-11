@@ -5,6 +5,8 @@
 
 #include "plugin/Plugin.hpp"
 
+#include "event/Event.hpp"
+
 #include "render/Renderer.hpp"
 
 #include "util/Util.hpp"
