@@ -73,5 +73,6 @@
         "any": "cpp"
     },
     "cmake.configureOnOpen": true,
-    "dotnet.defaultSolution": "disable"
+    "dotnet.defaultSolution": "disable",
+    "C_Cpp.default.compileCommands": "/home/ld/Git/JustEnoughMod/tmp/builddir/compile_commands.json"
 }

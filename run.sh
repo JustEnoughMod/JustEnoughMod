@@ -1,1 +1,1 @@
-./build/JustEnoughMod-bin
+./build/JustEnoughMod

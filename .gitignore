@@ -1,2 +1,4 @@
 result
 build
+subprojects/packagecache
+subprojects/SDL2-*
