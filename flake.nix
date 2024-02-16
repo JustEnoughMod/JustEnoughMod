@@ -34,7 +34,7 @@
               sha256 = "sha256-Pax8KYypbGVIReQuiwZ2kdgQqFuFYuoLA6YZgQLVE4w=";
               fetchSubmodules = true;
             };
-          in clangStdenv.mkDerivation rec {
+          in stdenv.mkDerivation rec {
             pname = "JustEnoughMod";
             inherit version;
 

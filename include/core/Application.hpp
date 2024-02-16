@@ -39,15 +39,15 @@ namespace JEM
                         m_quit = true;
                     else if (const auto event = std::any_cast<MouseButtonPressedEvent>(&anyEvent))
                     {
-                        printf("Mouse Pressed Button: %i, Clicks: %i\n", event->button, event->clicks);
+                        printf("Mouse Pressed Button: %i, Clicks: %i\n", static_cast<int>(event->button), event->clicks);
                     }
                     else if (const auto event = std::any_cast<MouseButtonReleasedEvent>(&anyEvent))
                     {
-                        printf("Mouse Released Button: %i, Clicks: %i\n", event->button, event->clicks);
+                        printf("Mouse Released Button: %i, Clicks: %i\n", static_cast<int>(event->button), event->clicks);
                     }
                     else if (const auto event = std::any_cast<MouseWheelEvent>(&anyEvent))
                     {
-                        printf("Mouse Wheel Direction: %i, X: %f, Y: %f\n", event->direction, event->x, event->y);
+                        printf("Mouse Wheel Direction: %i, X: %f, Y: %f\n", static_cast<int>(event->direction), event->x, event->y);
                     }
                 }
 
