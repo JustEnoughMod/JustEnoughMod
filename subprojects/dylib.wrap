@@ -1,0 +1,7 @@
+[wrap-git]
+directory = dylib
+url = git@github.com:LDprg/dylib.meson.git
+revision = main
+clone-recursive = true
+[provide]
+dylib = dylib_dep

@@ -1,3 +1,0 @@
-[submodule "subprojects/dylib"]
-	path = subprojects/dylib
-	url = https://github.com/martin-olivier/dylib
