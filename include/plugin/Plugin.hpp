@@ -2,25 +2,29 @@
 
 #include <util/Version.hpp>
 
+#include <iostream>
 #include <string>
 
-#define JEM_PLUGIN_DEF(plugin) extern "C" Plugin* _createPlugin() { return new plugin(); }
+#define JEM_PLUGIN_DEF(plugin) \
+    extern "C" Plugin *_createPlugin() { return new plugin(); }
 
 namespace JEM
 {
     class Plugin
     {
     public:
-        virtual std::string getPluginName() = 0;
-        virtual Version getPluginVersion() {
+        virtual const char *getPluginName() = 0;
+        virtual Version getPluginVersion()
+        {
             return {0, 0, 0};
         }
 
         virtual void init() = 0;
         virtual void update() = 0;
 
-        void load() {
-            printf("Loading Plugin %s with Version %s\n", getPluginName().c_str(), static_cast<std::string>(getPluginVersion()).c_str());
+        void load()
+        {
+            std::cout << "Loading Plugin " << getPluginName() << " with Version " << static_cast<std::string>(getPluginVersion()) << std::endl;
         }
 
         virtual ~Plugin() {}

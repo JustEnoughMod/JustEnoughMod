@@ -1,5 +1,7 @@
 {
-  description = "An over-engineered Hello World in C";
+  inputs = {
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+  };
 
   outputs = { self, nixpkgs }:
     let
@@ -8,7 +10,7 @@
       version = builtins.substring 0 8 lastModifiedDate;
 
       supportedSystems =
-        [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
+        [ "x86_64-linux" "aarch64-linux" ];
 
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
@@ -42,7 +44,7 @@
 
             enableParallelBuilding = true;
 
-            nativeBuildInputs = [ pkg-config meson ninja git binutils ];
+            nativeBuildInputs = [ pkg-config meson ninja ccache git binutils mold ];
             buildInputs = [
               alsa-lib
               audiofile

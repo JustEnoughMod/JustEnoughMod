@@ -4,12 +4,14 @@ project('JustEnoughMod', 'cpp',
                      'cpp_std=c++20',
                      'optimization=g'])
 
+add_project_arguments('-D_GLIBCXX_USE_CXX11_ABI=0', language : 'cpp')
+
 cmake = import('cmake')
 opt_var = cmake.subproject_options()
 
 opt_var.add_cmake_defines({'CMAKE_POLICY_DEFAULT_CMP0112': 'NEW', 'CMAKE_POLICY_DEFAULT_CMP0126': 'NEW'})
-opt_var.set_override_option('warning_level', '1')
-opt_var.append_compile_args('cpp', '-w', '-Wno-everything')
+opt_var.set_override_option('warning_level', '0')
+opt_var.append_compile_args('cpp', '-w')
 
 bgfx_proj = cmake.subproject('bgfx', options: opt_var)
 bgfx_dep = bgfx_proj.dependency('bgfx')
@@ -23,7 +25,7 @@ sdl2_dep = dependency('sdl2')
 
 incdir = include_directories('include')
 
-jem_lib = library('JustEnoughMod', 
+jem_lib = library('JustEnoughMod', 'src/core/Application.cpp',
   include_directories : incdir,
   dependencies: [
     sdl2_dep, 
