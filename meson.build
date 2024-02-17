@@ -13,15 +13,18 @@ opt_var.add_cmake_defines({'CMAKE_POLICY_DEFAULT_CMP0112': 'NEW', 'CMAKE_POLICY_
 opt_var.set_override_option('warning_level', '0')
 opt_var.append_compile_args('cpp', '-w')
 
-bgfx_proj = cmake.subproject('bgfx', options: opt_var)
-bgfx_dep = bgfx_proj.dependency('bgfx')
-bimg_dep = bgfx_proj.dependency('bimg')
-bx_dep = bgfx_proj.dependency('bx')
+# bgfx_proj = cmake.subproject('bgfx', options: opt_var)
+# bgfx_dep = bgfx_proj.dependency('bgfx')
+# bimg_dep = bgfx_proj.dependency('bimg')
+# bx_dep = bgfx_proj.dependency('bx')
 
 dylib_proj = cmake.subproject('dylib', options: opt_var)
 dylib_dep = dylib_proj.dependency('dylib')
 
 sdl2_dep = dependency('sdl2')
+bgfx_dep = dependency('bgfx')
+bimg_dep = dependency('bimg')
+bx_dep = dependency('bx')
 
 incdir = include_directories('include')
 
