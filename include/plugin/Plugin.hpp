@@ -16,7 +16,7 @@ namespace JEM
         virtual const char *getPluginName() = 0;
         virtual Version getPluginVersion()
         {
-            return {0, 0, 0};
+            return "0.0.0";
         }
 
         virtual void init() = 0;

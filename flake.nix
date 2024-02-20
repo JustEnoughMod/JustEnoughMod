@@ -1,7 +1,5 @@
 {
-  inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
-  };
+  inputs = { nixpkgs.url = "nixpkgs/nixos-unstable"; };
 
   outputs = { self, nixpkgs }:
     let
@@ -9,8 +7,7 @@
         self.lastModifiedDate or self.lastModified or "19700101";
       version = builtins.substring 0 8 lastModifiedDate;
 
-      supportedSystems =
-        [ "x86_64-linux" "aarch64-linux" ];
+      supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
 
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
@@ -21,19 +18,16 @@
         });
     in {
       overlay = final: prev: {
-
         JustEnoughMod = with final;
           let
             bgfx = prev.fetchgit {
-              url = "https://github.com/bkaradzic/bgfx.cmake";
-              rev = "011e8efe231d3d9aba9caf634dbc86d85263d20e";
-              sha256 = "sha256-whNLa8ZCgfLXwnXnp4EczNWfMqvlO71eQnagpmW7p+c=";
+              url = "https://github.com/LDprg/bgfx.meson";
+              sha256 = "sha256-1xGy+Rja9YNUWAc70ckc5H6tEmLeSPCUJ8T//eWKE1s=";
               fetchSubmodules = true;
             };
             dylib = prev.fetchgit {
-              url = "https://github.com/martin-olivier/dylib";
-              rev = "d848a2fe1b0959443d1fcd7288dc4bc779e1f836";
-              sha256 = "sha256-Pax8KYypbGVIReQuiwZ2kdgQqFuFYuoLA6YZgQLVE4w=";
+              url = "https://github.com/LDprg/dylib.meson";
+              sha256 = "sha256-bdYkfmxzv30+EQ4hXmIZ07rsyjz9YtSGEIOzUBDPJpM=";
               fetchSubmodules = true;
             };
           in stdenv.mkDerivation rec {
@@ -44,52 +38,9 @@
 
             enableParallelBuilding = true;
 
-            nativeBuildInputs = [ pkg-config meson ninja ccache git binutils mold ];
-            buildInputs = [
-              alsa-lib
-              audiofile
-              dbus
-              cmake
-              egl-wayland
-              glslang
-              ibus
-              jack2
-              libGL
-              libdecor
-              libdrm
-              libiconv
-              libpulseaudio
-              libunwind
-              libusb1
-              libxkbcommon
-              mesa
-              pcre2
-              pipewire
-              SDL2
-              shaderc
-              sndio
-              udev
-              util-linux
-              vulkan-headers
-              vulkan-loader
-              vulkan-tools
-              vulkan-validation-layers
-              wayland
-              wayland-protocols
-              wayland-scanner
-              xorg.libICE
-              xorg.libX11
-              xorg.libXScrnSaver
-              xorg.libXcursor
-              xorg.libXext
-              xorg.libXi
-              xorg.libXinerama
-              xorg.libXrandr
-              xorg.libXxf86vm
-            ];
-
-            VULKAN_SDK =
-              "${vulkan-validation-layers}/share/vulkan/explicit_layer.d";
+            nativeBuildInputs =
+              [ pkg-config meson ninja ccache git binutils makeWrapper ];
+            buildInputs = [ SDL2 cmake libGL ];
 
             preConfigure = ''
               cp -r ${bgfx} subprojects/bgfx
@@ -100,10 +51,12 @@
 
             installPhase = ''
               mkdir -p $out/bin
-              mv ${pname} $out/bin
+              mv JustEnoughMod $out/bin
+              mv libJustEnoughMod.so $out/bin
+              wrapProgram $out/bin/JustEnoughMod \
+                --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ libGL ]}
             '';
           };
-
       };
 
       packages = forAllSystems
