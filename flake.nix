@@ -20,16 +20,7 @@
       overlay = final: prev: {
         JustEnoughMod = with final;
           let
-            bgfx = prev.fetchgit {
-              url = "https://github.com/LDprg/bgfx.meson";
-              sha256 = "sha256-1xGy+Rja9YNUWAc70ckc5H6tEmLeSPCUJ8T//eWKE1s=";
-              fetchSubmodules = true;
-            };
-            dylib = prev.fetchgit {
-              url = "https://github.com/LDprg/dylib.meson";
-              sha256 = "sha256-bdYkfmxzv30+EQ4hXmIZ07rsyjz9YtSGEIOzUBDPJpM=";
-              fetchSubmodules = true;
-            };
+            sources = import ./nix/sources.nix;
           in stdenv.mkDerivation rec {
             pname = "JustEnoughMod";
             inherit version;
@@ -43,8 +34,8 @@
             buildInputs = [ SDL2 cmake libGL ];
 
             preConfigure = ''
-              cp -r ${bgfx} subprojects/bgfx
-              cp -r ${dylib} subprojects/dylib
+              cp -r ${sources.bgfx} subprojects/bgfx
+              cp -r ${sources.dylib} subprojects/dylib
 
               chmod 777 -R subprojects
             '';
