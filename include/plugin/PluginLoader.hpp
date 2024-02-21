@@ -10,8 +10,8 @@ namespace JEM
 {
     class PluginLoader {
     public:
-        void loadFile(std::string path) {
-            auto lib = std::make_shared<dylib>("build", path.c_str());
+        void loadFile(std::string path, std::string name) {
+            auto lib = std::make_shared<dylib>(path.c_str(), name.c_str());
             
             auto createPlugin = lib->get_function<Plugin*()>("_createPlugin");
 

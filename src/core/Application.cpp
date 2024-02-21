@@ -1,5 +1,15 @@
 #include <core/Application.hpp>
 
+void JEM::Application::init(char *path)
+{
+    m_quit = false;
+    m_window = std::make_shared<Window>("JustEnoughMods", 1000, 600);
+    m_renderer = std::make_shared<Renderer>(m_window);
+    m_pluginLoader = std::make_shared<PluginLoader>();
+
+    m_pluginLoader->loadFile(std::string(removeAppName(path)) + "Plugins", "JustEnoughModCore");
+}
+
 void JEM::Application::run()
 {
     for (auto plugin : m_pluginLoader->getNative())

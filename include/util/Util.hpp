@@ -1,24 +1,7 @@
 #pragma once
 
-#include <vector>
-#include <sstream>
-
 namespace JEM
 {
-    std::vector<std::string> split(const std::string &s, char delim)
-    {
-        std::vector<std::string> result;
-        std::stringstream ss(s);
-        std::string item;
-
-        while (getline(ss, item, delim))
-        {
-            result.push_back(item);
-        }
-
-        return result;
-    }
-
     constexpr int atoi(const char *ch)
     {
         int i = 0;
@@ -35,5 +18,19 @@ namespace JEM
         }
 
         return i;
+    }
+
+    constexpr char *removeAppName(char *path)
+    {
+        char *orig = path;
+
+        while (*path != '\0')
+            path++;
+        while (*path != '/')
+            path--;
+        path++;
+        *path = '\0';
+
+        return orig;
     }
 }

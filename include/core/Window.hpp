@@ -22,7 +22,7 @@ namespace JEM
         {
             if (m_count == 0)
             {
-                init_sdl();
+                initSdl();
             }
             m_count++;
 
@@ -44,7 +44,7 @@ namespace JEM
 
             if (m_count == 0)
             {
-                deinit_sdl();
+                deinitSdl();
             }
         }
 
@@ -156,7 +156,7 @@ namespace JEM
         std::shared_ptr<SDL_Window> m_window;
         std::string m_title;
 
-        static void init_sdl()
+        static void initSdl()
         {
             printf("SDL init\n");
             if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -166,7 +166,7 @@ namespace JEM
             }
         }
 
-        static void deinit_sdl()
+        static void deinitSdl()
         {
             printf("SDL deinit\n");
             SDL_Quit();
