@@ -1,7 +1,19 @@
 {
-  inputs = { nixpkgs.url = "nixpkgs/nixos-unstable"; };
+  inputs = { 
+    nixpkgs.url = "nixpkgs/nixos-unstable"; 
+    bgfx = {
+      url = "https://github.com/LDprg/bgfx.meson";
+      type = "git";
+      submodules = true;
+    };
+    dylib = {
+      url = "https://github.com/LDprg/dylib.meson";
+      type = "git";
+      submodules = true;
+    };
+  };
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, bgfx, dylib }:
     let
       lastModifiedDate =
         self.lastModifiedDate or self.lastModified or "19700101";
@@ -19,9 +31,7 @@
     in {
       overlay = final: prev: {
         JustEnoughMod = with final;
-          let
-            sources = import ./nix/sources.nix;
-          in stdenv.mkDerivation rec {
+          stdenv.mkDerivation rec {
             pname = "JustEnoughMod";
             inherit version;
 
@@ -34,8 +44,8 @@
             buildInputs = [ SDL2 cmake libGL ];
 
             preConfigure = ''
-              cp -r ${sources.bgfx} subprojects/bgfx
-              cp -r ${sources.dylib} subprojects/dylib
+              cp -r ${bgfx} subprojects/bgfx
+              cp -r ${dylib} subprojects/dylib
 
               chmod 777 -R subprojects
             '';
