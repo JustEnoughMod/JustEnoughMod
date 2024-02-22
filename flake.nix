@@ -1,6 +1,6 @@
 {
-  inputs = { 
-    nixpkgs.url = "nixpkgs/nixos-unstable"; 
+  inputs = {
+    nixpkgs.url = "nixpkgs/nixos-unstable";
     bgfx = {
       url = "https://github.com/LDprg/bgfx.meson";
       type = "git";
@@ -29,7 +29,7 @@
           overlays = [ self.overlay ];
         });
     in {
-      overlay = final: prev: {
+      overlay = final: _: {
         JustEnoughMod = with final;
           stdenv.mkDerivation rec {
             pname = "JustEnoughMod";
