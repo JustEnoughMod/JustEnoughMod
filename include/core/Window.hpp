@@ -12,6 +12,10 @@
 #include <memory>
 #include <any>
 
+#ifdef __INTELLISENSE__
+    #pragma diag_suppress 135
+#endif
+
 namespace JEM
 {
     class Window
