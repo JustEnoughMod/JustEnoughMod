@@ -1,6 +1,4 @@
 result
 build
-subprojects/packagecache
-subprojects/SDL2-*
-subprojects/bgfx
-subprojects/dylib
+subprojects/*
+!subprojects/*.wrap

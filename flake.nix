@@ -41,7 +41,7 @@
 
             nativeBuildInputs =
               [ pkg-config meson ninja ccache git binutils makeWrapper ];
-            buildInputs = [ SDL2 libGL ];
+            buildInputs = [ SDL2 spdlog libGL ];
 
             preConfigure = ''
               cp -r ${bgfx} subprojects/bgfx

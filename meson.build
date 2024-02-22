@@ -11,31 +11,31 @@ bimg_dep = dependency('bimg')
 bx_dep = dependency('bx')
 dylib_dep = dependency('dylib')
 sdl2_dep = dependency('sdl2')
+spdlog_dep = dependency('spdlog')
 
 incdir = include_directories('include')
+
+core_dep = [
+  sdl2_dep, 
+  bgfx_dep,  
+  bimg_dep,  
+  bx_dep, 
+  dylib_dep,
+  spdlog_dep
+]
 
 jem_lib = library('JustEnoughMod', 
   'src/core/Application.cpp',
   'src/core/Window.cpp',
   include_directories : incdir,
-  dependencies: [
-    sdl2_dep, 
-    bgfx_dep,  
-    bimg_dep,  
-    bx_dep, 
-    dylib_dep
-  ])
+  dependencies: core_dep
+)
 
 jem_dep = declare_dependency(
   link_with : jem_lib,
   include_directories : incdir,
-  dependencies: [
-    sdl2_dep, 
-    bgfx_dep,  
-    bimg_dep,  
-    bx_dep, 
-    dylib_dep
-  ])
+  dependencies: core_dep
+)
 
 executable('JustEnoughMod', 'src/main.cpp',
   win_subsystem: 'windows',
