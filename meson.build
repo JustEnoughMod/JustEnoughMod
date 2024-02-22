@@ -14,7 +14,9 @@ sdl2_dep = dependency('sdl2')
 
 incdir = include_directories('include')
 
-jem_lib = library('JustEnoughMod', 'src/core/Application.cpp',
+jem_lib = library('JustEnoughMod', 
+  'src/core/Application.cpp',
+  'src/core/Window.cpp',
   include_directories : incdir,
   dependencies: [
     sdl2_dep, 

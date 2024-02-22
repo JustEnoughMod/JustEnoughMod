@@ -13,8 +13,8 @@ namespace JEM
     class Plugin
     {
     public:
-        virtual const char *getPluginName() = 0;
-        virtual Version getPluginVersion()
+        virtual constexpr const char *getPluginName() = 0;
+        virtual constexpr Version getPluginVersion()
         {
             return "0.0.0";
         }

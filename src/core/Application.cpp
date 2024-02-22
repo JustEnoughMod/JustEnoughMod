@@ -7,7 +7,7 @@ void JEM::Application::init(char *path)
     m_renderer = std::make_shared<Renderer>(m_window);
     m_pluginLoader = std::make_shared<PluginLoader>();
 
-    m_pluginLoader->loadFile(std::string(removeAppName(path)) + "Plugins", "JustEnoughModCore");
+    m_pluginLoader->loadFolder(std::string(removeAppName(path)) + "Plugins");
 }
 
 void JEM::Application::deinit()

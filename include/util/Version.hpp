@@ -4,7 +4,8 @@
 
 #include <string>
 
-namespace JEM {
+namespace JEM
+{
     struct Version
     {
         int major;
@@ -15,33 +16,40 @@ namespace JEM {
 
         Version() = default;
 
-        Version(int maj, int min, int pat) {
+        Version(int maj, int min, int pat)
+        {
             major = maj;
             minor = min;
             patch = pat;
         }
 
-        consteval Version(const char *str) {
+        consteval Version(const char *str)
+        {
             major = 0;
             minor = 0;
             patch = 0;
 
             const char *token = str;
-            if (*token == '\0') return;
+            if (*token == '\0')
+                return;
 
             major = atoi(token);
 
-            do {
+            do
+            {
                 token++;
-                if (*token == '\0') return;
-            } while (*(token-1) != '.');
+                if (*token == '\0')
+                    return;
+            } while (*(token - 1) != '.');
 
             minor = atoi(token);
-            
-            do {
+
+            do
+            {
                 token++;
-                if (*token == '\0') return;
-            } while (*(token-1) != '.');
+                if (*token == '\0')
+                    return;
+            } while (*(token - 1) != '.');
 
             patch = atoi(token);
         }
