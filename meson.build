@@ -1,10 +1,10 @@
 project('JustEnoughMod', 'cpp',
-  version : '0.1',
+  version : '0.0.1',
   default_options : ['warning_level=3',
                      'cpp_std=c++20',
                      'optimization=g'])
 
-add_project_arguments('-D_GLIBCXX_USE_CXX11_ABI=0', language : 'cpp')
+add_project_arguments('-D_GLIBCXX_USE_CXX11_ABI=0', '-DVERSION="@0@"'.format(meson.project_version()), language : 'cpp')
 
 bgfx_dep = dependency('bgfx')
 bimg_dep = dependency('bimg')

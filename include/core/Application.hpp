@@ -14,6 +14,15 @@ namespace JEM
 
         void run();
 
+        static constexpr Version getAppVersion()
+        {
+#ifdef VERSION
+            return VERSION;
+#else
+            return "0.0.0";
+#endif
+        }
+
     private:
         static inline std::shared_ptr<Window> m_window;
         static inline std::shared_ptr<Renderer> m_renderer;

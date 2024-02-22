@@ -3,6 +3,7 @@
 #include <util/Util.hpp>
 
 #include <string>
+#include <ostream>
 
 namespace JEM
 {
@@ -54,4 +55,10 @@ namespace JEM
             patch = atoi(token);
         }
     };
+
+    std::ostream &operator<<(std::ostream &os, const Version &version)
+    {
+        os << static_cast<std::string>(version);
+        return os;
+    }
 }
