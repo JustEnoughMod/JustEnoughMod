@@ -10,6 +10,13 @@ void JEM::Application::init(char *path)
     m_pluginLoader->loadFile(std::string(removeAppName(path)) + "Plugins", "JustEnoughModCore");
 }
 
+void JEM::Application::deinit()
+{
+    m_window.reset();
+    m_renderer.reset();
+    m_pluginLoader.reset();
+}
+
 void JEM::Application::run()
 {
     for (auto plugin : m_pluginLoader->getNative())

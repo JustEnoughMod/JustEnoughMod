@@ -7,4 +7,6 @@ int main([[maybe_unused]] int argc, char **argv)
     app.init(argv[0]);
 
     app.run();
+
+    app.deinit();
 }

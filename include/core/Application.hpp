@@ -10,6 +10,8 @@ namespace JEM
     {
     public:
         void init(char *path);
+        void deinit();
+
         void run();
 
     private:
