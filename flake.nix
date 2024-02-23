@@ -31,7 +31,7 @@
     in {
       overlay = final: _: {
         JustEnoughMod = with final;
-          stdenv.mkDerivation rec {
+          gcc13Stdenv.mkDerivation rec {
             pname = "JustEnoughMod";
             inherit version;
 
@@ -41,7 +41,7 @@
 
             nativeBuildInputs =
               [ pkg-config meson ninja ccache git binutils makeWrapper ];
-            buildInputs = [ SDL2 spdlog libGL ];
+            buildInputs = [ SDL2 libGL ];
 
             preConfigure = ''
               cp -r ${bgfx} subprojects/bgfx
