@@ -13,7 +13,7 @@ namespace JEM
         int minor;
         int patch;
 
-        operator const std::string() const { return std::to_string(major) + "." + std::to_string(minor) + "." + std::to_string(patch); }
+        operator std::string() const { return std::to_string(major) + "." + std::to_string(minor) + "." + std::to_string(patch); }
 
         Version() = default;
 

@@ -34,8 +34,8 @@ bgfx::PlatformData JEM::Window::getRendererBindings()
     SDL_VERSION(&wmi.version);
     if (!SDL_GetWindowWMInfo(m_window.get(), &wmi))
     {
-        printf(
-            "SDL_SysWMinfo could not be retrieved. SDL_Error: %s\n",
+        Application().getLogger()->error(
+            "SDL_SysWMinfo could not be retrieved. SDL_Error: {}",
             SDL_GetError());
         exit(EXIT_FAILURE);
     }
@@ -108,7 +108,7 @@ std::any JEM::Window::pollEvent()
 
 void JEM::Window::initSdl()
 {
-    Application().getLogger()->trace("SDL init");
+    Application().getLogger()->trace("Initialize SDL");
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
         Application().getLogger()->error("SDL could not initialize. SDL_Error: {}", SDL_GetError());
@@ -118,6 +118,6 @@ void JEM::Window::initSdl()
 
 void JEM::Window::deinitSdl()
 {
-    Application().getLogger()->trace("SDL deinit");
+    Application().getLogger()->trace("Deinitialize SDL");
     SDL_Quit();
 }

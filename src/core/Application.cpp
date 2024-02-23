@@ -8,6 +8,10 @@ void JEM::Application::init(char *path)
     m_renderer = std::make_shared<Renderer>(m_window);
     m_pluginLoader = std::make_shared<PluginLoader>();
 
+    getLogger()->info("Running JustEnoughMod Version {}", static_cast<std::string>(getAppVersion()));
+    
+    getLogger()->trace("Scanning Plugin Folder");
+
     m_pluginLoader->loadFolder(std::string(removeAppName(path)) + "Plugins");
 }
 
