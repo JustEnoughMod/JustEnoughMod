@@ -28,7 +28,8 @@ jem_lib = library('JustEnoughMod',
   'src/core/Window.cpp',
   'src/plugin/PluginLoader.cpp',
   include_directories : incdir,
-  dependencies: core_dep
+  dependencies: core_dep,
+  cpp_pch : 'pch/pch.hpp'
 )
 
 jem_dep = declare_dependency(
