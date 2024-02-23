@@ -4,15 +4,13 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/vendor/bgfx/bgfx/include",
-                "${workspaceFolder}/vendor/bgfx/bx/include",
-                "${workspaceFolder}/vendor/bgfx/bimg/include",
-                "${workspaceFolder}/vendor/sdl/include",
-                "${workspaceFolder}/vendor/dylib/include"
+                "${workspaceFolder}/**/include",
+                "${workspaceFolder}/vendor/bgfx/**/include",
+                "${workspaceFolder}/vendor/**/include"
             ],
             "defines": [],
             "cStandard": "c23",
-            "cppStandard": "c++23",
+            "cppStandard": "c++20",
             "intelliSenseMode": "linux-clang-x64",
             "compilerPath": "/usr/bin/clang++"
         }
