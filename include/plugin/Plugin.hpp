@@ -26,7 +26,7 @@ namespace JEM
         void load()
         {
             m_logger = std::make_shared<Logger>(getPluginName());
-            // m_logger->getNative()->warn("TEST");
+            m_logger->getNative()->warn("TEST");
             std::cout << "Loading Plugin " << getPluginName() << " with Version " << static_cast<std::string>(getPluginVersion()) << std::endl;
         }
 
