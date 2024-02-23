@@ -2,6 +2,7 @@
 
 #include "core/Application.hpp"
 #include "core/Window.hpp"
+#include "core/Logger.hpp"
 
 #include "plugin/Plugin.hpp"
 

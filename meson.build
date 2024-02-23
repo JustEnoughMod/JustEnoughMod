@@ -27,6 +27,7 @@ core_dep = [
 jem_lib = library('JustEnoughMod', 
   'src/core/Application.cpp',
   'src/core/Window.cpp',
+  'src/core/Logger.cpp',
   include_directories : incdir,
   dependencies: core_dep
 )

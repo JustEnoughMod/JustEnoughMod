@@ -1,5 +1,6 @@
 #pragma once
 
+#include <core/Logger.hpp>
 #include <util/Version.hpp>
 
 #include <iostream>
@@ -24,9 +25,14 @@ namespace JEM
 
         void load()
         {
+            m_logger = std::make_shared<Logger>(getPluginName());
+            // m_logger->getNative()->warn("TEST");
             std::cout << "Loading Plugin " << getPluginName() << " with Version " << static_cast<std::string>(getPluginVersion()) << std::endl;
         }
 
         virtual ~Plugin() {}
+
+    private:
+        std::shared_ptr<Logger> m_logger;
     };
 }
