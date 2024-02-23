@@ -14,18 +14,19 @@ spdlog_dep = dependency('spdlog', default_options: ['warning_level=0'])
 incdir = include_directories('include')
 
 core_dep = [
-  sdl2_dep, 
   bgfx_dep,  
   bimg_dep,  
   bx_dep, 
   dylib_dep,
+  sdl2_dep, 
   spdlog_dep
 ]
 
 jem_lib = library('JustEnoughMod', 
   'src/core/Application.cpp',
-  'src/core/Window.cpp',
   'src/core/Logger.cpp',
+  'src/core/Window.cpp',
+  'src/plugin/PluginLoader.cpp',
   include_directories : incdir,
   dependencies: core_dep
 )

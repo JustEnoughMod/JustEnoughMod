@@ -3,7 +3,8 @@
 void JEM::Application::init(char *path)
 {
     m_quit = false;
-    m_window = std::make_shared<Window>("JustEnoughMods", 1000, 600);
+    m_logger = std::make_shared<Logger>("JustEnoughMod");
+    m_window = std::make_shared<Window>("JustEnoughMod", 1000, 600);
     m_renderer = std::make_shared<Renderer>(m_window);
     m_pluginLoader = std::make_shared<PluginLoader>();
 
@@ -15,6 +16,7 @@ void JEM::Application::deinit()
     m_window.reset();
     m_renderer.reset();
     m_pluginLoader.reset();
+    m_logger.reset();
 }
 
 void JEM::Application::run()
@@ -37,15 +39,15 @@ void JEM::Application::run()
                 m_quit = true;
             else if (const auto event = std::any_cast<MouseButtonPressedEvent>(&anyEvent))
             {
-                printf("Mouse Pressed Button: %i, Clicks: %i\n", static_cast<int>(event->button), event->clicks);
+                getLogger()->debug("Mouse Pressed Button: {}, Clicks: {}", static_cast<int>(event->button), event->clicks);
             }
             else if (const auto event = std::any_cast<MouseButtonReleasedEvent>(&anyEvent))
             {
-                printf("Mouse Released Button: %i, Clicks: %i\n", static_cast<int>(event->button), event->clicks);
+                getLogger()->debug("Mouse Released Button: {}, Clicks: {}", static_cast<int>(event->button), event->clicks);
             }
             else if (const auto event = std::any_cast<MouseWheelEvent>(&anyEvent))
             {
-                printf("Mouse Wheel Direction: %i, X: %f, Y: %f\n", static_cast<int>(event->direction), event->x, event->y);
+                getLogger()->debug("Mouse Wheel Direction: {}, X: {}, Y: {}", static_cast<int>(event->direction), event->x, event->y);
             }
         }
 

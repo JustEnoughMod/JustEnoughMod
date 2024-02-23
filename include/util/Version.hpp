@@ -55,10 +55,4 @@ namespace JEM
             patch = atoi(token);
         }
     };
-
-    std::ostream &operator<<(std::ostream &os, const Version &version)
-    {
-        os << static_cast<std::string>(version);
-        return os;
-    }
 }

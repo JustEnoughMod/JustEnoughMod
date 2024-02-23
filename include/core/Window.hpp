@@ -17,26 +17,7 @@ namespace JEM
     class Window
     {
     public:
-        Window(std::string title, int width, int height)
-            : m_title(title)
-        {
-            if (m_count == 0)
-            {
-                initSdl();
-            }
-            m_count++;
-
-            m_window = std::shared_ptr<SDL_Window>(SDL_CreateWindow(
-                                                       m_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width,
-                                                       height, SDL_WINDOW_SHOWN),
-                                                   SDL_DestroyWindow);
-
-            if (m_window.get() == nullptr)
-            {
-                printf("Window could not be created. SDL_Error: %s\n", SDL_GetError());
-                exit(EXIT_FAILURE);
-            }
-        }
+        Window(std::string title, int width, int height);
 
         ~Window()
         {
@@ -83,20 +64,7 @@ namespace JEM
         std::shared_ptr<SDL_Window> m_window;
         std::string m_title;
 
-        static void initSdl()
-        {
-            printf("SDL init\n");
-            if (SDL_Init(SDL_INIT_VIDEO) < 0)
-            {
-                printf("SDL could not initialize. SDL_Error: %s\n", SDL_GetError());
-                exit(EXIT_FAILURE);
-            }
-        }
-
-        static void deinitSdl()
-        {
-            printf("SDL deinit\n");
-            SDL_Quit();
-        }
+        static void initSdl();
+        static void deinitSdl();
     };
 }

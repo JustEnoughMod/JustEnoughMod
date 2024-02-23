@@ -14,6 +14,8 @@ namespace JEM
     class Plugin
     {
     public:
+        virtual ~Plugin() {}
+
         virtual constexpr const char *getPluginName() = 0;
         virtual constexpr Version getPluginVersion()
         {
@@ -26,11 +28,13 @@ namespace JEM
         void load()
         {
             m_logger = std::make_shared<Logger>(getPluginName());
-            m_logger->getNative()->warn("TEST");
-            std::cout << "Loading Plugin " << getPluginName() << " with Version " << static_cast<std::string>(getPluginVersion()) << std::endl;
+            getLogger()->info("Loading Plugin {} with Version {}", getPluginName(), static_cast<std::string>(getPluginVersion()));
         }
 
-        virtual ~Plugin() {}
+        std::shared_ptr<Logger> getLogger() const
+        {
+            return m_logger;
+        }
 
     private:
         std::shared_ptr<Logger> m_logger;

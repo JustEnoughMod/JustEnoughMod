@@ -1,9 +1,32 @@
 #include <core/Window.hpp>
 
+#include <core/Application.hpp>
+
 // fix vscode intellisense
 #ifdef __INTELLISENSE__
 #pragma diag_suppress 135
 #endif
+
+JEM::Window::Window(std::string title, int width, int height)
+    : m_title(title)
+{
+    if (m_count == 0)
+    {
+        initSdl();
+    }
+    m_count++;
+
+    m_window = std::shared_ptr<SDL_Window>(SDL_CreateWindow(
+                                               m_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width,
+                                               height, SDL_WINDOW_SHOWN),
+                                           SDL_DestroyWindow);
+
+    if (m_window.get() == nullptr)
+    {
+        Application().getLogger()->error("Window could not be created. SDL_Error: {}", SDL_GetError());
+        exit(EXIT_FAILURE);
+    }
+}
 
 bgfx::PlatformData JEM::Window::getRendererBindings()
 {
@@ -81,4 +104,20 @@ std::any JEM::Window::pollEvent()
     }
 
     return std::any();
+}
+
+void JEM::Window::initSdl()
+{
+    Application().getLogger()->trace("SDL init");
+    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    {
+        Application().getLogger()->error("SDL could not initialize. SDL_Error: {}", SDL_GetError());
+        exit(EXIT_FAILURE);
+    }
+}
+
+void JEM::Window::deinitSdl()
+{
+    Application().getLogger()->trace("SDL deinit");
+    SDL_Quit();
 }
