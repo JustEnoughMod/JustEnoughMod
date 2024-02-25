@@ -7,12 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Setup C++
-      uses: alandefreitas/cpp-actions/setup-cpp@master
-      id: setup-cpp
+    - name: Install LLVM and Clang
+      uses: KyleMayes/install-llvm-action@v1.9.0
       with:
-        compiler: clang
-        version: 16
+        version: "16.0"
     - uses: pre-commit/action@v3.0.1
     - uses: pre-commit-ci/lite-action@v1.0.2
       if: always()
