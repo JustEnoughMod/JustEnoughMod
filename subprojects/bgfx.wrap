@@ -1,6 +1,6 @@
 [wrap-git]
 directory = bgfx
-url = git@github.com:LDprg/bgfx.meson.git
+url = https://github.com/LDprg/bgfx.meson.git
 revision = main
 clone-recursive = true
 [provide]
