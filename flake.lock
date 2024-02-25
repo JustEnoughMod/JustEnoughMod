@@ -1,0 +1,98 @@
+{
+  "nodes": {
+    "bgfx": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1708631708,
+        "narHash": "sha256-gP1KruJxRWER6jgSzx/zhTYFxPaOCR4B1buhEmGXeYw=",
+        "ref": "refs/heads/main",
+        "rev": "b73d24bbc85d247b232df5a07c90ad4e3eac50b6",
+        "revCount": 12,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/LDprg/bgfx.meson"
+      },
+      "original": {
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/LDprg/bgfx.meson"
+      }
+    },
+    "dylib": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1708631675,
+        "narHash": "sha256-bcp+GCiigcq6NsVmee85URnwCsYUY7mniyynzRtY8xY=",
+        "ref": "refs/heads/main",
+        "rev": "6b07a1007e975aae6b7401a4a477423bd002363b",
+        "revCount": 4,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/LDprg/dylib.meson"
+      },
+      "original": {
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/LDprg/dylib.meson"
+      }
+    },
+    "flake-utils": {
+      "inputs": {
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1705309234,
+        "narHash": "sha256-uNRRNRKmJyCRC/8y1RqBkqWBLM034y4qN7EprSdmgyA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "1ef2e671c3b0c19053962c07dbda38332dcebf26",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1708475490,
+        "narHash": "sha256-g1v0TsWBQPX97ziznfJdWhgMyMGtoBFs102xSYO4syU=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "0e74ca98a74bc7270d28838369593635a5db3260",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-unstable",
+        "type": "indirect"
+      }
+    },
+    "root": {
+      "inputs": {
+        "bgfx": "bgfx",
+        "dylib": "dylib",
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs"
+      }
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

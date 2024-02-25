@@ -1,0 +1,4 @@
+result
+build
+subprojects/*
+!subprojects/*.wrap

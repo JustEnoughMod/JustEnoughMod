@@ -1,0 +1,19 @@
+{
+  "configurations": [
+    {
+      "cStandard": "c23",
+      "compilerPath": "/usr/bin/clang++",
+      "cppStandard": "c++23",
+      "defines": [],
+      "includePath": [
+        "${workspaceFolder}/**",
+        "${workspaceFolder}/**/include",
+        "${workspaceFolder}/vendor/bgfx/**/include",
+        "${workspaceFolder}/vendor/**/include"
+      ],
+      "intelliSenseMode": "linux-clang-x64",
+      "name": "Linux"
+    }
+  ],
+  "version": 4
+}
