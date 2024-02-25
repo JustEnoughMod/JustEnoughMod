@@ -10,12 +10,10 @@ jobs:
     - uses: actions/setup-python@v5
     - name: Install Python Dependencies
       run: pip install meson ninja
-    - name: Install Mesa
-      run: sudo apt-get install -y mesa-utils
+    - name: Install Mesa & SDL2
+      run: sudo apt-get install -y libsdl2-dev mesa-utils mesa-common-dev
     - name: Prepare Build
-      run: |
-        git config --global url.https://github.com/.insteadOf git://github.com/
-        meson setup build
+      run: meson setup build
     - name: Run Build
       run: meson compile -v -C build
     - name: Run Test Suite
