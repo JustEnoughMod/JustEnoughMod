@@ -2,14 +2,27 @@
 
 #include <core/Logger.hpp>
 
+#include <SDL.h>
+#include <SDL_syswm.h>
+
 // fix vscode intellisense
 #ifdef __INTELLISENSE__
-#pragma diag_suppress 135
+// #pragma diag_suppress 135
+#pragma diag_suppress 1696
 #endif
+
+#include <wayland-egl.h>
 
 JEM::Window::Window(std::string title, int width, int height) : m_title(title) {
   if (m_count == 0) {
-    initSdl();
+    getSystemLogger()->trace("Initialize SDL");
+
+    SDL_SetHint(SDL_HINT_VIDEODRIVER, "wayland,x11");
+
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER) < 0) {
+      getSystemLogger()->error("SDL could not initialize. SDL_Error: {}", SDL_GetError());
+      exit(EXIT_FAILURE);
+    }
   }
   m_count++;
 
@@ -37,11 +50,46 @@ bgfx::PlatformData JEM::Window::getRendererBindings() {
 #elif BX_PLATFORM_OSX
   pd.nwh = wmi.info.cocoa.window;
 #elif BX_PLATFORM_LINUX
-  pd.ndt = wmi.info.x11.display;
-  pd.nwh = (void *)(uintptr_t)wmi.info.x11.window;
+  if (wmi.subsystem == SDL_SYSWM_WAYLAND) {
+    wl_egl_window *win_impl = (wl_egl_window *)SDL_GetWindowData(m_window.get(), "wl_egl_window");
+    if (!win_impl) {
+      int width, height;
+      SDL_GetWindowSize(m_window.get(), &width, &height);
+      struct wl_surface *surface = wmi.info.wl.surface;
+      if (!surface)
+        exit(EXIT_FAILURE);
+      win_impl = wl_egl_window_create(surface, width, height);
+      SDL_SetWindowData(m_window.get(), "wl_egl_window", win_impl);
+    }
+
+    pd.ndt = wmi.info.wl.display;
+    pd.nwh = (void *)(uintptr_t)win_impl;
+  } else {
+    pd.ndt = wmi.info.x11.display;
+    pd.nwh = (void *)(uintptr_t)wmi.info.x11.window;
+  }
 #endif
 
   return pd;
+}
+
+JEM::Window::~Window() {
+  SDL_DestroyWindow(m_window.get());
+
+  m_count--;
+
+  if (m_count == 0) {
+    getSystemLogger()->trace("Deinitialize SDL");
+    SDL_Quit();
+  }
+}
+
+std::pair<int, int> JEM::Window::getSize() const {
+  int width, height;
+
+  SDL_GetWindowSize(m_window.get(), &width, &height);
+
+  return {width, height};
 }
 
 std::any JEM::Window::pollEvent() {
@@ -92,17 +140,4 @@ std::any JEM::Window::pollEvent() {
   }
 
   return std::any();
-}
-
-void JEM::Window::initSdl() {
-  getSystemLogger()->trace("Initialize SDL");
-  if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-    getSystemLogger()->error("SDL could not initialize. SDL_Error: {}", SDL_GetError());
-    exit(EXIT_FAILURE);
-  }
-}
-
-void JEM::Window::deinitSdl() {
-  getSystemLogger()->trace("Deinitialize SDL");
-  SDL_Quit();
 }

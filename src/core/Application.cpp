@@ -14,8 +14,8 @@ void JEM::Application::init(char *path) {
 }
 
 void JEM::Application::deinit() {
-  m_window.reset();
   m_renderer.reset();
+  m_window.reset();
   m_pluginLoader.reset();
 }
 
