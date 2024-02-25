@@ -1,6 +1,5 @@
 #include <core/Logger.hpp>
 
-#include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 
 JEM::Logger::Logger(std::string name)
