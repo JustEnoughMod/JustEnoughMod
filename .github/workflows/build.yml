@@ -1,0 +1,18 @@
+on:
+  pull_request:
+  push:
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+    - name: Install Python Dependencies
+      run: pip install meson ninja
+    - name: Prepare Build
+      run: meson setup build
+    - name: Run Build
+      run: meson compile -v -C build
+    - name: Run Test Suite
+      run: meson test -v -C build
