@@ -9,62 +9,54 @@
 #include <SDL.h>
 #include <SDL_syswm.h>
 
-#include <memory>
 #include <any>
+#include <memory>
 
-namespace JEM
-{
-    class Window
-    {
-    public:
-        Window(std::string title, int width, int height);
+namespace JEM {
+class Window {
+public:
+  Window(std::string title, int width, int height);
 
-        ~Window()
-        {
-            m_count--;
+  ~Window() {
+    m_count--;
 
-            if (m_count == 0)
-            {
-                deinitSdl();
-            }
-        }
+    if (m_count == 0) {
+      deinitSdl();
+    }
+  }
 
-        bgfx::PlatformData getRendererBindings();
+  bgfx::PlatformData getRendererBindings();
 
-        std::any pollEvent();
+  std::any pollEvent();
 
-        std::pair<int, int> getSize() const
-        {
-            int width, height;
+  std::pair<int, int> getSize() const {
+    int width, height;
 
-            SDL_GetWindowSize(m_window.get(), &width, &height);
+    SDL_GetWindowSize(m_window.get(), &width, &height);
 
-            return {width, height};
-        }
+    return {width, height};
+  }
 
-        int getWidth() const
-        {
-            auto [width, height] = getSize();
-            return width;
-        }
+  int getWidth() const {
+    auto [width, height] = getSize();
+    return width;
+  }
 
-        int getHeight() const
-        {
-            auto [width, height] = getSize();
-            return height;
-        }
+  int getHeight() const {
+    auto [width, height] = getSize();
+    return height;
+  }
 
-        std::shared_ptr<SDL_Window> getNative() const
-        {
-            return m_window;
-        }
+  std::shared_ptr<SDL_Window> getNative() const {
+    return m_window;
+  }
 
-    private:
-        static inline unsigned int m_count = 0;
-        std::shared_ptr<SDL_Window> m_window;
-        std::string m_title;
+private:
+  static inline unsigned int m_count = 0;
+  std::shared_ptr<SDL_Window> m_window;
+  std::string m_title;
 
-        static void initSdl();
-        static void deinitSdl();
-    };
-}
+  static void initSdl();
+  static void deinitSdl();
+};
+} // namespace JEM

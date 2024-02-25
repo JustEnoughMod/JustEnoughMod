@@ -24,10 +24,5 @@
           inherit system;
           overlays = [ overlay ];
         };
-      in {
-        legacyPackages = rec { JustEnoughMod = pkgs.JustEnoughMod; };
-        packages = nixpkgs.lib.filterAttrs (_: v: nixpkgs.lib.isDerivation v)
-          self.legacyPackages.${system};
-        defaultPackage = self.packages.${system}.JustEnoughMod;
-      });
+      in { packages.default = pkgs.JustEnoughMod; });
 }
