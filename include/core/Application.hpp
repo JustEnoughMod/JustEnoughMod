@@ -20,15 +20,10 @@ namespace JEM {
 #endif
       }
 
-      std::shared_ptr<Logger> getLogger() const {
-        return m_logger;
-      }
-
     private:
       static inline std::shared_ptr<Window> m_window;
       static inline std::shared_ptr<Renderer> m_renderer;
       static inline std::shared_ptr<PluginLoader> m_pluginLoader;
-      static inline std::shared_ptr<Logger> m_logger;
 
       static inline bool m_quit;
   };

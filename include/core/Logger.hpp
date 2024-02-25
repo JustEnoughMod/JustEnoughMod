@@ -32,4 +32,6 @@ namespace JEM {
     private:
       std::shared_ptr<spdlog::logger> m_logger;
   };
+
+  Logger *getSystemLogger();
 } // namespace JEM

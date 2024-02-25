@@ -1,6 +1,6 @@
 #include <core/Window.hpp>
 
-#include <core/Application.hpp>
+#include <core/Logger.hpp>
 
 // fix vscode intellisense
 #ifdef __INTELLISENSE__
@@ -18,7 +18,7 @@ JEM::Window::Window(std::string title, int width, int height) : m_title(title) {
                                          SDL_DestroyWindow);
 
   if (m_window.get() == nullptr) {
-    Application().getLogger()->error("Window could not be created. SDL_Error: {}", SDL_GetError());
+    getSystemLogger()->error("Window could not be created. SDL_Error: {}", SDL_GetError());
     exit(EXIT_FAILURE);
   }
 }
@@ -27,7 +27,7 @@ bgfx::PlatformData JEM::Window::getRendererBindings() {
   SDL_SysWMinfo wmi;
   SDL_VERSION(&wmi.version);
   if (!SDL_GetWindowWMInfo(m_window.get(), &wmi)) {
-    Application().getLogger()->error("SDL_SysWMinfo could not be retrieved. SDL_Error: {}", SDL_GetError());
+    getSystemLogger()->error("SDL_SysWMinfo could not be retrieved. SDL_Error: {}", SDL_GetError());
     exit(EXIT_FAILURE);
   }
 
@@ -95,14 +95,14 @@ std::any JEM::Window::pollEvent() {
 }
 
 void JEM::Window::initSdl() {
-  Application().getLogger()->trace("Initialize SDL");
+  getSystemLogger()->trace("Initialize SDL");
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-    Application().getLogger()->error("SDL could not initialize. SDL_Error: {}", SDL_GetError());
+    getSystemLogger()->error("SDL could not initialize. SDL_Error: {}", SDL_GetError());
     exit(EXIT_FAILURE);
   }
 }
 
 void JEM::Window::deinitSdl() {
-  Application().getLogger()->trace("Deinitialize SDL");
+  getSystemLogger()->trace("Deinitialize SDL");
   SDL_Quit();
 }
