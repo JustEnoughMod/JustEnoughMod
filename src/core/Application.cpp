@@ -6,7 +6,7 @@ void JEM::Application::init(char *path) {
   m_quit = false;
   m_eventManager = std::make_shared<EventManager>(shared_from_this());
   m_window = std::make_shared<Window>(shared_from_this(), "JustEnoughMod", 1000, 600);
-  // m_renderer = std::make_shared<Renderer>(shared_from_this());
+  m_renderer = std::make_shared<Renderer>(shared_from_this());
   m_pluginLoader = std::make_shared<PluginLoader>(shared_from_this());
 
   getSystemLogger()->info("Running JustEnoughMod Version {}", static_cast<std::string>(getAppVersion()));
@@ -21,14 +21,12 @@ JEM::Application::~Application() {
   m_window.reset();
   m_pluginLoader.reset();
   m_eventManager.reset();
-
-  getSystemLogger()->warn("Not crashed here");
 }
 
 void JEM::Application::run() {
-  // for (auto plugin : getPluginLoader()->getNative()) {
-  //   plugin->init();
-  // }
+  for (auto plugin : getPluginLoader()->getNative()) {
+    plugin->init();
+  }
 
   while (!m_quit) {
     while (true) {
@@ -51,12 +49,12 @@ void JEM::Application::run() {
       }
     }
 
-    // getRenderer()->clear();
+    getRenderer()->clear();
 
-    // for (auto plugin : getPluginLoader()->getNative()) {
-    //   plugin->update();
-    // }
+    for (auto plugin : getPluginLoader()->getNative()) {
+      plugin->update();
+    }
 
-    // getRenderer()->draw();
+    getRenderer()->draw();
   }
 }

@@ -22,26 +22,26 @@ namespace JEM {
       }
 
       std::shared_ptr<Window> getWindow() const {
-        return m_window.lock();
+        return m_window;
       }
 
       std::shared_ptr<Renderer> getRenderer() const {
-        return m_renderer.lock();
+        return m_renderer;
       }
 
       std::shared_ptr<PluginLoader> getPluginLoader() const {
-        return m_pluginLoader.lock();
+        return m_pluginLoader;
       }
 
       std::shared_ptr<EventManager> getEventManager() const {
-        return m_eventManager.lock();
+        return m_eventManager;
       }
 
     private:
-      std::weak_ptr<Window> m_window;
-      std::weak_ptr<Renderer> m_renderer;
-      std::weak_ptr<PluginLoader> m_pluginLoader;
-      std::weak_ptr<EventManager> m_eventManager;
+      std::shared_ptr<Window> m_window;
+      std::shared_ptr<Renderer> m_renderer;
+      std::shared_ptr<PluginLoader> m_pluginLoader;
+      std::shared_ptr<EventManager> m_eventManager;
 
       bool m_quit;
   };

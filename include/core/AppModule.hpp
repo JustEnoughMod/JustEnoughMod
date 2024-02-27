@@ -12,10 +12,10 @@ namespace JEM {
 
     protected:
       std::shared_ptr<Application> getApp() {
-        return m_app;
+        return m_app.lock();
       }
 
     private:
-      std::shared_ptr<Application> m_app;
+      std::weak_ptr<Application> m_app;
   };
 } // namespace JEM

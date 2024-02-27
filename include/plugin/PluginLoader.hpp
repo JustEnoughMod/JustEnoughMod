@@ -14,12 +14,10 @@ namespace JEM {
       PluginLoader(std::shared_ptr<Application> app) : AppModule(app) {
       }
 
-      ~PluginLoader();
-
       void loadFile(std::string path, std::string name);
       void loadFolder(std::string path);
 
-      auto getNative() const {
+      std::vector<std::shared_ptr<Plugin>> getNative() const {
         return m_pluginVec;
       }
 
