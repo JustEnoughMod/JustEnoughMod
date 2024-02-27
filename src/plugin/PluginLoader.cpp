@@ -17,3 +17,13 @@ void JEM::PluginLoader::loadFolder(std::string path) {
   for (const auto &dirEntry : std::filesystem::directory_iterator(path))
     loadFile(dirEntry.path().parent_path(), dirEntry.path().filename());
 }
+
+JEM::PluginLoader::~PluginLoader() {
+  for (auto plugin : m_pluginVec) {
+    plugin.reset();
+  }
+
+  for (auto dylib : m_dylibVec) {
+    dylib.reset();
+  }
+}

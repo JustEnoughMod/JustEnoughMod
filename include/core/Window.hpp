@@ -1,5 +1,6 @@
 #pragma once
 
+#include <core/AppModule.hpp>
 #include <event/Event.hpp>
 
 #include <bgfx/bgfx.h>
@@ -10,9 +11,9 @@
 #include <memory>
 
 namespace JEM {
-  class Window {
+  class Window : public AppModule {
     public:
-      Window(std::string title, int width, int height);
+      Window(std::shared_ptr<Application> app, std::string title, int width, int height);
 
       ~Window();
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <core/AppModule.hpp>
 #include <plugin/Plugin.hpp>
 
 #include <dylib.hpp>
@@ -8,8 +9,13 @@
 #include <vector>
 
 namespace JEM {
-  class PluginLoader {
+  class PluginLoader : public AppModule {
     public:
+      PluginLoader(std::shared_ptr<Application> app) : AppModule(app) {
+      }
+
+      ~PluginLoader();
+
       void loadFile(std::string path, std::string name);
       void loadFolder(std::string path);
 

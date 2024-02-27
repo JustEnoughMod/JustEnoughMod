@@ -1,12 +1,12 @@
 #include <JustEnoughMod.hpp>
 
+#include <memory>
+
 int main([[maybe_unused]] int argc, char **argv) {
 
-  JEM::Application app;
+  std::shared_ptr<JEM::Application> app = std::make_shared<JEM::Application>();
 
-  app.init(argv[0]);
+  app->init(argv[0]);
 
-  app.run();
-
-  app.deinit();
+  app->run();
 }

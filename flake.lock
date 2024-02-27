@@ -3,11 +3,11 @@
     "bgfx": {
       "flake": false,
       "locked": {
-        "lastModified": 1708631708,
-        "narHash": "sha256-gP1KruJxRWER6jgSzx/zhTYFxPaOCR4B1buhEmGXeYw=",
+        "lastModified": 1708884172,
+        "narHash": "sha256-vJ8Eg67CHQOvgSw6AFKgPQ8Jmg2sBBNuRRMqkS7wvAQ=",
         "ref": "refs/heads/main",
-        "rev": "b73d24bbc85d247b232df5a07c90ad4e3eac50b6",
-        "revCount": 12,
+        "rev": "571794888777698bc8e865ad9c83f44e437b17a1",
+        "revCount": 24,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/LDprg/bgfx.meson"
@@ -21,11 +21,11 @@
     "dylib": {
       "flake": false,
       "locked": {
-        "lastModified": 1708631675,
-        "narHash": "sha256-bcp+GCiigcq6NsVmee85URnwCsYUY7mniyynzRtY8xY=",
+        "lastModified": 1708884090,
+        "narHash": "sha256-bsUoCK+1Hp8IsuCina153+ob5d5bBGmFawKP3YfImuQ=",
         "ref": "refs/heads/main",
-        "rev": "6b07a1007e975aae6b7401a4a477423bd002363b",
-        "revCount": 4,
+        "rev": "f1ef935d90f17d0b29b72c5bf401e7b4d0328bc4",
+        "revCount": 6,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/LDprg/dylib.meson"
@@ -56,11 +56,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1708475490,
-        "narHash": "sha256-g1v0TsWBQPX97ziznfJdWhgMyMGtoBFs102xSYO4syU=",
+        "lastModified": 1708807242,
+        "narHash": "sha256-sRTRkhMD4delO/hPxxi+XwLqPn8BuUq6nnj4JqLwOu0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "0e74ca98a74bc7270d28838369593635a5db3260",
+        "rev": "73de017ef2d18a04ac4bfd0c02650007ccb31c2a",
         "type": "github"
       },
       "original": {
