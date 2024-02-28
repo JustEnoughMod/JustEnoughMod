@@ -17,7 +17,7 @@ namespace JEM {
       void loadFile(std::string path, std::string name);
       void loadFolder(std::string path);
 
-      std::vector<std::shared_ptr<Plugin>> getNative() const {
+      auto &getNative() const {
         return m_pluginVec;
       }
 

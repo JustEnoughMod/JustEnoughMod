@@ -28,6 +28,8 @@ void JEM::Application::run() {
     plugin->init();
   }
 
+  getSystemLogger()->trace("Using bgfx renderer: {}", bgfx::getRendererName(bgfx::getRendererType()));
+
   while (!m_quit) {
     while (true) {
       std::any anyEvent = getWindow()->pollEvent();

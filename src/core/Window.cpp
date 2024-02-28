@@ -48,9 +48,12 @@ bgfx::PlatformData JEM::Window::getRendererBindings() {
   }
 
   bgfx::PlatformData pd{};
+
 #if BX_PLATFORM_WINDOWS
+  pd.type = bgfx::NativeWindowHandleType::Default;
   pd.nwh = wmi.info.win.window;
 #elif BX_PLATFORM_OSX
+  pd.type = bgfx::NativeWindowHandleType::Default;
   pd.nwh = wmi.info.cocoa.window;
 #elif BX_PLATFORM_LINUX
   if (wmi.subsystem == SDL_SYSWM_WAYLAND) {
@@ -65,9 +68,11 @@ bgfx::PlatformData JEM::Window::getRendererBindings() {
       SDL_SetWindowData(m_window.get(), "wl_egl_window", win_impl);
     }
 
+    pd.type = bgfx::NativeWindowHandleType::Wayland;
     pd.ndt = wmi.info.wl.display;
     pd.nwh = (void *)(uintptr_t)win_impl;
   } else {
+    pd.type = bgfx::NativeWindowHandleType::Default;
     pd.ndt = wmi.info.x11.display;
     pd.nwh = (void *)(uintptr_t)wmi.info.x11.window;
   }
