@@ -24,7 +24,9 @@ final: prev: {
         cp JustEnoughMod $out/bin
         cp libJustEnoughMod.so $out/bin
         wrapProgram $out/bin/JustEnoughMod \
-          --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ libGL vulkan-loader ]}
+          --prefix LD_LIBRARY_PATH : ${
+            lib.makeLibraryPath [ libGL vulkan-loader ]
+          }
       '';
 
       LD_LIBRARY_PATH = lib.makeLibraryPath [ libGL vulkan-loader ];

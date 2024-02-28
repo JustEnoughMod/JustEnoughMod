@@ -24,7 +24,5 @@
           inherit system;
           overlays = [ overlay ];
         };
-      in {
-        packages.default = pkgs.JustEnoughMod;
-      });
+      in { packages.default = pkgs.JustEnoughMod; });
 }

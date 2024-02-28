@@ -16,5 +16,6 @@
 #include <memory>
 #include <queue>
 #include <string>
+#include <thread>
 #include <utility>
 #include <vector>
