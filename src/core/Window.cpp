@@ -100,52 +100,59 @@ std::pair<int, int> JEM::Window::getSize() const {
   return {width, height};
 }
 
-std::any JEM::Window::pollEvent() {
+bool JEM::Window::pollEvent() {
   SDL_Event event;
 
-  if (SDL_PollEvent(&event)) {
+  int result = SDL_PollEvent(&event);
+
+  if (result) {
     switch (event.type) {
       case SDL_QUIT:
-        return ExitEvent{};
+        getApp()->getEventManager()->push(ExitEvent{});
+        break;
       case SDL_MOUSEMOTION:
-        return MouseMoveEvent{
+        getApp()->getEventManager()->push(MouseMoveEvent{
             .windowId = event.motion.windowID,
             .mouseId = event.motion.which,
             .x = event.motion.x,
             .y = event.motion.y,
             .dx = event.motion.xrel,
             .dy = event.motion.yrel,
-        };
+        });
+        break;
       case SDL_MOUSEBUTTONDOWN:
-        return MouseButtonPressedEvent{
+        getApp()->getEventManager()->push(MouseButtonPressedEvent{
             .windowId = event.button.windowID,
             .mouseId = event.button.which,
             .button = static_cast<Mouse>(event.button.button),
             .clicks = event.button.clicks,
             .x = event.button.x,
             .y = event.button.y,
-        };
+        });
+        break;
       case SDL_MOUSEBUTTONUP:
-        return MouseButtonReleasedEvent{
+        getApp()->getEventManager()->push(MouseButtonReleasedEvent{
             .windowId = event.button.windowID,
             .mouseId = event.button.which,
             .button = static_cast<Mouse>(event.button.button),
             .clicks = event.button.clicks,
             .x = event.button.x,
             .y = event.button.y,
-        };
+        });
+        break;
       case SDL_MOUSEWHEEL:
-        return MouseWheelEvent{
+        getApp()->getEventManager()->push(MouseWheelEvent{
             .windowId = event.wheel.windowID,
             .mouseId = event.wheel.which,
             .direction = static_cast<MouseWheel>(event.wheel.direction),
             .x = event.wheel.preciseX,
             .y = event.wheel.preciseY,
-        };
+        });
+        break;
       default:
         break;
     }
   }
 
-  return std::any();
+  return static_cast<bool>(result);
 }

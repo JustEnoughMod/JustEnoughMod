@@ -31,15 +31,19 @@ void JEM::Application::run() {
   getSystemLogger()->trace("Using bgfx renderer: {}", bgfx::getRendererName(bgfx::getRendererType()));
 
   while (!m_quit) {
+    while (getWindow()->pollEvent())
+      ;
+
     while (true) {
-      std::any anyEvent = getWindow()->pollEvent();
+      std::any anyEvent = getEventManager()->pop();
 
       if (!anyEvent.has_value())
         break;
 
-      if (std::any_cast<ExitEvent>(&anyEvent))
+      if (std::any_cast<ExitEvent>(&anyEvent)) {
+        getSystemLogger()->debug("Quit Event recieved, Application will close");
         m_quit = true;
-      else if (const auto event = std::any_cast<MouseButtonPressedEvent>(&anyEvent)) {
+      } else if (const auto event = std::any_cast<MouseButtonPressedEvent>(&anyEvent)) {
         getSystemLogger()->debug("Mouse Pressed Button: {}, Clicks: {}", static_cast<int>(event->button),
                                  event->clicks);
       } else if (const auto event = std::any_cast<MouseButtonReleasedEvent>(&anyEvent)) {

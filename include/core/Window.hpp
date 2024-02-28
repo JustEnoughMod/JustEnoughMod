@@ -19,7 +19,7 @@ namespace JEM {
 
       bgfx::PlatformData getRendererBindings();
 
-      std::any pollEvent();
+      bool pollEvent();
 
       std::pair<int, int> getSize() const;
 

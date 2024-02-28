@@ -11,7 +11,7 @@ namespace JEM {
       }
 
     protected:
-      std::shared_ptr<Application> getApp() {
+      std::shared_ptr<Application> getApp() const {
         return m_app.lock();
       }
 
