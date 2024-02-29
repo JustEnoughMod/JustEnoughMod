@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SDL.h>
+
 #include <core/AppModule.hpp>
 #include <event/Event.hpp>
 
