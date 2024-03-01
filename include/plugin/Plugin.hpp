@@ -14,8 +14,7 @@
 namespace JEM {
   class Plugin {
     public:
-      virtual ~Plugin() {
-      }
+      virtual ~Plugin() {}
 
       virtual constexpr const char *getPluginName() = 0;
       virtual constexpr Version getPluginVersion() {

@@ -29,23 +29,26 @@ namespace JEM {
         patch = 0;
 
         const char *token = str;
-        if (*token == '\0')
+        if (*token == '\0') {
           return;
+        }
 
         major = atoi(token);
 
         do {
           token++;
-          if (*token == '\0')
+          if (*token == '\0') {
             return;
+          }
         } while (*(token - 1) != '.');
 
         minor = atoi(token);
 
         do {
           token++;
-          if (*token == '\0')
+          if (*token == '\0') {
             return;
+          }
         } while (*(token - 1) != '.');
 
         patch = atoi(token);

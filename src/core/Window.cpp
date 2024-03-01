@@ -62,8 +62,9 @@ bgfx::PlatformData JEM::Window::getRendererBindings() {
       int width, height;
       SDL_GetWindowSize(m_window.get(), &width, &height);
       struct wl_surface *surface = wmi.info.wl.surface;
-      if (!surface)
+      if (!surface) {
         exit(EXIT_FAILURE);
+      }
       win_impl = wl_egl_window_create(surface, width, height);
       SDL_SetWindowData(m_window.get(), "wl_egl_window", win_impl);
     }

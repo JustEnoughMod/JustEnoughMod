@@ -10,8 +10,7 @@
 namespace JEM {
   class EventManager : public AppModule {
     public:
-      EventManager(std::shared_ptr<Application> app) : AppModule(app) {
-      }
+      EventManager(std::shared_ptr<Application> app) : AppModule(app) {}
 
       void push(const std::any &event) {
         m_queue.push(event);

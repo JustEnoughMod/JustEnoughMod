@@ -24,7 +24,7 @@ namespace JEM {
       }
 
       ~TaskPool() {
-        getSystemLogger()->info("Destroy {} thread runners", m_pool.size());
+        getSystemLogger()->info("Destroying {} thread runners", m_pool.size());
 
         for (auto &thread : m_pool) {
           thread.request_stop();
@@ -40,8 +40,6 @@ namespace JEM {
       std::condition_variable m_cond;
 
       void Runner(const std::stop_token token, int id) {
-        // getSystemLogger()->trace("Creating task runner [{}/{}]", id, m_pool.size());
-
         while (!token.stop_requested()) {
           {
             std::unique_lock<std::mutex> lock(m_mutex);
@@ -54,14 +52,9 @@ namespace JEM {
 
           if (!m_taskQueue.empty() && !token.stop_requested()) {
             auto func = m_taskQueue.pop();
-
-            // getSystemLogger()->debug("Recieved Task: Runner {}", id);
-
             func();
           }
         }
-
-        // getSystemLogger()->trace("Destroying task runner [{}/{}]", id, m_pool.size());
       }
   };
 } // namespace JEM

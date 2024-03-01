@@ -6,7 +6,8 @@
 
 namespace JEM {
 
-  template <typename T> class queue {
+  template <typename T>
+  class queue {
     public:
       void push(T item) {
         std::unique_lock<std::mutex> lock(m_mutex);

@@ -5,8 +5,9 @@ namespace JEM {
     int i = 0;
 
     while (*ch != '\0') {
-      if (*ch < 48 || *ch > 57)
+      if (*ch < 48 || *ch > 57) {
         break;
+      }
 
       i *= 10;
       i += *ch - 48;
@@ -20,10 +21,12 @@ namespace JEM {
   constexpr char *removeAppName(char *path) {
     char *orig = path;
 
-    while (*path != '\0')
+    while (*path != '\0') {
       path++;
-    while (*path != '/')
+    }
+    while (*path != '/') {
       path--;
+    }
     path++;
     *path = '\0';
 

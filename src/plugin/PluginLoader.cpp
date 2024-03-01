@@ -14,6 +14,7 @@ void JEM::PluginLoader::loadFile(std::string path, std::string name) {
 }
 
 void JEM::PluginLoader::loadFolder(std::string path) {
-  for (const auto &dirEntry : std::filesystem::directory_iterator(path))
+  for (const auto &dirEntry : std::filesystem::directory_iterator(path)) {
     loadFile(dirEntry.path().parent_path(), dirEntry.path().filename());
+  }
 }

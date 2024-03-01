@@ -39,8 +39,9 @@ void JEM::Application::run() {
     while (true) {
       std::any anyEvent = getEventManager()->pop();
 
-      if (!anyEvent.has_value())
+      if (!anyEvent.has_value()) {
         break;
+      }
 
       if (std::any_cast<ExitEvent>(&anyEvent)) {
         getSystemLogger()->debug("Quit Event recieved, Application will close");
