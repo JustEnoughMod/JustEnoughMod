@@ -4,6 +4,7 @@
 
 void JEM::Application::init(char *path) {
   m_quit = false;
+  m_taskManager = std::make_shared<TaskManager>(shared_from_this());
   m_eventManager = std::make_shared<EventManager>(shared_from_this());
   m_window = std::make_shared<Window>(shared_from_this(), "JustEnoughMod", 1000, 600);
   m_renderer = std::make_shared<Renderer>(shared_from_this());
@@ -21,10 +22,11 @@ JEM::Application::~Application() {
   m_window.reset();
   m_pluginLoader.reset();
   m_eventManager.reset();
+  m_taskManager.reset();
 }
 
 void JEM::Application::run() {
-  for (auto plugin : getPluginLoader()->getNative()) {
+  for (const auto &plugin : getPluginLoader()->getNative()) {
     plugin->init();
   }
 
@@ -57,7 +59,7 @@ void JEM::Application::run() {
 
     getRenderer()->clear();
 
-    for (auto plugin : getPluginLoader()->getNative()) {
+    for (const auto &plugin : getPluginLoader()->getNative()) {
       plugin->update();
     }
 

@@ -10,7 +10,10 @@
 #include <dylib.hpp>
 
 #include <any>
+#include <chrono>
+#include <condition_variable>
 #include <filesystem>
+#include <future>
 #include <initializer_list>
 #include <iostream>
 #include <memory>

@@ -2,9 +2,6 @@
 
 #include <event/Key.hpp>
 
-#include <any>
-#include <queue>
-
 namespace JEM {
   struct ExitEvent {};
 

@@ -3,8 +3,9 @@
 #include <core/AppModule.hpp>
 #include <event/Event.hpp>
 
+#include <util/Queue.hpp>
+
 #include <any>
-#include <queue>
 
 namespace JEM {
   class EventManager : public AppModule {
@@ -20,14 +21,13 @@ namespace JEM {
         std::any event;
 
         if (!m_queue.empty()) {
-          event = m_queue.front();
-          m_queue.pop();
+          event = m_queue.pop();
         }
 
         return event;
       }
 
     private:
-      static inline std::queue<std::any> m_queue;
+      static inline JEM::queue<std::any> m_queue;
   };
 } // namespace JEM

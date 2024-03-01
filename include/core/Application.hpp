@@ -4,6 +4,7 @@
 #include <event/EventManager.hpp>
 #include <plugin/PluginLoader.hpp>
 #include <render/Renderer.hpp>
+#include <sched/TaskManager.hpp>
 
 namespace JEM {
   class Application : public std::enable_shared_from_this<Application> {
@@ -42,6 +43,7 @@ namespace JEM {
       std::shared_ptr<Renderer> m_renderer;
       std::shared_ptr<PluginLoader> m_pluginLoader;
       std::shared_ptr<EventManager> m_eventManager;
+      std::shared_ptr<TaskManager> m_taskManager;
 
       bool m_quit;
   };
