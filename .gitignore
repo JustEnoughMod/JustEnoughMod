@@ -1,4 +1,6 @@
 result
 build
+run
 subprojects/*
 !subprojects/*.wrap
+.pre-commit-config.yaml

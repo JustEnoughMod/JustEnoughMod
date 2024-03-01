@@ -2,6 +2,7 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
     bgfx = {
       url = "https://github.com/LDprg/bgfx.meson";
       flake = false;
@@ -16,7 +17,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, bgfx, dylib }:
+  outputs = { self, nixpkgs, flake-utils, pre-commit-hooks, bgfx, dylib }:
     let overlay = import ./overlay.nix { inherit nixpkgs bgfx dylib; };
     in flake-utils.lib.eachDefaultSystem (system:
       let
@@ -24,5 +25,19 @@
           inherit system;
           overlays = [ overlay ];
         };
-      in { packages.default = pkgs.JustEnoughMod; });
+      in
+      {
+        checks = {
+          pre-commit-check = pre-commit-hooks.lib.${system}.run {
+            src = ./.;
+            hooks = {
+              nixpkgs-fmt.enable = true;
+            };
+          };
+        };
+        devShells.default = pkgs.mkShell {
+          inherit (self.checks.${system}.pre-commit-check) shellHook;
+        };
+        packages.default = pkgs.JustEnoughMod;
+      });
 }
