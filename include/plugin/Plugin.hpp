@@ -1,10 +1,10 @@
-#pragma once
+#ifndef PLUGIN_PLUGIN_HPP
+#define PLUGIN_PLUGIN_HPP
 
 #include <core/Logger.hpp>
 #include <util/Version.hpp>
 
-#include <iostream>
-#include <string>
+#include <memory>
 
 #define JEM_PLUGIN_DEF(plugin)                                                                                         \
   extern "C" Plugin *_createPlugin() {                                                                                 \
@@ -14,12 +14,11 @@
 namespace JEM {
   class Plugin {
     public:
-      virtual ~Plugin() {
-      }
+      virtual ~Plugin() = default;
 
-      virtual constexpr const char *getPluginName() = 0;
-      virtual constexpr Version getPluginVersion() {
-        return "0.0.0";
+      [[nodiscard]] virtual constexpr auto getPluginName() -> const char * = 0;
+      [[nodiscard]] virtual constexpr auto getPluginVersion() -> Version {
+        return Version("0.0.0");
       }
 
       virtual void init() = 0;
@@ -31,7 +30,7 @@ namespace JEM {
                           static_cast<std::string>(getPluginVersion()));
       }
 
-      std::shared_ptr<Logger> getLogger() const {
+      [[nodiscard]] auto getLogger() const -> std::shared_ptr<Logger> {
         return m_logger;
       }
 
@@ -39,3 +38,5 @@ namespace JEM {
       std::shared_ptr<Logger> m_logger;
   };
 } // namespace JEM
+
+#endif

@@ -1,56 +1,69 @@
 #include <core/Application.hpp>
 
+#include <memory>
+
 void JEM::Application::init(char *path) {
   m_quit = false;
-  m_logger = std::make_shared<Logger>("JustEnoughMod");
-  m_window = std::make_shared<Window>("JustEnoughMod", 1000, 600);
-  m_renderer = std::make_shared<Renderer>(m_window);
-  m_pluginLoader = std::make_shared<PluginLoader>();
+  m_taskManager = std::make_shared<TaskManager>(shared_from_this());
+  m_eventManager = std::make_shared<EventManager>(shared_from_this());
+  m_window = std::make_shared<Window>(shared_from_this(), "JustEnoughMod", 1000, 600);
+  m_renderer = std::make_shared<Renderer>(shared_from_this());
+  m_pluginLoader = std::make_shared<PluginLoader>(shared_from_this());
 
-  getLogger()->info("Running JustEnoughMod Version {}", static_cast<std::string>(getAppVersion()));
+  getSystemLogger()->info("Running JustEnoughMod Version {}", static_cast<std::string>(getAppVersion()));
 
-  getLogger()->trace("Scanning Plugin Folder");
+  getSystemLogger()->trace("Scanning Plugin Folder");
 
-  m_pluginLoader->loadFolder(std::string(removeAppName(path)) + "Plugins");
+  getPluginLoader()->loadFolder(std::string(removeAppName(path)) + "Plugins");
 }
 
-void JEM::Application::deinit() {
-  m_window.reset();
+JEM::Application::~Application() {
   m_renderer.reset();
+  m_window.reset();
   m_pluginLoader.reset();
-  m_logger.reset();
+  m_eventManager.reset();
+  m_taskManager.reset();
 }
 
 void JEM::Application::run() {
-  for (auto plugin : m_pluginLoader->getNative()) {
+  for (const auto &plugin : getPluginLoader()->getNative()) {
     plugin->init();
   }
 
+  getSystemLogger()->trace("Using bgfx renderer: {}", bgfx::getRendererName(bgfx::getRendererType()));
+
   while (!m_quit) {
+    while (getWindow()->pollEvent())
+      ;
+
     while (true) {
-      std::any anyEvent = m_window->pollEvent();
+      std::any anyEvent = getEventManager()->pop();
 
-      if (!anyEvent.has_value())
+      if (!anyEvent.has_value()) {
         break;
+      }
 
-      if (std::any_cast<ExitEvent>(&anyEvent))
+      if (std::any_cast<ExitEvent>(&anyEvent)) {
+        getSystemLogger()->debug("Quit Event recieved, Application will close");
         m_quit = true;
-      else if (const auto event = std::any_cast<MouseButtonPressedEvent>(&anyEvent)) {
-        getLogger()->debug("Mouse Pressed Button: {}, Clicks: {}", static_cast<int>(event->button), event->clicks);
+      } else if (const auto event = std::any_cast<MouseButtonPressedEvent>(&anyEvent)) {
+        getSystemLogger()->debug("Mouse Pressed Button: {}, Clicks: {}", static_cast<int>(event->button),
+                                 event->clicks);
       } else if (const auto event = std::any_cast<MouseButtonReleasedEvent>(&anyEvent)) {
-        getLogger()->debug("Mouse Released Button: {}, Clicks: {}", static_cast<int>(event->button), event->clicks);
+        getSystemLogger()->debug("Mouse Released Button: {}, Clicks: {}", static_cast<int>(event->button),
+                                 event->clicks);
       } else if (const auto event = std::any_cast<MouseWheelEvent>(&anyEvent)) {
-        getLogger()->debug("Mouse Wheel Direction: {}, X: {}, Y: {}", static_cast<int>(event->direction), event->x,
-                           event->y);
+        getSystemLogger()->debug("Mouse Wheel Direction: {}, X: {}, Y: {}", static_cast<int>(event->direction),
+                                 event->x, event->y);
       }
     }
 
-    m_renderer->clear();
+    getRenderer()->clear();
 
-    for (auto plugin : m_pluginLoader->getNative()) {
+    for (const auto &plugin : getPluginLoader()->getNative()) {
       plugin->update();
     }
 
-    m_renderer->draw();
+    getRenderer()->draw();
   }
 }

@@ -1,15 +1,31 @@
 #include <core/Window.hpp>
 
 #include <core/Application.hpp>
+#include <core/Logger.hpp>
+#include <event/EventManager.hpp>
+
+#include <SDL.h>
+#include <SDL_syswm.h>
 
 // fix vscode intellisense
 #ifdef __INTELLISENSE__
 #pragma diag_suppress 135
+#pragma diag_suppress 1696
 #endif
 
-JEM::Window::Window(std::string title, int width, int height) : m_title(title) {
+#include <wayland-egl.h>
+
+JEM::Window::Window(std::shared_ptr<Application> app, std::string title, int width, int height)
+    : AppModule(app), m_title(title) {
   if (m_count == 0) {
-    initSdl();
+    getSystemLogger()->trace("Initialize SDL");
+
+    SDL_SetHint(SDL_HINT_VIDEODRIVER, "wayland,x11");
+
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER) < 0) {
+      getSystemLogger()->error("SDL could not initialize. SDL_Error: {}", SDL_GetError());
+      exit(EXIT_FAILURE);
+    }
   }
   m_count++;
 
@@ -18,7 +34,7 @@ JEM::Window::Window(std::string title, int width, int height) : m_title(title) {
                                          SDL_DestroyWindow);
 
   if (m_window.get() == nullptr) {
-    Application().getLogger()->error("Window could not be created. SDL_Error: {}", SDL_GetError());
+    getSystemLogger()->error("Window could not be created. SDL_Error: {}", SDL_GetError());
     exit(EXIT_FAILURE);
   }
 }
@@ -27,82 +43,117 @@ bgfx::PlatformData JEM::Window::getRendererBindings() {
   SDL_SysWMinfo wmi;
   SDL_VERSION(&wmi.version);
   if (!SDL_GetWindowWMInfo(m_window.get(), &wmi)) {
-    Application().getLogger()->error("SDL_SysWMinfo could not be retrieved. SDL_Error: {}", SDL_GetError());
+    getSystemLogger()->error("SDL_SysWMinfo could not be retrieved. SDL_Error: {}", SDL_GetError());
     exit(EXIT_FAILURE);
   }
 
   bgfx::PlatformData pd{};
+
 #if BX_PLATFORM_WINDOWS
+  pd.type = bgfx::NativeWindowHandleType::Default;
   pd.nwh = wmi.info.win.window;
 #elif BX_PLATFORM_OSX
+  pd.type = bgfx::NativeWindowHandleType::Default;
   pd.nwh = wmi.info.cocoa.window;
 #elif BX_PLATFORM_LINUX
-  pd.ndt = wmi.info.x11.display;
-  pd.nwh = (void *)(uintptr_t)wmi.info.x11.window;
+  if (wmi.subsystem == SDL_SYSWM_WAYLAND) {
+    wl_egl_window *win_impl = (wl_egl_window *)SDL_GetWindowData(m_window.get(), "wl_egl_window");
+    if (!win_impl) {
+      int width, height;
+      SDL_GetWindowSize(m_window.get(), &width, &height);
+      struct wl_surface *surface = wmi.info.wl.surface;
+      if (!surface) {
+        exit(EXIT_FAILURE);
+      }
+      win_impl = wl_egl_window_create(surface, width, height);
+      SDL_SetWindowData(m_window.get(), "wl_egl_window", win_impl);
+    }
+
+    pd.type = bgfx::NativeWindowHandleType::Wayland;
+    pd.ndt = wmi.info.wl.display;
+    pd.nwh = (void *)(uintptr_t)win_impl;
+  } else {
+    pd.type = bgfx::NativeWindowHandleType::Default;
+    pd.ndt = wmi.info.x11.display;
+    pd.nwh = (void *)(uintptr_t)wmi.info.x11.window;
+  }
 #endif
 
   return pd;
 }
 
-std::any JEM::Window::pollEvent() {
+JEM::Window::~Window() {
+  SDL_DestroyWindow(m_window.get());
+
+  m_count--;
+
+  if (m_count == 0) {
+    getSystemLogger()->trace("Deinitialize SDL");
+    SDL_Quit();
+  }
+}
+
+std::pair<int, int> JEM::Window::getSize() const {
+  int width, height;
+
+  SDL_GetWindowSize(m_window.get(), &width, &height);
+
+  return {width, height};
+}
+
+bool JEM::Window::pollEvent() {
   SDL_Event event;
 
-  if (SDL_PollEvent(&event)) {
+  int result = SDL_PollEvent(&event);
+
+  if (result) {
     switch (event.type) {
       case SDL_QUIT:
-        return ExitEvent{};
+        getApp()->getEventManager()->push(ExitEvent{});
+        break;
       case SDL_MOUSEMOTION:
-        return MouseMoveEvent{
+        getApp()->getEventManager()->push(MouseMoveEvent{
             .windowId = event.motion.windowID,
             .mouseId = event.motion.which,
             .x = event.motion.x,
             .y = event.motion.y,
             .dx = event.motion.xrel,
             .dy = event.motion.yrel,
-        };
+        });
+        break;
       case SDL_MOUSEBUTTONDOWN:
-        return MouseButtonPressedEvent{
+        getApp()->getEventManager()->push(MouseButtonPressedEvent{
             .windowId = event.button.windowID,
             .mouseId = event.button.which,
             .button = static_cast<Mouse>(event.button.button),
             .clicks = event.button.clicks,
             .x = event.button.x,
             .y = event.button.y,
-        };
+        });
+        break;
       case SDL_MOUSEBUTTONUP:
-        return MouseButtonReleasedEvent{
+        getApp()->getEventManager()->push(MouseButtonReleasedEvent{
             .windowId = event.button.windowID,
             .mouseId = event.button.which,
             .button = static_cast<Mouse>(event.button.button),
             .clicks = event.button.clicks,
             .x = event.button.x,
             .y = event.button.y,
-        };
+        });
+        break;
       case SDL_MOUSEWHEEL:
-        return MouseWheelEvent{
+        getApp()->getEventManager()->push(MouseWheelEvent{
             .windowId = event.wheel.windowID,
             .mouseId = event.wheel.which,
             .direction = static_cast<MouseWheel>(event.wheel.direction),
             .x = event.wheel.preciseX,
             .y = event.wheel.preciseY,
-        };
+        });
+        break;
       default:
         break;
     }
   }
 
-  return std::any();
-}
-
-void JEM::Window::initSdl() {
-  Application().getLogger()->trace("Initialize SDL");
-  if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-    Application().getLogger()->error("SDL could not initialize. SDL_Error: {}", SDL_GetError());
-    exit(EXIT_FAILURE);
-  }
-}
-
-void JEM::Window::deinitSdl() {
-  Application().getLogger()->trace("Deinitialize SDL");
-  SDL_Quit();
+  return static_cast<bool>(result);
 }

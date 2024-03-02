@@ -1,9 +1,9 @@
+#ifndef EVENT_EVENT_HPP
+#define EVENT_EVENT_HPP
+
 #pragma once
 
 #include <event/Key.hpp>
-
-#include <any>
-#include <queue>
 
 namespace JEM {
   struct ExitEvent {};
@@ -15,7 +15,7 @@ namespace JEM {
       int y;
       int dx;
       int dy;
-  };
+  } __attribute__((aligned(32)));
 
   struct MouseButtonPressedEvent {
       unsigned int windowId;
@@ -24,7 +24,7 @@ namespace JEM {
       unsigned int clicks;
       int x;
       int y;
-  };
+  } __attribute__((aligned(32)));
 
   struct MouseButtonReleasedEvent {
       unsigned int windowId;
@@ -33,7 +33,7 @@ namespace JEM {
       unsigned int clicks;
       int x;
       int y;
-  };
+  } __attribute__((aligned(32)));
 
   struct MouseWheelEvent {
       unsigned int windowId;
@@ -41,5 +41,7 @@ namespace JEM {
       MouseWheel direction;
       float x;
       float y;
-  };
+  } __attribute__((aligned(32)));
 } // namespace JEM
+
+#endif

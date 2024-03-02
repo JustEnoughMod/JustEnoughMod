@@ -1,3 +1,6 @@
+#ifndef EVENT_KEY_HPP
+#define EVENT_KEY_HPP
+
 #pragma once
 
 #include <SDL.h>
@@ -134,3 +137,5 @@ namespace JEM {
     Menu = SDL_SCANCODE_MENU
   };
 } // namespace JEM
+
+#endif

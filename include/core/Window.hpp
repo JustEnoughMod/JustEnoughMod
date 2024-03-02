@@ -1,53 +1,39 @@
-#pragma once
+#ifndef CORE_WINDOW_HPP
+#define CORE_WINDOW_HPP
 
+#include <SDL.h>
+
+#include <core/AppModule.hpp>
 #include <event/Event.hpp>
 
 #include <bgfx/bgfx.h>
 #include <bgfx/platform.h>
 #include <bx/math.h>
 
-#include <SDL.h>
-#include <SDL_syswm.h>
-
-#include <any>
-#include <memory>
-
 namespace JEM {
-  class Window {
+  class Window : public AppModule {
     public:
-      Window(std::string title, int width, int height);
+      Window(std::shared_ptr<Application> app, std::string title, int width, int height);
 
-      ~Window() {
-        m_count--;
+      ~Window();
 
-        if (m_count == 0) {
-          deinitSdl();
-        }
-      }
+      auto getRendererBindings() -> bgfx::PlatformData;
 
-      bgfx::PlatformData getRendererBindings();
+      auto pollEvent() -> bool;
 
-      std::any pollEvent();
+      [[nodiscard]] auto getSize() const -> std::pair<int, int>;
 
-      std::pair<int, int> getSize() const {
-        int width, height;
-
-        SDL_GetWindowSize(m_window.get(), &width, &height);
-
-        return {width, height};
-      }
-
-      int getWidth() const {
+      [[nodiscard]] auto getWidth() const -> int {
         auto [width, height] = getSize();
         return width;
       }
 
-      int getHeight() const {
+      [[nodiscard]] auto getHeight() const -> int {
         auto [width, height] = getSize();
         return height;
       }
 
-      std::shared_ptr<SDL_Window> getNative() const {
+      [[nodiscard]] auto getNative() const -> std::shared_ptr<SDL_Window> {
         return m_window;
       }
 
@@ -55,8 +41,7 @@ namespace JEM {
       static inline unsigned int m_count = 0;
       std::shared_ptr<SDL_Window> m_window;
       std::string m_title;
-
-      static void initSdl();
-      static void deinitSdl();
   };
 } // namespace JEM
+
+#endif

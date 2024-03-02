@@ -1,12 +1,14 @@
 #include <JustEnoughMod.hpp>
 
-int main([[maybe_unused]] int argc, char **argv) {
+auto main([[maybe_unused]] int argc, char **argv) -> int {
+  try {
+    // shared_ptr is needed for shared_from_this()
+    std::shared_ptr<JEM::Application> const app = std::make_shared<JEM::Application>();
 
-  JEM::Application app;
+    app->init(argv[0]);
 
-  app.init(argv[0]);
-
-  app.run();
-
-  app.deinit();
+    app->run();
+  } catch (std::exception e) {
+    JEM::getSystemLogger()->error("Unknown Exception: {}", e.what());
+  }
 }
