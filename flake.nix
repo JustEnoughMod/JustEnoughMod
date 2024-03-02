@@ -24,6 +24,9 @@
         overlayShell = _: prev: {
           JustEnoughMod-shell = prev.JustEnoughMod.overrideAttrs (_: {
             inherit (self.checks.${system}.pre-commit-check) shellHook;
+
+            LD_LIBRARY_PATH =
+              prev.lib.makeLibraryPath [ prev.libGL prev.vulkan-loader ];
           });
         };
 

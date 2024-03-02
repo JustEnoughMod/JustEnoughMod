@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CORE_WINDOW_HPP
+#define CORE_WINDOW_HPP
 
 #include <SDL.h>
 
@@ -9,9 +10,6 @@
 #include <bgfx/platform.h>
 #include <bx/math.h>
 
-#include <any>
-#include <memory>
-
 namespace JEM {
   class Window : public AppModule {
     public:
@@ -19,23 +17,23 @@ namespace JEM {
 
       ~Window();
 
-      bgfx::PlatformData getRendererBindings();
+      auto getRendererBindings() -> bgfx::PlatformData;
 
-      bool pollEvent();
+      auto pollEvent() -> bool;
 
-      std::pair<int, int> getSize() const;
+      [[nodiscard]] auto getSize() const -> std::pair<int, int>;
 
-      int getWidth() const {
+      [[nodiscard]] auto getWidth() const -> int {
         auto [width, height] = getSize();
         return width;
       }
 
-      int getHeight() const {
+      [[nodiscard]] auto getHeight() const -> int {
         auto [width, height] = getSize();
         return height;
       }
 
-      std::shared_ptr<SDL_Window> getNative() const {
+      [[nodiscard]] auto getNative() const -> std::shared_ptr<SDL_Window> {
         return m_window;
       }
 
@@ -45,3 +43,5 @@ namespace JEM {
       std::string m_title;
   };
 } // namespace JEM
+
+#endif

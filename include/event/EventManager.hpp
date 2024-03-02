@@ -1,3 +1,6 @@
+#ifndef EVENT_EVENTMANAGER_HPP
+#define EVENT_EVENTMANAGER_HPP
+
 #pragma once
 
 #include <core/AppModule.hpp>
@@ -5,18 +8,18 @@
 
 #include <util/Queue.hpp>
 
-#include <any>
+#include <utility>
 
 namespace JEM {
   class EventManager : public AppModule {
     public:
-      EventManager(std::shared_ptr<Application> app) : AppModule(app) {}
+      explicit EventManager(std::shared_ptr<Application> app) : AppModule(std::move(app)) {}
 
-      void push(const std::any &event) {
+      static void push(const std::any &event) {
         m_queue.push(event);
       }
 
-      std::any pop() {
+      static auto pop() -> std::any {
         std::any event;
 
         if (!m_queue.empty()) {
@@ -30,3 +33,5 @@ namespace JEM {
       static inline JEM::queue<std::any> m_queue;
   };
 } // namespace JEM
+
+#endif

@@ -1,17 +1,15 @@
-#pragma once
+#ifndef SCHED_TASKPOOL_HPP
+#define SCHED_TASKPOOL_HPP
 
 #include <core/Logger.hpp>
 #include <util/Queue.hpp>
 
-#include <condition_variable>
-#include <functional>
-#include <thread>
-#include <vector>
+#include <utility>
 
 namespace JEM {
   class TaskPool {
     public:
-      TaskPool(unsigned int count = std::jthread::hardware_concurrency()) {
+      explicit TaskPool(unsigned int count) {
         getSystemLogger()->info("Creating {} thread runners", count);
 
         for (int i = 0; i < count; i++) {
@@ -20,7 +18,7 @@ namespace JEM {
       }
 
       void push(std::function<void()> func) {
-        m_taskQueue.push(func);
+        m_taskQueue.push(std::move(func));
       }
 
       ~TaskPool() {
@@ -39,7 +37,7 @@ namespace JEM {
       std::mutex m_mutex;
       std::condition_variable m_cond;
 
-      void Runner(const std::stop_token token, int id) {
+      void Runner(const std::stop_token token, int /*id*/) {
         while (!token.stop_requested()) {
           {
             std::unique_lock<std::mutex> lock(m_mutex);
@@ -58,3 +56,5 @@ namespace JEM {
       }
   };
 } // namespace JEM
+
+#endif

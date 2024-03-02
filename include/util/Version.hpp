@@ -1,9 +1,7 @@
-#pragma once
+#ifndef UTIL_VERSION_HPP
+#define UTIL_VERSION_HPP
 
 #include <util/Util.hpp>
-
-#include <ostream>
-#include <string>
 
 namespace JEM {
   struct Version {
@@ -11,22 +9,15 @@ namespace JEM {
       int minor;
       int patch;
 
-      operator std::string() const {
+      explicit operator std::string() const {
         return std::to_string(major) + "." + std::to_string(minor) + "." + std::to_string(patch);
       }
 
       Version() = default;
 
-      Version(int maj, int min, int pat) {
-        major = maj;
-        minor = min;
-        patch = pat;
-      }
+      Version(int maj, int min, int pat) : major(maj), minor(min), patch(pat) {}
 
-      consteval Version(const char *str) {
-        major = 0;
-        minor = 0;
-        patch = 0;
+      consteval explicit Version(const char *str) : major(0), minor(0), patch(0) {
 
         const char *token = str;
         if (*token == '\0') {
@@ -53,5 +44,7 @@ namespace JEM {
 
         patch = atoi(token);
       }
-  };
+  } __attribute__((aligned(16)));
 } // namespace JEM
+
+#endif

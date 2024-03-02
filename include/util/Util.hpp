@@ -1,7 +1,8 @@
-#pragma once
+#ifndef UTIL_UTIL_HPP
+#define UTIL_UTIL_HPP
 
 namespace JEM {
-  constexpr int atoi(const char *ch) {
+  constexpr auto atoi(const char *ch) -> int {
     int i = 0;
 
     while (*ch != '\0') {
@@ -18,7 +19,7 @@ namespace JEM {
     return i;
   }
 
-  constexpr char *removeAppName(char *path) {
+  constexpr auto removeAppName(char *path) -> char * {
     char *orig = path;
 
     while (*path != '\0') {
@@ -33,3 +34,5 @@ namespace JEM {
     return orig;
   }
 } // namespace JEM
+
+#endif

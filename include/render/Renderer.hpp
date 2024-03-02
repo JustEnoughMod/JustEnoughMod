@@ -1,3 +1,6 @@
+#ifndef RENDER_RENDERER_HPP
+#define RENDER_RENDERER_HPP
+
 #pragma once
 
 #include <core/AppModule.hpp>
@@ -6,20 +9,22 @@
 namespace JEM {
   class Renderer : public AppModule {
     public:
-      Renderer(std::shared_ptr<Application> app);
+      explicit Renderer(std::shared_ptr<Application> app);
 
       ~Renderer() {
         bgfx::shutdown();
       }
 
-      void clear() {
+      static void clear() {
         bgfx::touch(0);
       }
 
-      void draw() {
+      static void draw() {
         bgfx::frame();
       }
 
     private:
   };
 } // namespace JEM
+
+#endif

@@ -1,8 +1,5 @@
-#pragma once
-
-#include <condition_variable>
-#include <mutex>
-#include <queue>
+#ifndef UTIL_QUEUE_HPP
+#define UTIL_QUEUE_HPP
 
 namespace JEM {
 
@@ -10,14 +7,14 @@ namespace JEM {
   class queue {
     public:
       void push(T item) {
-        std::unique_lock<std::mutex> lock(m_mutex);
+        std::unique_lock<std::mutex> const lock(m_mutex);
 
         m_queue.push(item);
 
         m_cond.notify_all();
       }
 
-      T pop() {
+      auto pop() -> T {
         std::unique_lock<std::mutex> lock(m_mutex);
 
         m_cond.wait(lock, [this]() { return !m_queue.empty(); });
@@ -28,8 +25,8 @@ namespace JEM {
         return item;
       }
 
-      bool empty() {
-        std::unique_lock<std::mutex> lock(m_mutex);
+      auto empty() -> bool {
+        std::unique_lock<std::mutex> const lock(m_mutex);
 
         return m_queue.empty();
       }
@@ -40,3 +37,5 @@ namespace JEM {
       std::condition_variable m_cond;
   };
 } // namespace JEM
+
+#endif

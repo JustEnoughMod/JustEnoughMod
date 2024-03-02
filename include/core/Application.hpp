@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CORE_APPLICATION_HPP
+#define CORE_APPLICATION_HPP
 
 #include <core/Window.hpp>
 #include <event/EventManager.hpp>
@@ -14,7 +15,7 @@ namespace JEM {
 
       void run();
 
-      static constexpr Version getAppVersion() {
+      static constexpr auto getAppVersion() -> Version {
 #ifdef VERSION
         return VERSION;
 #else
@@ -22,19 +23,19 @@ namespace JEM {
 #endif
       }
 
-      std::shared_ptr<Window> getWindow() const {
+      auto getWindow() const -> std::shared_ptr<Window> {
         return m_window;
       }
 
-      std::shared_ptr<Renderer> getRenderer() const {
+      auto getRenderer() const -> std::shared_ptr<Renderer> {
         return m_renderer;
       }
 
-      std::shared_ptr<PluginLoader> getPluginLoader() const {
+      auto getPluginLoader() const -> std::shared_ptr<PluginLoader> {
         return m_pluginLoader;
       }
 
-      std::shared_ptr<EventManager> getEventManager() const {
+      auto getEventManager() const -> std::shared_ptr<EventManager> {
         return m_eventManager;
       }
 
@@ -45,6 +46,8 @@ namespace JEM {
       std::shared_ptr<EventManager> m_eventManager;
       std::shared_ptr<TaskManager> m_taskManager;
 
-      bool m_quit;
+      bool m_quit{};
   };
 } // namespace JEM
+
+#endif

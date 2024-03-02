@@ -8,7 +8,7 @@ final: _: {
 
       enableParallelBuilding = true;
 
-      nativeBuildInputs = [ pkg-config meson ninja ccache mold makeWrapper ];
+      nativeBuildInputs = [ clang-tools pkg-config meson ninja makeWrapper ];
       buildInputs = [ SDL2 spdlog libGL vulkan-loader wayland ];
 
       preConfigure = ''
@@ -28,7 +28,5 @@ final: _: {
             lib.makeLibraryPath [ libGL vulkan-loader ]
           }
       '';
-
-      LD_LIBRARY_PATH = lib.makeLibraryPath [ libGL vulkan-loader ];
     };
 }

@@ -1,13 +1,10 @@
-#pragma once
-
-#include <spdlog/spdlog.h>
-
-#include <string>
+#ifndef CORE_LOGGER_HPP
+#define CORE_LOGGER_HPP
 
 namespace JEM {
   class Logger {
     public:
-      Logger(std::string name);
+      explicit Logger(std::string name);
 
       template <typename... Args>
       constexpr auto trace(spdlog::format_string_t<Args...> fmt, Args &&...args) -> void {
@@ -38,5 +35,7 @@ namespace JEM {
       std::shared_ptr<spdlog::logger> m_logger;
   };
 
-  Logger *getSystemLogger();
+  auto getSystemLogger() -> Logger *;
 } // namespace JEM
+
+#endif
