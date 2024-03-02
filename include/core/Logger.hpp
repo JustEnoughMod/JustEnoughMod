@@ -9,28 +9,28 @@ namespace JEM {
       explicit Logger(std::string name);
 
       template <typename... Args>
-      constexpr auto trace(spdlog::format_string_t<Args...> fmt, Args &&...args) -> void {
-        return m_logger->trace(std::forward<spdlog::format_string_t<Args...>>(fmt), std::forward<Args>(args)...);
+      constexpr auto trace(fmt::format_string<Args...> fmt, Args &&...args) -> void {
+        return m_logger->trace(fmt, std::forward<Args>(args)...);
       }
 
       template <typename... Args>
-      constexpr auto debug(spdlog::format_string_t<Args...> fmt, Args &&...args) -> void {
-        return m_logger->debug(std::forward<spdlog::format_string_t<Args...>>(fmt), std::forward<Args>(args)...);
+      constexpr auto debug(fmt::format_string<Args...> fmt, Args &&...args) -> void {
+        return m_logger->debug(fmt, std::forward<Args>(args)...);
       }
 
       template <typename... Args>
-      constexpr auto info(spdlog::format_string_t<Args...> fmt, Args &&...args) -> void {
-        return m_logger->info(std::forward<spdlog::format_string_t<Args...>>(fmt), std::forward<Args>(args)...);
+      constexpr auto info(fmt::format_string<Args...> fmt, Args &&...args) -> void {
+        return m_logger->info(fmt, std::forward<Args>(args)...);
       }
 
       template <typename... Args>
-      constexpr auto warn(spdlog::format_string_t<Args...> fmt, Args &&...args) -> void {
-        return m_logger->warn(std::forward<spdlog::format_string_t<Args...>>(fmt), std::forward<Args>(args)...);
+      constexpr auto warn(fmt::format_string<Args...> fmt, Args &&...args) -> void {
+        return m_logger->warn(fmt, std::forward<Args>(args)...);
       }
 
       template <typename... Args>
-      constexpr auto error(spdlog::format_string_t<Args...> fmt, Args &&...args) -> void {
-        return m_logger->error(std::forward<spdlog::format_string_t<Args...>>(fmt), std::forward<Args>(args)...);
+      constexpr auto error(fmt::format_string<Args...> fmt, Args &&...args) -> void {
+        return m_logger->error(fmt, std::forward<Args>(args)...);
       }
 
     private:
