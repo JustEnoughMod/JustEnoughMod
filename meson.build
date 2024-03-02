@@ -60,17 +60,17 @@ executable('JustEnoughMod',
     jem_dep
   ])
 
-clangtidy = find_program('clang-tidy', required: false)
-if clangtidy.found()
-  run_target(
-    'clang-tidy',
-    command: [
-      clangtidy,
-      '--header-filter=\'../include/*\'',
-      '--config-file=../.clang-tidy',
-      '--checks=*',
-      '--fix-errors',
-      '-p', meson.build_root(),
-    ] + src_files + jem_src
-  )
-endif
+# clangtidy = find_program('clang-tidy', required: false)
+# if clangtidy.found()
+#   run_target(
+#     'clang-tidy',
+#     command: [
+#       clangtidy,
+#       '--header-filter=\'../include/*\'',
+#       '--config-file=../.clang-tidy',
+#       '--checks=*',
+#       '--fix-errors',
+#       '-p', meson.build_root(),
+#     ] + src_files + jem_src
+#   )
+# endif

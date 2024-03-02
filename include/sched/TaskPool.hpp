@@ -9,7 +9,7 @@
 namespace JEM {
   class TaskPool {
     public:
-      explicit TaskPool(unsigned int count) {
+      TaskPool(unsigned int count = std::thread::hardware_concurrency()) {
         getSystemLogger()->info("Creating {} thread runners", count);
 
         for (int i = 0; i < count; i++) {

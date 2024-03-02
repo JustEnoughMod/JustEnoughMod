@@ -1,6 +1,8 @@
 #ifndef CORE_LOGGER_HPP
 #define CORE_LOGGER_HPP
 
+#include <spdlog/spdlog.h>
+
 namespace JEM {
   class Logger {
     public:

@@ -1,6 +1,11 @@
 #ifndef UTIL_QUEUE_HPP
 #define UTIL_QUEUE_HPP
 
+#include <condition_variable>
+#include <mutex>
+#include <queue>
+#include <thread>
+
 namespace JEM {
 
   template <typename T>

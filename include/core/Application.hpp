@@ -7,6 +7,8 @@
 #include <render/Renderer.hpp>
 #include <sched/TaskManager.hpp>
 
+#include <memory>
+
 namespace JEM {
   class Application : public std::enable_shared_from_this<Application> {
     public:
@@ -15,27 +17,27 @@ namespace JEM {
 
       void run();
 
-      static constexpr auto getAppVersion() -> Version {
+      [[nodiscard]] static constexpr auto getAppVersion() -> Version {
 #ifdef VERSION
-        return VERSION;
+        return Version(VERSION);
 #else
-        return "0.0.0";
+        return Version("0.0.0");
 #endif
       }
 
-      auto getWindow() const -> std::shared_ptr<Window> {
+      [[nodiscard]] auto getWindow() const -> std::shared_ptr<Window> {
         return m_window;
       }
 
-      auto getRenderer() const -> std::shared_ptr<Renderer> {
+      [[nodiscard]] auto getRenderer() const -> std::shared_ptr<Renderer> {
         return m_renderer;
       }
 
-      auto getPluginLoader() const -> std::shared_ptr<PluginLoader> {
+      [[nodiscard]] auto getPluginLoader() const -> std::shared_ptr<PluginLoader> {
         return m_pluginLoader;
       }
 
-      auto getEventManager() const -> std::shared_ptr<EventManager> {
+      [[nodiscard]] auto getEventManager() const -> std::shared_ptr<EventManager> {
         return m_eventManager;
       }
 

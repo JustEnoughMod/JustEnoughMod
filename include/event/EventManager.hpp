@@ -8,7 +8,8 @@
 
 #include <util/Queue.hpp>
 
-#include <utility>
+#include <any>
+#include <memory>
 
 namespace JEM {
   class EventManager : public AppModule {
