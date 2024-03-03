@@ -4,7 +4,7 @@ project('JustEnoughMod', 'cpp',
 
 add_project_arguments('-DVERSION="@0@"'.format(meson.project_version()), language : 'cpp')
 
-bgfx_proj = subproject('bgfx', default_options: ['warning_level=0'])
+bgfx_proj = subproject('bgfx', default_options: ['warning_level=0', 'with_wayland=true'])
 
 bgfx_dep = bgfx_proj.get_variable('bgfx_dep')
 bimg_dep = bgfx_proj.get_variable('bimg_dep')
