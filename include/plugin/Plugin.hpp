@@ -7,7 +7,7 @@
 #include <memory>
 
 #define JEM_PLUGIN_DEF(plugin)                                                                                         \
-  extern "C" Plugin *_createPlugin() {                                                                                 \
+  extern "C" auto _createPlugin()->Plugin * {                                                                          \
     return new plugin();                                                                                               \
   }
 

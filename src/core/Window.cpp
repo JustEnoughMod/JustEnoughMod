@@ -20,9 +20,9 @@ JEM::Window::Window(std::shared_ptr<Application> app, std::string title, int wid
   if (m_count == 0) {
     getSystemLogger()->trace("Initialize SDL");
 
-    #ifdef SDL_HINT_VIDEODRIVER
-      SDL_SetHint(SDL_HINT_VIDEODRIVER, "wayland,x11");
-    #endif
+#ifdef SDL_HINT_VIDEODRIVER
+    SDL_SetHint(SDL_HINT_VIDEODRIVER, "wayland,x11");
+#endif
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER) < 0) {
       getSystemLogger()->error("SDL could not initialize. SDL_Error: {}", SDL_GetError());

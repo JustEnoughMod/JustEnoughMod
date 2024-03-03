@@ -8,7 +8,7 @@ auto main([[maybe_unused]] int argc, char **argv) -> int {
     app->init(argv[0]);
 
     app->run();
-  } catch (std::exception e) {
+  } catch (std::exception &e) {
     JEM::getSystemLogger()->error("Unknown Exception: {}", e.what());
   }
 }
