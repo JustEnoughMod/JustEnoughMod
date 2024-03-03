@@ -9,27 +9,27 @@ namespace JEM {
       explicit Logger(std::string name);
 
       template <typename... Args>
-      constexpr auto trace(fmt::format_string<Args...> fmt, Args &&...args) -> void {
+      constexpr auto trace(spdlog::format_string_t<Args...> fmt, Args &&...args) -> void {
         return m_logger->trace(fmt, std::forward<Args>(args)...);
       }
 
       template <typename... Args>
-      constexpr auto debug(fmt::format_string<Args...> fmt, Args &&...args) -> void {
+      constexpr auto debug(spdlog::format_string_t<Args...> fmt, Args &&...args) -> void {
         return m_logger->debug(fmt, std::forward<Args>(args)...);
       }
 
       template <typename... Args>
-      constexpr auto info(fmt::format_string<Args...> fmt, Args &&...args) -> void {
+      constexpr auto info(spdlog::format_string_t<Args...> fmt, Args &&...args) -> void {
         return m_logger->info(fmt, std::forward<Args>(args)...);
       }
 
       template <typename... Args>
-      constexpr auto warn(fmt::format_string<Args...> fmt, Args &&...args) -> void {
+      constexpr auto warn(spdlog::format_string_t<Args...> fmt, Args &&...args) -> void {
         return m_logger->warn(fmt, std::forward<Args>(args)...);
       }
 
       template <typename... Args>
-      constexpr auto error(fmt::format_string<Args...> fmt, Args &&...args) -> void {
+      constexpr auto error(spdlog::format_string_t<Args...> fmt, Args &&...args) -> void {
         return m_logger->error(fmt, std::forward<Args>(args)...);
       }
 
