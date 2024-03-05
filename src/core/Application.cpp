@@ -1,5 +1,3 @@
-#include "pch.hpp"
-
 #include <core/Application.hpp>
 
 void JEM::Application::init(char *path) {

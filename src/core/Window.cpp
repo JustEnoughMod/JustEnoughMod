@@ -1,15 +1,18 @@
-#include "pch.hpp"
-
 #include <core/Window.hpp>
 
 #include <core/Application.hpp>
 #include <core/Logger.hpp>
 #include <event/EventManager.hpp>
 
+#include <SDL.h>
+#include <SDL_syswm.h>
+
 // fix vscode intellisense
 #ifdef __INTELLISENSE__
 #pragma diag_suppress 135
 #endif
+
+#include <wayland-egl.h>
 
 JEM::Window::Window(std::shared_ptr<Application> app, std::string title, int width, int height)
     : AppModule(app), m_title(title) {

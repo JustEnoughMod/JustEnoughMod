@@ -1,7 +1,5 @@
 #include <core/Logger.hpp>
 
-#include <spdlog/sinks/stdout_color_sinks.h>
-
 JEM::Logger::Logger(const std::string &name) {
   spdlog::set_pattern("[%T] [%=24!n] [%^%-7l%$] %v");
 

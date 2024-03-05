@@ -17,7 +17,7 @@ sdl2_dep = dependency('sdl2', default_options: ['warning_level=0'])
 wayland_dep = dependency('wayland-client', default_options: ['warning_level=0'])
 wayland_egl_dep = dependency('wayland-egl', default_options: ['warning_level=0'])
 
-incdir = [include_directories('include'), include_directories('pch')]
+incdir = include_directories('include')
 
 core_dep = [
   bgfx_dep,
@@ -41,8 +41,7 @@ jem_src = files(
 jem_lib = library('JustEnoughMod',
   jem_src,
   include_directories : incdir,
-  dependencies: core_dep,
-  cpp_pch : 'pch/pch.hpp'
+  dependencies: core_dep
 )
 
 jem_dep = declare_dependency(
@@ -60,17 +59,10 @@ executable('JustEnoughMod',
     jem_dep
   ])
 
-# clangtidy = find_program('clang-tidy', required: false)
-# if clangtidy.found()
-#   run_target(
-#     'clang-tidy',
-#     command: [
-#       clangtidy,
-#       '--header-filter=\'../include/*\'',
-#       '--config-file=../.clang-tidy',
-#       '--checks=*',
-#       '--fix-errors',
-#       '-p', meson.build_root(),
-#     ] + src_files + jem_src
-#   )
-# endif
+doxygen = find_program('doxygen', required : false)
+if doxygen.found()
+  message('Doxygen found')
+  run_target('docs', command : [doxygen, meson.source_root() + '/doc/Doxyfile'])
+else
+  warning('Documentation disabled without doxygen')
+endif
