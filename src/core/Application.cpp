@@ -1,6 +1,6 @@
-#include <core/Application.hpp>
+#include "pch.hpp"
 
-#include <memory>
+#include <core/Application.hpp>
 
 void JEM::Application::init(char *path) {
   m_quit = false;

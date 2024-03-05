@@ -1,3 +1,5 @@
+#include "pch.hpp"
+
 #include <plugin/PluginLoader.hpp>
 
 void JEM::PluginLoader::loadFile(std::string path, std::string name) {

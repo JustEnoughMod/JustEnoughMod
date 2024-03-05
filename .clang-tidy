@@ -1,5 +1,5 @@
 ---
-Checks:          'clang-diagnostic-*,clang-analyzer-*,android-*,boost-*,bugprone-*,cert-*,concurrency-*,misc-*,modernize-*,performance-*,readability-*,-readability-magic-numbers'
+Checks:          'clang-diagnostic-*,clang-analyzer-*,android-*,boost-*,bugprone-*,cert-*,concurrency-*,misc-*,modernize-*,performance-*,readability-*,-readability-magic-numbers,-misc-confusable-identifiers,-bugprone-easily-swappable-parameters,-readability-identifier-length'
 WarningsAsErrors: ''
 HeaderFilterRegex: ''
 AnalyzeTemporaryDtors: false

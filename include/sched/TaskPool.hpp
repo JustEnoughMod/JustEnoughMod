@@ -39,14 +39,12 @@ namespace JEM {
 
       void Runner(const std::stop_token token, int /*id*/) {
         while (!token.stop_requested()) {
-          {
-            std::unique_lock<std::mutex> lock(m_mutex);
+          std::unique_lock<std::mutex> lock(m_mutex);
 
-            m_cond.wait(lock, [this, &token]() { return !m_taskQueue.empty() || token.stop_requested(); });
+          m_cond.wait(lock, [this, &token]() { return !m_taskQueue.empty() || token.stop_requested(); });
 
-            lock.unlock();
-            m_cond.notify_one();
-          }
+          lock.unlock();
+          m_cond.notify_one();
 
           if (!m_taskQueue.empty() && !token.stop_requested()) {
             auto func = m_taskQueue.pop();

@@ -11,7 +11,7 @@
 namespace JEM {
   class PluginLoader : public AppModule {
     public:
-      explicit PluginLoader(std::shared_ptr<Application> app) : AppModule(std::move(app)) {}
+      explicit PluginLoader(std::shared_ptr<Application> app) : AppModule(app) {}
 
       void loadFile(std::string path, std::string name);
       void loadFolder(std::string path);

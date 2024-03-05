@@ -1,3 +1,4 @@
+#include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/spdlog.h>
 
 #include <bgfx/bgfx.h>
@@ -22,3 +23,10 @@
 #include <thread>
 #include <utility>
 #include <vector>
+
+// fix vscode intellisense
+#ifdef __INTELLISENSE__
+#pragma diag_suppress 1696
+#endif
+
+#include <wayland-egl.h>

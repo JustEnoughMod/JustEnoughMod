@@ -17,7 +17,7 @@ sdl2_dep = dependency('sdl2', default_options: ['warning_level=0'])
 wayland_dep = dependency('wayland-client', default_options: ['warning_level=0'])
 wayland_egl_dep = dependency('wayland-egl', default_options: ['warning_level=0'])
 
-incdir = include_directories('include')
+incdir = [include_directories('include'), include_directories('pch')]
 
 core_dep = [
   bgfx_dep,

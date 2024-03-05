@@ -6,7 +6,7 @@
 namespace JEM {
   class Logger {
     public:
-      explicit Logger(std::string name);
+      explicit Logger(const std::string &name);
 
       template <typename... Args>
       constexpr auto trace(spdlog::format_string_t<Args...> fmt, Args &&...args) -> void {

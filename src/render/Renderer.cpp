@@ -1,3 +1,5 @@
+#include "pch.hpp"
+
 #include <render/Renderer.hpp>
 
 #include <core/Application.hpp>
