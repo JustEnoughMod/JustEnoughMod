@@ -25,25 +25,29 @@
       pkgs = forAllSystems (system:
         import nixpkgs {
           inherit system;
-          overlays = [ self.overlay self.shell.${system}.overlay ];
+          overlays = [ self.overlays.${system}.default ];
         });
 
     in {
-      overlay = import ./overlay.nix { inherit bgfx dylib; };
+      overlays = forAllSystems
+        (_: { default = import ./overlay.nix { inherit bgfx dylib; }; });
 
-      shell = forAllSystems (system: {
-        overlay = _: prev: {
-          JustEnoughMod-shell = prev.JustEnoughMod.overrideAttrs (_: {
-            inherit (self.checks.${system}.pre-commit-check) shellHook;
+      devShells = forAllSystems (system: {
+        precommit = pkgs.${system}.mkShell {
+          inherit (self.checks.${system}.pre-commit-check) shellHook;
+        };
 
-            LD_LIBRARY_PATH =
-              prev.lib.makeLibraryPath [ prev.libGL prev.vulkan-loader ];
-          });
+        default = pkgs.${system}.mkShell {
+          inherit (self.checks.${system}.pre-commit-check) shellHook;
+
+          inherit (pkgs.${system}.JustEnoughMod) nativeBuildInputs buildInputs;
+
+          LD_LIBRARY_PATH = pkgs.${system}.lib.makeLibraryPath [
+            pkgs.${system}.libGL
+            pkgs.${system}.vulkan-loader
+          ];
         };
       });
-
-      devShells = forAllSystems
-        (system: { default = pkgs.${system}.JustEnoughMod-shell; });
 
       packages =
         forAllSystems (system: { default = pkgs.${system}.JustEnoughMod; });
