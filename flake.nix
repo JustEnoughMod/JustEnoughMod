@@ -205,6 +205,15 @@
             shfmt.enable = true;
 
             clang-format.enable = true;
+
+            cppcheck = {
+              enable = true;
+              name = "cppcheck";
+              types_or = [ "c" "c++" "objective-c" ];
+              entry = "${
+                  pkgs.${system}.cppcheck
+                }/bin/cppcheck -q --error-exitcode=1 --error-exitcode=1 --suppress=unmatchedSuppression --suppress=missingIncludeSystem --suppress=unusedFunction";
+            };
           };
         };
       });

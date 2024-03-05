@@ -1,8 +1,6 @@
 #ifndef EVENT_EVENTMANAGER_HPP
 #define EVENT_EVENTMANAGER_HPP
 
-#pragma once
-
 #include <core/AppModule.hpp>
 #include <event/Event.hpp>
 

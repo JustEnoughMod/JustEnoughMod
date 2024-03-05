@@ -1,8 +1,6 @@
 #ifndef RENDER_RENDERER_HPP
 #define RENDER_RENDERER_HPP
 
-#pragma once
-
 #include <core/AppModule.hpp>
 #include <core/Window.hpp>
 

@@ -1,8 +1,6 @@
 #ifndef EVENT_EVENT_HPP
 #define EVENT_EVENT_HPP
 
-#pragma once
-
 #include <event/Key.hpp>
 
 namespace JEM {

@@ -1,7 +1,7 @@
 { bgfx, dylib, ... }:
 final: _: {
   JustEnoughMod = with final;
-    clangStdenv.mkDerivation rec {
+    clangStdenv.mkDerivation {
       name = "JustEnoughMod";
 
       src = ./.;
