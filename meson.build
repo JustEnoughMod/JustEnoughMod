@@ -13,7 +13,7 @@ bx_dep = bgfx_proj.get_variable('bx_dep')
 dylib_dep = subproject('dylib', default_options: ['warning_level=0']).get_variable('dylib_dep')
 spdlog_dep = subproject('spdlog', default_options: ['warning_level=0', 'compile_library=false', 'std_format=enabled']).get_variable('spdlog_dep')
 
-sdl2_dep = dependency('sdl2', default_options: ['warning_level=0'])
+sdl2_dep = dependency('sdl2', default_options: ['warning_level=0', 'test=false'])
 wayland_dep = dependency('wayland-client', default_options: ['warning_level=0'])
 wayland_egl_dep = dependency('wayland-egl', default_options: ['warning_level=0'])
 
