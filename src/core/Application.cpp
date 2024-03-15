@@ -5,7 +5,7 @@ void JEM::Application::init(char *path) {
   m_taskManager = std::make_shared<TaskManager>(shared_from_this());
   m_eventManager = std::make_shared<EventManager>(shared_from_this());
   m_window = std::make_shared<Window>(shared_from_this(), "JustEnoughMod", 1000, 600);
-  m_renderer = std::make_shared<Renderer>(shared_from_this());
+  // m_renderer = std::make_shared<Renderer>(shared_from_this());
   m_pluginLoader = std::make_shared<PluginLoader>(shared_from_this());
 
   getSystemLogger()->info("Running JustEnoughMod Version {}", static_cast<std::string>(getAppVersion()));
@@ -16,7 +16,7 @@ void JEM::Application::init(char *path) {
 }
 
 JEM::Application::~Application() {
-  m_renderer.reset();
+  // m_renderer.reset();
   m_window.reset();
   m_pluginLoader.reset();
   m_eventManager.reset();
@@ -24,11 +24,9 @@ JEM::Application::~Application() {
 }
 
 void JEM::Application::run() {
-  for (const auto &plugin : getPluginLoader()->getNative()) {
-    plugin->init();
-  }
-
-  getSystemLogger()->trace("Using bgfx renderer: {}", bgfx::getRendererName(bgfx::getRendererType()));
+  // for (const auto &plugin : getPluginLoader()->getNative()) {
+  //   plugin->init();
+  // }
 
   while (!m_quit) {
     while (getWindow()->pollEvent())
@@ -56,12 +54,12 @@ void JEM::Application::run() {
       }
     }
 
-    getRenderer()->clear();
+    // getRenderer()->clear();
 
-    for (const auto &plugin : getPluginLoader()->getNative()) {
-      plugin->update();
-    }
+    // for (const auto &plugin : getPluginLoader()->getNative()) {
+    //   plugin->update();
+    // }
 
-    getRenderer()->draw();
+    // getRenderer()->draw();
   }
 }

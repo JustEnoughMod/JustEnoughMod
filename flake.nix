@@ -2,20 +2,13 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
-    bgfx = {
-      url = "https://github.com/JustEnoughMod/bgfx.meson";
-      ref = "main";
-      flake = false;
-      type = "git";
-      submodules = true;
-    };
     dylib = {
       url = "https://github.com/JustEnoughMod/dylib.meson";
       flake = false;
     };
   };
 
-  outputs = { self, nixpkgs, pre-commit-hooks, bgfx, dylib }:
+  outputs = { self, nixpkgs, pre-commit-hooks, dylib }:
     let
       supportedSystems =
         [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
@@ -30,7 +23,7 @@
 
     in {
       overlays = forAllSystems
-        (_: { default = import ./overlay.nix { inherit bgfx dylib; }; });
+        (_: { default = import ./overlay.nix { inherit dylib; }; });
 
       devShells = forAllSystems (system: {
         precommit = pkgs.${system}.mkShell {
@@ -42,10 +35,8 @@
 
           inherit (pkgs.${system}.JustEnoughMod) nativeBuildInputs buildInputs;
 
-          LD_LIBRARY_PATH = pkgs.${system}.lib.makeLibraryPath [
-            pkgs.${system}.libGL
-            pkgs.${system}.vulkan-loader
-          ];
+          LD_LIBRARY_PATH = pkgs.${system}.lib.makeLibraryPath
+            pkgs.${system}.JustEnoughMod.buildInputs;
         };
       });
 

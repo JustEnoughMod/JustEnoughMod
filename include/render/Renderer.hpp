@@ -9,17 +9,11 @@ namespace JEM {
     public:
       explicit Renderer(std::shared_ptr<Application> app);
 
-      ~Renderer() {
-        bgfx::shutdown();
-      }
+      ~Renderer() {}
 
-      static void clear() {
-        bgfx::touch(0);
-      }
+      static void clear() {}
 
-      static void draw() {
-        bgfx::frame();
-      }
+      static void draw() {}
 
     private:
   };

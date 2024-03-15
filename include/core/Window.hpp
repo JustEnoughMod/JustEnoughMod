@@ -6,18 +6,12 @@
 #include <core/AppModule.hpp>
 #include <event/Event.hpp>
 
-#include <bgfx/bgfx.h>
-#include <bgfx/platform.h>
-#include <bx/math.h>
-
 namespace JEM {
   class Window : public AppModule {
     public:
       Window(std::shared_ptr<Application> app, std::string title, int width, int height);
 
       ~Window();
-
-      auto getRendererBindings() -> bgfx::PlatformData;
 
       auto pollEvent() -> bool;
 

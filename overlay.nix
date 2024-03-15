@@ -1,4 +1,4 @@
-{ bgfx, dylib, ... }:
+{ dylib, ... }:
 final: _: {
   JustEnoughMod = with final;
     clangStdenv.mkDerivation {
@@ -10,10 +10,9 @@ final: _: {
 
       nativeBuildInputs =
         [ clang-tools pkg-config meson ninja makeWrapper doxygen graphviz ];
-      buildInputs = [ SDL2 spdlog libGL vulkan-loader wayland ];
+      buildInputs = [ SDL2 spdlog vulkan-loader wayland ];
 
       preConfigure = ''
-        cp -r ${bgfx} subprojects/bgfx
         cp -r ${dylib} subprojects/dylib
 
         chmod 777 -R subprojects
@@ -25,9 +24,7 @@ final: _: {
         cp JustEnoughMod $out/bin
         cp libJustEnoughMod.so $out/bin
         wrapProgram $out/bin/JustEnoughMod \
-          --prefix LD_LIBRARY_PATH : ${
-            lib.makeLibraryPath [ libGL vulkan-loader ]
-          }
+          --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ vulkan-loader ]}
       '';
     };
 }

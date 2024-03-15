@@ -1,24 +1,5 @@
 {
   "nodes": {
-    "bgfx": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1709469363,
-        "narHash": "sha256-2YC2ZkbUUgCHHtxXJv6Oyf+84TRPSbxk1AAodJRPmnw=",
-        "ref": "main",
-        "rev": "032b0a322a0e3372f72d288f511231ae82908f07",
-        "revCount": 33,
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/JustEnoughMod/bgfx.meson"
-      },
-      "original": {
-        "ref": "main",
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/JustEnoughMod/bgfx.meson"
-      }
-    },
     "dylib": {
       "flake": false,
       "locked": {
@@ -157,7 +138,6 @@
     },
     "root": {
       "inputs": {
-        "bgfx": "bgfx",
         "dylib": "dylib",
         "nixpkgs": "nixpkgs",
         "pre-commit-hooks": "pre-commit-hooks"
