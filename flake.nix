@@ -36,7 +36,7 @@
           inherit (pkgs.${system}.JustEnoughMod) nativeBuildInputs buildInputs;
 
           LD_LIBRARY_PATH = pkgs.${system}.lib.makeLibraryPath
-            pkgs.${system}.JustEnoughMod.buildInputs;
+            pkgs.${system}.JustEnoughMod.libPath;
         };
       });
 

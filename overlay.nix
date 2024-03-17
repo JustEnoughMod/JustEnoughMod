@@ -10,7 +10,16 @@ final: _: {
 
       nativeBuildInputs =
         [ clang-tools pkg-config meson ninja makeWrapper doxygen graphviz ];
-      buildInputs = [ SDL2 spdlog vulkan-loader wayland ];
+      buildInputs = [
+        glfw-wayland
+        wayland
+        spdlog
+        vulkan-headers
+        vulkan-loader
+        vulkan-validation-layers
+      ];
+
+      libPath = [ vulkan-loader ];
 
       preConfigure = ''
         cp -r ${dylib} subprojects/dylib
@@ -24,7 +33,7 @@ final: _: {
         cp JustEnoughMod $out/bin
         cp libJustEnoughMod.so $out/bin
         wrapProgram $out/bin/JustEnoughMod \
-          --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ vulkan-loader ]}
+          --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath libPath}
       '';
     };
 }
