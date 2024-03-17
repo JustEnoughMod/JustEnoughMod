@@ -7,8 +7,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
           folder: docs/html
-          config_file: ../Doxyfile
-          target_folder: docs
+          config_file: Doxyfile
 
 name: Doxygen GitHub Pages Deploy Action
 
