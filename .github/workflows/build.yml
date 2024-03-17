@@ -3,12 +3,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Set up GCC
-      uses: egor-tensin/setup-gcc@v1
+    - name: Install LLVM and Clang
+      uses: KyleMayes/install-llvm-action@v1.9.0
       with:
-        version: 14
-        platform: x64
-        cc: 1
+        version: "17.0"
     - uses: actions/setup-python@v5
       with:
         python-version: '3.12'
@@ -18,10 +16,19 @@ jobs:
       run: sudo apt-get install -y libglfw3-dev libwayland-dev libvulkan-dev
     - name: Prepare Build
       run: meson setup build
+      env:
+        CC: clang
+        CXX: clang++
     - name: Run Build
       run: meson compile -v -C build
+      env:
+        CC: clang
+        CXX: clang++
     - name: Run Test Suite
       run: meson test -v -C build
+      env:
+        CC: clang
+        CXX: clang++
 
 on:
   pull_request:
