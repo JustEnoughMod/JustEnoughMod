@@ -25,3 +25,7 @@ Later on we will implement a version system that allows to determine what versio
 ## How to get started with modding
 
 TBD !Currently no example plugin is implemented!
+
+## Documentation
+
+Documentation is generated with doxygen and published to GH-Pages [see here](https://justenoughmod.github.io/JustEnoughMod/).
