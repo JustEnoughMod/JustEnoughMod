@@ -33,7 +33,8 @@ var NAVTREE =
       [ "How it works", "md_README.html#autotoc_md4", null ],
       [ "What should a mod/plugin (not) do", "md_README.html#autotoc_md5", null ],
       [ "How about mod incompatibilities", "md_README.html#autotoc_md6", null ],
-      [ "How to get started with modding", "md_README.html#autotoc_md7", null ]
+      [ "How to get started with modding", "md_README.html#autotoc_md7", null ],
+      [ "Documentation", "md_README.html#autotoc_md8", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
