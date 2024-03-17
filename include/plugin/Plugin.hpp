@@ -2,6 +2,7 @@
 #define PLUGIN_PLUGIN_HPP
 
 #include <core/Logger.hpp>
+#include <string>
 #include <util/Version.hpp>
 
 #include <memory>

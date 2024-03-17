@@ -1,5 +1,7 @@
 #include <core/Application.hpp>
 
+#include <event/Event.hpp>
+
 void JEM::Application::init(char *path) {
   m_quit = false;
   m_taskManager = std::make_shared<TaskManager>(shared_from_this());
@@ -38,20 +40,20 @@ void JEM::Application::run() {
         break;
       }
 
-      if (std::any_cast<ExitEvent>(&anyEvent)) {
+      if (std::any_cast<ExitEvent>(&anyEvent) != nullptr) {
         getSystemLogger()->debug("Quit Event recieved, Application will close");
         m_quit = true;
-      } else if (const auto event = std::any_cast<MouseButtonPressedEvent>(&anyEvent)) {
+      } else if (auto *const event = std::any_cast<MouseButtonPressedEvent>(&anyEvent)) {
         getSystemLogger()->debug("Mouse Pressed Button: {}", static_cast<int>(event->button));
-      } else if (const auto event = std::any_cast<MouseButtonReleasedEvent>(&anyEvent)) {
+      } else if (auto *const event = std::any_cast<MouseButtonReleasedEvent>(&anyEvent)) {
         getSystemLogger()->debug("Mouse Released Button: {}", static_cast<int>(event->button));
-      } else if (const auto event = std::any_cast<KeyPressedEvent>(&anyEvent)) {
+      } else if (auto *const event = std::any_cast<KeyPressedEvent>(&anyEvent)) {
         getSystemLogger()->debug("Key Pressed: {}", static_cast<int>(event->key));
-      } else if (const auto event = std::any_cast<KeyReleasedEvent>(&anyEvent)) {
+      } else if (auto *const event = std::any_cast<KeyReleasedEvent>(&anyEvent)) {
         getSystemLogger()->debug("Key Released: {}", static_cast<int>(event->key));
-      } else if (const auto event = std::any_cast<TextInputEvent>(&anyEvent)) {
+      } else if (auto *const event = std::any_cast<TextInputEvent>(&anyEvent)) {
         getSystemLogger()->debug("Text Input: {}", static_cast<char>(event->unicode));
-      } else if (const auto event = std::any_cast<MouseWheelEvent>(&anyEvent)) {
+      } else if (auto *const event = std::any_cast<MouseWheelEvent>(&anyEvent)) {
         getSystemLogger()->debug("Mouse Wheel X: {}, Y: {}", event->x, event->y);
       }
     }

@@ -2,9 +2,9 @@
 #define CORE_WINDOW_HPP
 
 #include <core/AppModule.hpp>
-#include <event/Event.hpp>
 
 #include <GLFW/glfw3.h>
+#include <utility>
 
 namespace JEM {
   class Window : public AppModule {

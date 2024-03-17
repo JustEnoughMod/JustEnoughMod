@@ -2,7 +2,6 @@
 #define EVENT_EVENTMANAGER_HPP
 
 #include <core/AppModule.hpp>
-#include <event/Event.hpp>
 
 #include <util/Queue.hpp>
 

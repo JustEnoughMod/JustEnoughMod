@@ -2,16 +2,17 @@
 
 #include <core/Application.hpp>
 #include <core/Logger.hpp>
+#include <event/Event.hpp>
 #include <event/EventManager.hpp>
 
 #include <GLFW/glfw3.h>
 
 JEM::Window::Window(std::shared_ptr<Application> app, std::string title, int width, int height)
-    : AppModule(app), m_title(title) {
+    : AppModule(app), m_title(std::move(title)) {
   if (m_count == 0) {
     getSystemLogger()->trace("Initialize GLFW");
 
-    if (!glfwInit()) {
+    if (glfwInit() == 0) {
       const char *error;
       glfwGetError(&error);
       getSystemLogger()->critical("GLFW initialsation failed: {}", error);
@@ -21,10 +22,10 @@ JEM::Window::Window(std::shared_ptr<Application> app, std::string title, int wid
   }
   ++m_count;
 
-  m_window =
-      std::shared_ptr<GLFWwindow>(glfwCreateWindow(width, height, m_title.c_str(), NULL, NULL), glfwDestroyWindow);
+  m_window = std::shared_ptr<GLFWwindow>(glfwCreateWindow(width, height, m_title.c_str(), nullptr, nullptr),
+                                         glfwDestroyWindow);
 
-  if (m_window.get() == nullptr) {
+  if (m_window == nullptr) {
     const char *error;
     glfwGetError(&error);
     getSystemLogger()->critical("GLFW Window creation failed: {}", error);
@@ -54,7 +55,8 @@ JEM::Window::~Window() {
 }
 
 auto JEM::Window::getSize() const -> std::pair<int, int> {
-  int width, height;
+  int width;
+  int height;
 
   glfwGetWindowSize(m_window.get(), &width, &height);
 
@@ -72,17 +74,17 @@ auto JEM::Window::errorCallback(int error_code, const char *description) -> void
 }
 
 auto JEM::Window::cursorPosCallback(GLFWwindow *window, double xpos, double ypos) -> void {
-  Window *thisWindow = reinterpret_cast<Window *>(glfwGetWindowUserPointer(window));
+  auto *thisWindow = reinterpret_cast<Window *>(glfwGetWindowUserPointer(window));
   thisWindow->getApp()->getEventManager()->push(MouseMoveEvent{xpos, ypos});
 }
 
 auto JEM::Window::windowCloseCallback(GLFWwindow *window) -> void {
-  Window *thisWindow = reinterpret_cast<Window *>(glfwGetWindowUserPointer(window));
+  auto *thisWindow = reinterpret_cast<Window *>(glfwGetWindowUserPointer(window));
   thisWindow->getApp()->getEventManager()->push(ExitEvent{});
 }
 
-auto JEM::Window::mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) -> void {
-  Window *thisWindow = reinterpret_cast<Window *>(glfwGetWindowUserPointer(window));
+auto JEM::Window::mouseButtonCallback(GLFWwindow *window, int button, int action, int /*mods*/) -> void {
+  auto *thisWindow = reinterpret_cast<Window *>(glfwGetWindowUserPointer(window));
   if (action == GLFW_PRESS) {
     thisWindow->getApp()->getEventManager()->push(MouseButtonPressedEvent{static_cast<Mouse>(button)});
   } else if (action == GLFW_RELEASE) {
@@ -91,12 +93,12 @@ auto JEM::Window::mouseButtonCallback(GLFWwindow *window, int button, int action
 }
 
 auto JEM::Window::scrollCallback(GLFWwindow *window, double xoffset, double yoffset) -> void {
-  Window *thisWindow = reinterpret_cast<Window *>(glfwGetWindowUserPointer(window));
+  auto *thisWindow = reinterpret_cast<Window *>(glfwGetWindowUserPointer(window));
   thisWindow->getApp()->getEventManager()->push(MouseWheelEvent{xoffset, yoffset});
 }
 
-auto JEM::Window::keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods) -> void {
-  Window *thisWindow = reinterpret_cast<Window *>(glfwGetWindowUserPointer(window));
+auto JEM::Window::keyCallback(GLFWwindow *window, int key, int /*scancode*/, int action, int /*mods*/) -> void {
+  auto *thisWindow = reinterpret_cast<Window *>(glfwGetWindowUserPointer(window));
   if (action == GLFW_PRESS) {
     thisWindow->getApp()->getEventManager()->push(KeyPressedEvent{static_cast<Key>(key)});
   } else if (action == GLFW_RELEASE) {
@@ -105,6 +107,6 @@ auto JEM::Window::keyCallback(GLFWwindow *window, int key, int scancode, int act
 }
 
 auto JEM::Window::charCallback(GLFWwindow *window, unsigned int codepoint) -> void {
-  Window *thisWindow = reinterpret_cast<Window *>(glfwGetWindowUserPointer(window));
+  auto *thisWindow = reinterpret_cast<Window *>(glfwGetWindowUserPointer(window));
   thisWindow->getApp()->getEventManager()->push(TextInputEvent{codepoint});
 }

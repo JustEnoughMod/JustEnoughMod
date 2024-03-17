@@ -8,7 +8,7 @@ namespace JEM {
 
   class AppModule {
     public:
-      explicit AppModule(std::shared_ptr<Application> &app) : m_app(std::move(app)){};
+      explicit AppModule(std::shared_ptr<Application> &app) : m_app(app){};
 
     protected:
       [[nodiscard]] auto getApp() const -> std::shared_ptr<Application> {

@@ -13,8 +13,8 @@ namespace JEM {
     public:
       explicit PluginLoader(std::shared_ptr<Application> app) : AppModule(app) {}
 
-      void loadFile(std::string path, std::string name);
-      void loadFolder(std::string path);
+      void loadFile(const std::string &path, const std::string &name);
+      void loadFolder(const std::string &path);
 
       [[nodiscard]] auto getNative() const -> auto & {
         return m_pluginVec;
