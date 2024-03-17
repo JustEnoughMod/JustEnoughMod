@@ -25,16 +25,11 @@
 var NAVTREE =
 [
   [ "JustEnoughMod", "index.html", [
-    [ "Getting Started", "index.html", [
-      [ "Generating pre-commit hooks", "index.html#autotoc_md3", null ],
-      [ "Building project without nix", "index.html#autotoc_md4", [
-        [ "Dependency installation", "index.html#dependency", null ],
-        [ "Build commands", "index.html#autotoc_md5", null ]
-      ] ]
+    [ "Getting Started", "index.html", "index" ],
+    [ "FAQ", "md_docs_2FAQ.html", [
+      [ "Platform support", "md_docs_2FAQ.html#autotoc_md1", null ]
     ] ],
-    [ "FAQ", "md_docs_FAQ.html", [
-      [ "Platform support", "md_docs_FAQ.html#autotoc_md1", null ]
-    ] ],
+    [ "pag_example", "pag_example.html", null ],
     [ "JustEnoughMod", "md_README.html", [
       [ "How it works", "md_README.html#autotoc_md7", null ],
       [ "What should a mod/plugin (not) do", "md_README.html#autotoc_md8", null ],
@@ -42,20 +37,48 @@ var NAVTREE =
       [ "How to get started with modding", "md_README.html#autotoc_md10", null ],
       [ "Documentation", "md_README.html#autotoc_md11", null ]
     ] ],
+    [ "Bug List", "bug.html", null ],
+    [ "Topics", "topics.html", "topics" ],
+    [ "Namespaces", "namespaces.html", [
+      [ "Namespace List", "namespaces.html", "namespaces_dup" ],
+      [ "Namespace Members", "namespacemembers.html", [
+        [ "All", "namespacemembers.html", null ],
+        [ "Functions", "namespacemembers_func.html", null ]
+      ] ]
+    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
-      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ]
+      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
+      [ "Class Members", "functions.html", [
+        [ "All", "functions.html", null ],
+        [ "Functions", "functions_func.html", null ],
+        [ "Variables", "functions_vars.html", null ],
+        [ "Enumerations", "functions_enum.html", null ],
+        [ "Enumerator", "functions_eval.html", null ],
+        [ "Related Symbols", "functions_rela.html", null ]
+      ] ]
     ] ],
     [ "Files", "files.html", [
-      [ "File List", "files.html", "files_dup" ]
-    ] ]
+      [ "File List", "files.html", "files_dup" ],
+      [ "File Members", "globals.html", [
+        [ "All", "globals.html", null ],
+        [ "Functions", "globals_func.html", null ],
+        [ "Variables", "globals_vars.html", null ],
+        [ "Typedefs", "globals_type.html", null ],
+        [ "Enumerations", "globals_enum.html", null ],
+        [ "Enumerator", "globals_eval.html", null ],
+        [ "Macros", "globals_defs.html", null ]
+      ] ]
+    ] ],
+    [ "Examples", "examples.html", "examples" ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"AppModule_8hpp_source.html"
+"AppModule_8hpp_source.html",
+"structObject.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['version_49',['Version',['../classJEM_1_1Version.html',1,'JEM']]]
+  ['logger_0',['Logger',['../classJEM_1_1Logger.html',1,'JEM']]]
 ];

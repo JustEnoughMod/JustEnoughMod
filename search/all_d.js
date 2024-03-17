@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['window_26',['Window',['../classJEM_1_1Window.html',1,'JEM']]]
+  ['list_0',['Bug List',['../bug.html',1,'']]],
+  ['logger_1',['Logger',['../classJEM_1_1Logger.html',1,'JEM']]]
 ];
