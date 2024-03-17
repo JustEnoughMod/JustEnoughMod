@@ -6,7 +6,7 @@ jobs:
     - uses: cachix/install-nix-action@v22
       with:
         nix_path: nixpkgs=channel:nixos-unstable
-    - run: nix develop .#precommit
+    - run: nix develop .#precommit --ignore-environment
     - name: Install LLVM and Clang
       uses: KyleMayes/install-llvm-action@v1.9.0
       with:
