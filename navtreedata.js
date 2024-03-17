@@ -26,19 +26,21 @@ var NAVTREE =
 [
   [ "JustEnoughMod", "index.html", [
     [ "Getting Started", "index.html", [
-      [ "Generating pre-commit hooks", "index.html#autotoc_md2", null ],
-      [ "Building project without nix", "index.html#autotoc_md3", [
+      [ "Generating pre-commit hooks", "index.html#autotoc_md3", null ],
+      [ "Building project without nix", "index.html#autotoc_md4", [
         [ "Dependency installation", "index.html#dependency", null ],
-        [ "Build commands", "index.html#autotoc_md4", null ]
+        [ "Build commands", "index.html#autotoc_md5", null ]
       ] ]
     ] ],
-    [ "FAQ", "md_docs_FAQ.html", null ],
+    [ "FAQ", "md_docs_FAQ.html", [
+      [ "Platform support", "md_docs_FAQ.html#autotoc_md1", null ]
+    ] ],
     [ "JustEnoughMod", "md_README.html", [
-      [ "How it works", "md_README.html#autotoc_md6", null ],
-      [ "What should a mod/plugin (not) do", "md_README.html#autotoc_md7", null ],
-      [ "How about mod incompatibilities", "md_README.html#autotoc_md8", null ],
-      [ "How to get started with modding", "md_README.html#autotoc_md9", null ],
-      [ "Documentation", "md_README.html#autotoc_md10", null ]
+      [ "How it works", "md_README.html#autotoc_md7", null ],
+      [ "What should a mod/plugin (not) do", "md_README.html#autotoc_md8", null ],
+      [ "How about mod incompatibilities", "md_README.html#autotoc_md9", null ],
+      [ "How to get started with modding", "md_README.html#autotoc_md10", null ],
+      [ "Documentation", "md_README.html#autotoc_md11", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
