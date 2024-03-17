@@ -3,6 +3,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - name: Update Ubuntu
+      run: sudo apt-get update -y
     - name: Install GCC & G++ 14
       run: sudo apt-get install -y gcc-14 g++-14
     - uses: actions/setup-python@v5
