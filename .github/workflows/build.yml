@@ -4,9 +4,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Update Ubuntu
-      run: auto apt-get update -y
+      run: auto apt-get update
     - name: Upgrade Ubuntu
-      run: auto apt-get upgrade -y
+      run: auto apt-get upgrade
     - uses: actions/setup-python@v5
       with:
         python-version: '3.12'
