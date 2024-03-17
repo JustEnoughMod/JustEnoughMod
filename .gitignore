@@ -6,3 +6,4 @@ subprojects/*
 !subprojects/*.wrap
 !subprojects/doxygen-awesome-css
 .pre-commit-config.yaml
+.obsidian
