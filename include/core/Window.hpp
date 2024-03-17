@@ -41,6 +41,9 @@ namespace JEM {
       static auto cursorPosCallback(GLFWwindow *window, double xpos, double ypos) -> void;
       static auto windowCloseCallback(GLFWwindow *window) -> void;
       static auto mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) -> void;
+      static auto scrollCallback(GLFWwindow *window, double xoffset, double yoffset) -> void;
+      static auto keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods) -> void;
+      static auto charCallback(GLFWwindow *window, unsigned int codepoint) -> void;
   };
 } // namespace JEM
 

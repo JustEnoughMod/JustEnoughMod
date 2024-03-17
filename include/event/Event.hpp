@@ -20,8 +20,20 @@ namespace JEM {
   };
 
   struct MouseWheelEvent {
-      //   float x;
-      //   float y;
+      double x;
+      double y;
+  };
+
+  struct KeyPressedEvent {
+      Key key;
+  };
+
+  struct KeyReleasedEvent {
+      Key key;
+  };
+
+  struct TextInputEvent {
+      unsigned int unicode;
   };
 } // namespace JEM
 

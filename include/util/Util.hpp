@@ -13,7 +13,7 @@ namespace JEM {
       i *= 10;
       i += *ch - 48;
 
-      ch++;
+      ++ch;
     }
 
     return i;
@@ -23,12 +23,12 @@ namespace JEM {
     char *orig = path;
 
     while (*path != '\0') {
-      path++;
+      ++path;
     }
     while (*path != '/') {
-      path--;
+      --path;
     }
-    path++;
+    ++path;
     *path = '\0';
 
     return orig;

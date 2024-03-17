@@ -26,7 +26,7 @@ namespace JEM {
         major = atoi(token);
 
         do {
-          token++;
+          ++token;
           if (*token == '\0') {
             return;
           }
@@ -35,7 +35,7 @@ namespace JEM {
         minor = atoi(token);
 
         do {
-          token++;
+          ++token;
           if (*token == '\0') {
             return;
           }

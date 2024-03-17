@@ -11,7 +11,7 @@ namespace JEM {
   class TaskManager : public AppModule {
     public:
       explicit TaskManager(std::shared_ptr<Application> app) : AppModule(app) {
-        // for (int i = 0; i < 10000000; i++) {
+        // for (int i = 0; i < 10000000; ++i) {
         //   m_pool.push([i]() { getSystemLogger()->debug("Test Task {}", i + 1); });
         // }
       }

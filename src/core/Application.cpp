@@ -42,14 +42,18 @@ void JEM::Application::run() {
         getSystemLogger()->debug("Quit Event recieved, Application will close");
         m_quit = true;
       } else if (const auto event = std::any_cast<MouseButtonPressedEvent>(&anyEvent)) {
-        getSystemLogger()->debug("Mouse Pressed Button: {}", mouseToString(event->button));
+        getSystemLogger()->debug("Mouse Pressed Button: {}", static_cast<int>(event->button));
       } else if (const auto event = std::any_cast<MouseButtonReleasedEvent>(&anyEvent)) {
-        getSystemLogger()->debug("Mouse Released Button: {}", mouseToString(event->button));
+        getSystemLogger()->debug("Mouse Released Button: {}", static_cast<int>(event->button));
+      } else if (const auto event = std::any_cast<KeyPressedEvent>(&anyEvent)) {
+        getSystemLogger()->debug("Key Pressed: {}", static_cast<int>(event->key));
+      } else if (const auto event = std::any_cast<KeyReleasedEvent>(&anyEvent)) {
+        getSystemLogger()->debug("Key Released: {}", static_cast<int>(event->key));
+      } else if (const auto event = std::any_cast<TextInputEvent>(&anyEvent)) {
+        getSystemLogger()->debug("Text Input: {}", static_cast<char>(event->unicode));
+      } else if (const auto event = std::any_cast<MouseWheelEvent>(&anyEvent)) {
+        getSystemLogger()->debug("Mouse Wheel X: {}, Y: {}", event->x, event->y);
       }
-      // else if (const auto event = std::any_cast<MouseWheelEvent>(&anyEvent)) {
-      //   getSystemLogger()->debug("Mouse Wheel Direction: {}, X: {}, Y: {}", static_cast<int>(event->direction),
-      //                            event->x, event->y);
-      // }
     }
 
     getRenderer()->clear();

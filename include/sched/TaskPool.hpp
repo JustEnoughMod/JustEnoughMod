@@ -12,7 +12,7 @@ namespace JEM {
       TaskPool(unsigned int count = std::thread::hardware_concurrency()) {
         getSystemLogger()->info("Creating {} thread runners", count);
 
-        for (unsigned int i = 0; i < count; i++) {
+        for (unsigned int i = 0; i < count; ++i) {
           m_pool.emplace_back(std::bind_front(&TaskPool::Runner, this), i + 1);
         }
       }
