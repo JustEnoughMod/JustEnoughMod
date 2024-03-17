@@ -3,10 +3,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Install LLVM and Clang
-      uses: KyleMayes/install-llvm-action@v1.9.0
-      with:
-        version: "17.0"
+    - name: Update Tools
+      run: apt update -y && apt upgrade -y
     - uses: actions/setup-python@v5
       with:
         python-version: '3.12'
