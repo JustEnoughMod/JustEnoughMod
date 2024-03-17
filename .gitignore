@@ -1,6 +1,8 @@
 result
 build
+build_docs
 run
 subprojects/*
 !subprojects/*.wrap
+!subprojects/doxygen-awesome-css
 .pre-commit-config.yaml
