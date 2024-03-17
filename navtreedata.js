@@ -26,15 +26,19 @@ var NAVTREE =
 [
   [ "JustEnoughMod", "index.html", [
     [ "Getting Started", "index.html", [
-      [ "Welcome", "index.html#autotoc_md2", null ]
+      [ "Generating pre-commit hooks", "index.html#autotoc_md2", null ],
+      [ "Building project without nix", "index.html#autotoc_md3", [
+        [ "Dependency installation", "index.html#dependency", null ],
+        [ "Build commands", "index.html#autotoc_md4", null ]
+      ] ]
     ] ],
     [ "FAQ", "md_docs_FAQ.html", null ],
     [ "JustEnoughMod", "md_README.html", [
-      [ "How it works", "md_README.html#autotoc_md4", null ],
-      [ "What should a mod/plugin (not) do", "md_README.html#autotoc_md5", null ],
-      [ "How about mod incompatibilities", "md_README.html#autotoc_md6", null ],
-      [ "How to get started with modding", "md_README.html#autotoc_md7", null ],
-      [ "Documentation", "md_README.html#autotoc_md8", null ]
+      [ "How it works", "md_README.html#autotoc_md6", null ],
+      [ "What should a mod/plugin (not) do", "md_README.html#autotoc_md7", null ],
+      [ "How about mod incompatibilities", "md_README.html#autotoc_md8", null ],
+      [ "How to get started with modding", "md_README.html#autotoc_md9", null ],
+      [ "Documentation", "md_README.html#autotoc_md10", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
