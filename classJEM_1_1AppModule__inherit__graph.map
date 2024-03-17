@@ -1,0 +1,8 @@
+<map id="JEM::AppModule" name="JEM::AppModule">
+<area shape="rect" id="node1" title=" " alt="" coords="335,5,461,32"/>
+<area shape="rect" id="node2" href="$classJEM_1_1EventManager.html" title=" " alt="" coords="5,80,153,107"/>
+<area shape="rect" id="node3" href="$classJEM_1_1PluginLoader.html" title=" " alt="" coords="178,80,317,107"/>
+<area shape="rect" id="node4" href="$classJEM_1_1Renderer.html" title=" " alt="" coords="341,80,455,107"/>
+<area shape="rect" id="node5" href="$classJEM_1_1TaskManager.html" title=" " alt="" coords="479,80,619,107"/>
+<area shape="rect" id="node6" href="$classJEM_1_1Window.html" title=" " alt="" coords="643,80,750,107"/>
+</map>
