@@ -9,7 +9,7 @@ jobs:
     - name: Install Python Dependencies
       run: pip install meson ninja
     - name: Install Project Dependencies
-      run: sudo apt-get install -y libglfw3-dev libwayland-dev libspdlog-dev libvulkan-dev
+      run: sudo apt-get install -y libglfw3-dev libwayland-dev libvulkan-dev
     - name: Prepare Build
       run: meson setup build
     - name: Run Build
