@@ -1,5 +1,7 @@
 var NAVTREEINDEX1 =
 {
+"structJEM_1_1MouseButtonPressedEvent.html":[7,0,1,7],
+"structJEM_1_1MouseButtonReleasedEvent.html":[7,0,1,8],
 "structJEM_1_1MouseMoveEvent.html":[7,0,1,9],
 "structJEM_1_1MouseWheelEvent.html":[7,0,1,10],
 "structJEM_1_1TextInputEvent.html":[7,0,1,18],

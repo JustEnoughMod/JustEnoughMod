@@ -29,15 +29,17 @@ var NAVTREE =
     [ "FAQ", "md_docs_2FAQ.html", [
       [ "What is JEM exactly?", "md_docs_2FAQ.html#autotoc_md1", null ],
       [ "Why JEM?", "md_docs_2FAQ.html#autotoc_md2", null ],
-      [ "Platform support", "md_docs_2FAQ.html#autotoc_md3", null ]
+      [ "What is not going to be supported?", "md_docs_2FAQ.html#autotoc_md3", null ],
+      [ "Want to contribute?", "md_docs_2FAQ.html#autotoc_md4", null ],
+      [ "Platform support", "md_docs_2FAQ.html#autotoc_md5", null ]
     ] ],
     [ "pag_example", "pag_example.html", null ],
     [ "JustEnoughMod", "md_README.html", [
-      [ "How it works", "md_README.html#autotoc_md9", null ],
-      [ "What should a mod/plugin (not) do", "md_README.html#autotoc_md10", null ],
-      [ "How about mod incompatibilities", "md_README.html#autotoc_md11", null ],
-      [ "How to get started with modding", "md_README.html#autotoc_md12", null ],
-      [ "Documentation", "md_README.html#autotoc_md13", null ]
+      [ "How it works", "md_README.html#autotoc_md11", null ],
+      [ "What should a mod/plugin (not) do", "md_README.html#autotoc_md12", null ],
+      [ "How about mod incompatibilities", "md_README.html#autotoc_md13", null ],
+      [ "How to get started with modding", "md_README.html#autotoc_md14", null ],
+      [ "Documentation", "md_README.html#autotoc_md15", null ]
     ] ],
     [ "Bug List", "bug.html", null ],
     [ "Topics", "topics.html", "topics" ],
@@ -80,7 +82,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "AppModule_8hpp_source.html",
-"structJEM_1_1MouseMoveEvent.html"
+"structJEM_1_1MouseButtonPressedEvent.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
