@@ -28,6 +28,14 @@ Besides the stated pros above JEM aims to support following things:
 - High flexibility
 - Easy PLugin system
 
+## What is not going to be supported?
+
+Not much on this side besides web games. The reason is simply the Vulkan only ideology and high optimization for performance and possible support for FSR/DLSS, Raytracing, etc.
+
+## Want to contribute?
+
+JEM is open source and contributions are great. Just fork the project and make sure you installed pre-commit correctly (see Getting started).
+
 ## Platform support
 
 JEM does support Windows and Linux, however MacOS is possible but not developed currently due to the lack of tester.
