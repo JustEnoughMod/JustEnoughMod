@@ -4,6 +4,8 @@
 #include <core/AppModule.hpp>
 #include <memory>
 
+#include <vulkan/vulkan.h>
+
 namespace JEM {
   class Renderer : public AppModule {
     public:
@@ -16,6 +18,7 @@ namespace JEM {
       static void draw() {}
 
     private:
+      VkInstance instance;
   };
 } // namespace JEM
 

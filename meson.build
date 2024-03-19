@@ -8,8 +8,8 @@ dylib_dep = subproject('dylib', default_options: ['warning_level=0']).get_variab
 spdlog_dep = subproject('spdlog', default_options: ['warning_level=0', 'compile_library=false', 'std_format=enabled']).get_variable('spdlog_dep')
 
 glfw_dep = dependency('glfw3', default_options: ['warning_level=0'])
-wayland_dep = dependency('wayland-client', default_options: ['warning_level=0'])
-wayland_egl_dep = dependency('wayland-egl', default_options: ['warning_level=0'])
+
+vulkan_dep = dependency('vulkan', default_options: ['warning_level=0'])
 
 incdir = include_directories('include')
 
@@ -17,8 +17,7 @@ core_dep = [
   dylib_dep,
   glfw_dep,
   spdlog_dep,
-  wayland_dep,
-  wayland_egl_dep
+  vulkan_dep
 ]
 
 jem_src = files(
