@@ -114,8 +114,36 @@ $(function(){initNavTree('md_docs_2FAQ.html',''); initResizable(); });
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="autotoc_md0"></a> </p>
 <h1><a class="anchor" id="autotoc_md1"></a>
+What is JEM exactly?</h1>
+<p>JEM is a game engine that is packed as an executable. The game it self is loaded as dll and so are any mods/plugins.</p>
+<p>This reversed process has some benefits over normal linking:</p>
+<ul>
+<li>Default Plugin/modding support (Since everything is a dynamic plugin)</li>
+<li>Better Plugin performance since it is based on cpp (not an any interpreted language)</li>
+<li>Easier development of official plugin interfaces</li>
+<li>Game engine can just be used for multiple Games</li>
+<li>Game engine swapable or modable (modding of the Game Engine by replacing the executable is not recommended).</li>
+</ul>
+<p>There are also some minor drawbacks:</p>
+<ul>
+<li>Bigger Executable size (the whole game engine needs to be packed into the Executable no room for optimizations)</li>
+<li>Version management might be a bit more complicated for normal games, however it is not a lot more complicated than normal official modding support.</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Why JEM?</h1>
+<p>Besides the stated pros above JEM aims to support following things:</p>
+<ul>
+<li>Platform independent code</li>
+<li>Multithreading by default (ECS)</li>
+<li>Multiplayer support and interfaces</li>
+<li>High performance</li>
+<li>High flexibility</li>
+<li>Easy PLugin system</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md3"></a>
 Platform support</h1>
-<p>JEM does support Windows and Linux, however MacOS is currently due to the lack of tester. </p>
+<p>JEM does support Windows and Linux, however MacOS is possible but not developed currently due to the lack of tester.</p>
+<p>Android and IOS support is planned, however there is a lot of much more important stuff to do. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
