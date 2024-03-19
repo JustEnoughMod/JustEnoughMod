@@ -39,7 +39,7 @@ Following dependencies ar required for compiling:
 
 @note Optional libraries are recommended to speed up compile speed.
 
-### Build commands
+### Build commands {#build}
 
 Before building JEM you need to initialize meson first.
 
@@ -62,3 +62,42 @@ After that you can just type:
 ```
 
 or run the executable directly.
+
+Another handy script is:
+
+```shell
+./tidy.sh
+```
+
+This will run clang-tidy and check your code for possible improvements.
+
+For generating documentation you just need to call:
+
+```shell
+./docs.sh
+```
+
+## Building with nix
+
+For setting up the project using nix not other dependency than nix itself is needed. You might need to enable "nix-commands" and "flakes" as experimental features (see nix documentation).
+
+Following command will setup pre-commit and all needed dependencies (recommended for development):
+
+```shell
+nix develop
+```
+
+Now you can just proceed with @ref build.
+
+You can also build the project automatically into the result directory using
+```shell
+nix build
+```
+
+Another option is to directly run the directly after compile without the creation of the result directory:
+
+```shell
+nix run
+```
+
+@note `nix build` and `nix run` will recompile the project after every change without any cache. It is not recommend to use this for development, however it is recommend to use this for production.

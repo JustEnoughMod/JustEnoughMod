@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-ninja -C build docs
+doxygen ./Doxyfile
