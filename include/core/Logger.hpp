@@ -51,6 +51,7 @@ namespace JEM {
   };
 
   auto getSystemLogger() -> Logger *;
+  auto getVulkanLogger() -> Logger *;
 } // namespace JEM
 
 #endif

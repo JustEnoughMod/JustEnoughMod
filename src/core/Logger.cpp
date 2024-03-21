@@ -13,7 +13,12 @@ JEM::Logger::Logger(std::string name) : m_name(std::move(name)) {
   m_logger->set_level(spdlog::level::trace);
 }
 
-auto JEM::getSystemLogger() -> JEM::Logger * {
+auto JEM::getSystemLogger() -> Logger * {
   static Logger log("JustEnoughMod");
+  return &log;
+}
+
+auto JEM::getVulkanLogger() -> Logger * {
+  static Logger log("JEM-Vulkan");
   return &log;
 }

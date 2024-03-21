@@ -46,7 +46,37 @@ namespace JEM {
                                                           const VkDebugUtilsMessengerCallbackDataEXT *pCallbackData,
                                                           void *pUserData) {
 
-        getSystemLogger()->warn("validation layer: {}", pCallbackData->pMessage);
+        std::string prefix = "[UNKNOWN    ]";
+
+        switch (messageType) {
+          case VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT:
+            prefix = "[GENERAL    ]";
+            break;
+          case VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT:
+            prefix = "[VALIDATION ]";
+            break;
+          case VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT:
+            prefix = "[PERFORMANCE]";
+            break;
+        }
+
+        switch (messageSeverity) {
+          case VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT:
+            getVulkanLogger()->trace("{} {}", prefix, pCallbackData->pMessage);
+            break;
+          case VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT:
+            getVulkanLogger()->info("{} {}", prefix, pCallbackData->pMessage);
+            break;
+          case VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT:
+            getVulkanLogger()->warn("{} {}", prefix, pCallbackData->pMessage);
+            break;
+          case VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT:
+            getVulkanLogger()->error("{} {}", prefix, pCallbackData->pMessage);
+            break;
+          default:
+            getVulkanLogger()->error("UNKNOWN MESSAGE SEVERITY");
+            getVulkanLogger()->error("{} {}", prefix, pCallbackData->pMessage);
+        }
 
         return VK_FALSE;
       }
