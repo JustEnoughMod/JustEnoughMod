@@ -2,14 +2,14 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: JustEnoughMod/doxygen-github-pages-action@main
+      - uses: JustEnoughMod/DoxygenDeployAction@1.0.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
           folder: build_docs/html
           config_file: Doxyfile
 
-name: Doxygen GitHub Pages Deploy Action
+name: Doxygen Deploy Action
 
 on:
   push:
