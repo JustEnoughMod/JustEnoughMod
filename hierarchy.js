@@ -34,6 +34,7 @@ var hierarchy =
     [ "JEM::ExitEvent", "structJEM_1_1ExitEvent.html", null ],
     [ "Fn_Test", "classFn__Test.html", null ],
     [ "Include_Test", "classInclude__Test.html", null ],
+    [ "JEM::InstanceExtensions", "structJEM_1_1InstanceExtensions.html", null ],
     [ "Javadoc_Test", "classJavadoc__Test.html", null ],
     [ "JEM::KeyPressedEvent", "structJEM_1_1KeyPressedEvent.html", null ],
     [ "JEM::KeyReleasedEvent", "structJEM_1_1KeyReleasedEvent.html", null ],

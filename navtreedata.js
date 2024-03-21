@@ -35,11 +35,11 @@ var NAVTREE =
     ] ],
     [ "pag_example", "pag_example.html", null ],
     [ "JustEnoughMod", "md_README.html", [
-      [ "How it works", "md_README.html#autotoc_md11", null ],
-      [ "What should a mod/plugin (not) do", "md_README.html#autotoc_md12", null ],
-      [ "How about mod incompatibilities", "md_README.html#autotoc_md13", null ],
-      [ "How to get started with modding", "md_README.html#autotoc_md14", null ],
-      [ "Documentation", "md_README.html#autotoc_md15", null ]
+      [ "How it works", "md_README.html#autotoc_md10", null ],
+      [ "What should a mod/plugin (not) do", "md_README.html#autotoc_md11", null ],
+      [ "How about mod incompatibilities", "md_README.html#autotoc_md12", null ],
+      [ "How to get started with modding", "md_README.html#autotoc_md13", null ],
+      [ "Documentation", "md_README.html#autotoc_md14", null ]
     ] ],
     [ "Bug List", "bug.html", null ],
     [ "Topics", "topics.html", "topics" ],
@@ -82,7 +82,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "AppModule_8hpp_source.html",
-"structJEM_1_1MouseButtonPressedEvent.html"
+"structJEM_1_1KeyReleasedEvent.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

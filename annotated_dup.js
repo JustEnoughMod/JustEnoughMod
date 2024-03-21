@@ -8,6 +8,7 @@ var annotated_dup =
       [ "AppModule", "classJEM_1_1AppModule.html", null ],
       [ "EventManager", "classJEM_1_1EventManager.html", null ],
       [ "ExitEvent", "structJEM_1_1ExitEvent.html", null ],
+      [ "InstanceExtensions", "structJEM_1_1InstanceExtensions.html", null ],
       [ "KeyPressedEvent", "structJEM_1_1KeyPressedEvent.html", null ],
       [ "KeyReleasedEvent", "structJEM_1_1KeyReleasedEvent.html", null ],
       [ "Logger", "classJEM_1_1Logger.html", null ],

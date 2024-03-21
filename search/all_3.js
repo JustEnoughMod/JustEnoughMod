@@ -5,6 +5,6 @@ var searchData=
   ['be_20supported_2',['What is not going to be supported?',['../md_docs_2FAQ.html#autotoc_md3',1,'']]],
   ['bug_20list_3',['Bug List',['../bug.html',1,'']]],
   ['build_20commands_4',['Build commands',['../index.html#build',1,'']]],
-  ['building_20project_20without_20nix_5',['Building project without nix',['../index.html#autotoc_md8',1,'']]],
-  ['building_20with_20nix_6',['Building with nix',['../index.html#autotoc_md9',1,'']]]
+  ['building_20project_20without_20nix_5',['Building project without nix',['../index.html#autotoc_md7',1,'']]],
+  ['building_20with_20nix_6',['Building with nix',['../index.html#autotoc_md8',1,'']]]
 ];

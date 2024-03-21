@@ -1,10 +1,11 @@
 var NAVTREEINDEX1 =
 {
-"structJEM_1_1MouseButtonPressedEvent.html":[7,0,1,7],
-"structJEM_1_1MouseButtonReleasedEvent.html":[7,0,1,8],
-"structJEM_1_1MouseMoveEvent.html":[7,0,1,9],
-"structJEM_1_1MouseWheelEvent.html":[7,0,1,10],
-"structJEM_1_1TextInputEvent.html":[7,0,1,18],
+"structJEM_1_1KeyReleasedEvent.html":[7,0,1,6],
+"structJEM_1_1MouseButtonPressedEvent.html":[7,0,1,8],
+"structJEM_1_1MouseButtonReleasedEvent.html":[7,0,1,9],
+"structJEM_1_1MouseMoveEvent.html":[7,0,1,10],
+"structJEM_1_1MouseWheelEvent.html":[7,0,1,11],
+"structJEM_1_1TextInputEvent.html":[7,0,1,19],
 "structObject.html":[7,0,24],
 "structTruck.html":[7,0,34],
 "structTruck.html#ad0ac321609dda1a6c552488b05ec7ac8":[7,0,34,0],
