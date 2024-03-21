@@ -17,24 +17,21 @@ JEM::Renderer::Renderer(std::shared_ptr<Application> app) : AppModule(app) {
   createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
   createInfo.pApplicationInfo = &appInfo;
 
-  uint32_t glfwExtensionCount = 0;
-  const char **glfwExtensions;
+  InstanceExtensions instanceExtensions = getApp()->getWindow()->getInstanceExtensions();
 
-  glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
-
-  createInfo.enabledExtensionCount = glfwExtensionCount;
-  createInfo.ppEnabledExtensionNames = glfwExtensions;
+  createInfo.enabledExtensionCount = instanceExtensions.count;
+  createInfo.ppEnabledExtensionNames = instanceExtensions.names;
   createInfo.enabledLayerCount = 0;
 
   std::vector<const char *> requiredExtensions;
 
-  for (uint32_t i = 0; i < glfwExtensionCount; i++) {
-    requiredExtensions.emplace_back(glfwExtensions[i]);
+  for (uint32_t i = 0; i < instanceExtensions.count; i++) {
+    requiredExtensions.emplace_back(instanceExtensions.names[i]);
   }
 
-  requiredExtensions.emplace_back(VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME);
-
-  createInfo.flags |= VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR;
+  // Portability flags for MacOS
+  // requiredExtensions.emplace_back(VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME);
+  // createInfo.flags |= VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR;
 
   createInfo.enabledExtensionCount = (uint32_t)requiredExtensions.size();
   createInfo.ppEnabledExtensionNames = requiredExtensions.data();

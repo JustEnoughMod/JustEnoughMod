@@ -69,6 +69,15 @@ auto JEM::Window::pollEvent() -> void {
   glfwPollEvents();
 }
 
+[[nodiscard]] auto JEM::Window::getInstanceExtensions() const -> InstanceExtensions {
+  uint32_t glfwExtensionCount = 0;
+  const char **glfwExtensions;
+
+  glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
+
+  return {glfwExtensionCount, glfwExtensions};
+}
+
 auto JEM::Window::errorCallback(int error_code, const char *description) -> void {
   getSystemLogger()->error("GLFW error [{}] : {}", error_code, description);
 }

@@ -7,6 +7,11 @@
 #include <utility>
 
 namespace JEM {
+  struct InstanceExtensions {
+      uint32_t count;
+      const char **names;
+  };
+
   class Window : public AppModule {
     public:
       Window(std::shared_ptr<Application> app, std::string title, int width, int height);
@@ -26,6 +31,8 @@ namespace JEM {
         auto [width, height] = getSize();
         return height;
       }
+
+      [[nodiscard]] auto getInstanceExtensions() const -> InstanceExtensions;
 
       [[nodiscard]] auto getNative() const -> std::shared_ptr<GLFWwindow> {
         return m_window;

@@ -26,18 +26,22 @@ Besides the stated pros above JEM aims to support following things:
 - Multiplayer support and interfaces
 - High performance
 - High flexibility
-- Easy PLugin system
+- Easy Plugin system
 
 ## What is not going to be supported?
 
-Not much on this side besides web games. The reason is simply the Vulkan only ideology and high optimization for performance and possible support for FSR/DLSS, Raytracing, etc.
+Not much on this side besides web, mobile and hardware not capable of running Vulkan. The reason is simply the Vulkan only ideology and high optimization for performance and possible support for FSR/DLSS, Raytracing, etc.
+
+And if you are talking about platform compatibility. Well nowadays almost all hardware that is capable of running modern games supports Vulkan. Hardware that is older is very likely not capable of running those games. So it isn't worth the maintenance and possible performance regression for other platforms.
 
 ## Want to contribute?
 
-JEM is open source and contributions are great. Just fork the project and make sure you installed pre-commit correctly (see Getting started).
+JEM is open source and contributions are great. Just fork the project and make sure you installed pre-commit correctly (see @ref started). After this just make a Github PR.
 
 ## Platform support
 
-JEM does support Windows and Linux, however MacOS is possible but not developed currently due to the lack of tester.
+JEM does officially supports Windows and Linux.
 
-Android and IOS support is planned, however there is a lot of much more important stuff to do.
+However MacOS is possible but not planned currently due to the lack of tester and developers. Feel to make contributions for MacOS.
+
+Android and IOS support isn't very likely to be a thing in JEM (main problem is the plugin system). However feel free to make suggestions/discussions and creating contributions.
