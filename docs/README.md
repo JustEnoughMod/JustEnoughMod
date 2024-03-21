@@ -84,20 +84,28 @@ For setting up the project using nix not other dependency than nix itself is nee
 Following command will setup pre-commit and all needed dependencies (recommended for development):
 
 ```shell
-nix develop
+nix develop .#default
 ```
+
+If you want to setup only pre-commit without any other dependency you can run following command (not recommended for development):
+
+```shell
+nix develop .#precommit
+```
+
+@note With only precommit you will be able to check the code. However you wont be able to use any development scripts! Use carefully since you might be able to build the project incorrectly/unclean with system/nix dependency mix (DO NOT DO THIS).
 
 Now you can just proceed with @ref build.
 
 You can also build the project automatically into the result directory using
 ```shell
-nix build
+nix build .#default
 ```
 
 Another option is to directly run the directly after compile without the creation of the result directory:
 
 ```shell
-nix run
+nix run .#default
 ```
 
 @note `nix build` and `nix run` will recompile the project after every change without any cache. It is not recommend to use this for development, however it is recommend to use this for production.
