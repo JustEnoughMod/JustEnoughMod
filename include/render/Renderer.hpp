@@ -11,14 +11,22 @@ namespace JEM {
     public:
       explicit Renderer(std::shared_ptr<Application> app);
 
-      ~Renderer() = default;
+      ~Renderer();
 
-      static void clear() {}
+      auto clear() -> void {}
 
-      static void draw() {}
+      auto draw() -> void {}
 
     private:
       VkInstance instance;
+
+      auto checkValidationLayerSupport() -> bool;
+
+#ifdef NDEBUG
+      constexpr static const bool enableValidationLayers = false;
+#else
+      constexpr static const bool enableValidationLayers = true;
+#endif
   };
 } // namespace JEM
 

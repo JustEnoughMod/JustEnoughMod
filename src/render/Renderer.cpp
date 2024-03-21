@@ -5,6 +5,10 @@
 JEM::Renderer::Renderer(std::shared_ptr<Application> app) : AppModule(app) {
   getSystemLogger()->trace("Initializing Vulkan");
 
+  if (enableValidationLayers && !checkValidationLayerSupport()) {
+    getSystemLogger()->critical("validation layers requested, but not available!");
+  }
+
   VkApplicationInfo appInfo{};
   appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
   appInfo.pApplicationName = "JustEnoughMod";
@@ -39,4 +43,49 @@ JEM::Renderer::Renderer(std::shared_ptr<Application> app) : AppModule(app) {
   if (vkCreateInstance(&createInfo, nullptr, &instance) != VK_SUCCESS) {
     getSystemLogger()->critical("Vulkan: failed to create instance!");
   }
+
+  uint32_t extensionCount = 0;
+  vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
+
+  std::vector<VkExtensionProperties> extensions(extensionCount);
+  vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, extensions.data());
+
+  getSystemLogger()->debug("available extensions:");
+
+  for (const auto &extension : extensions) {
+    getSystemLogger()->debug("\t{}", extension.extensionName);
+  }
+}
+
+JEM::Renderer::~Renderer() {
+
+  getSystemLogger()->trace("Deinitialize Vulkan");
+  vkDestroyInstance(instance, nullptr);
+}
+
+auto JEM::Renderer::checkValidationLayerSupport() -> bool {
+  const std::vector<const char *> validationLayers = {"VK_LAYER_KHRONOS_validation"};
+
+  uint32_t layerCount;
+  vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
+
+  std::vector<VkLayerProperties> availableLayers(layerCount);
+  vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
+
+  for (const char *layerName : validationLayers) {
+    bool layerFound = false;
+
+    for (const auto &layerProperties : availableLayers) {
+      if (strcmp(layerName, layerProperties.layerName) == 0) {
+        layerFound = true;
+        break;
+      }
+    }
+
+    if (!layerFound) {
+      return false;
+    }
+  }
+
+  return true;
 }

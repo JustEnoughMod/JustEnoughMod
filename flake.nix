@@ -5,6 +5,9 @@
     dylib = {
       url = "https://github.com/JustEnoughMod/dylib.meson";
       flake = false;
+      ref = "main";
+      submodules = true;
+      type = "git";
     };
   };
 
@@ -37,6 +40,10 @@
 
           LD_LIBRARY_PATH = pkgs.${system}.lib.makeLibraryPath
             pkgs.${system}.JustEnoughMod.libPath;
+
+          VK_LAYER_PATH = "${
+              pkgs.${system}.vulkan-validation-layers
+            }/share/vulkan/explicit_layer.d";
         };
       });
 

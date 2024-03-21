@@ -1,7 +1,10 @@
 { dylib, ... }:
 final: _: {
   JustEnoughMod = with final;
-    clangStdenv.mkDerivation {
+    let libPath = [ vulkan-loader ];
+    in clangStdenv.mkDerivation {
+      inherit libPath;
+
       name = "JustEnoughMod";
 
       src = ./.;
@@ -18,8 +21,6 @@ final: _: {
         vulkan-loader
         vulkan-validation-layers
       ];
-
-      libPath = [ vulkan-loader ];
 
       preConfigure = ''
         cp -r ${dylib} subprojects/dylib

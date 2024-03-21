@@ -5,8 +5,8 @@ project('JustEnoughMod', 'cpp',
 add_project_arguments('-DVERSION="@0@"'.format(meson.project_version()), language : 'cpp')
 
 dylib_dep = subproject('dylib', default_options: ['warning_level=0']).get_variable('dylib_dep')
-spdlog_dep = subproject('spdlog', default_options: ['warning_level=0', 'compile_library=false', 'std_format=enabled']).get_variable('spdlog_dep')
 
+spdlog_dep = dependency('spdlog', default_options: ['warning_level=0', 'compile_library=false', 'std_format=enabled'])
 glfw_dep = dependency('glfw3', default_options: ['warning_level=0'])
 
 vulkan_dep = dependency('vulkan', default_options: ['warning_level=0'])
