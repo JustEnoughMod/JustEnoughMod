@@ -10,7 +10,7 @@ var searchData=
   ['test_3c_20void_20_2a_2c_20200_20_3e_7',['Test&lt; void *, 200 &gt;',['../classTest_3_01void_01_5_00_01200_01_4.html',1,'']]],
   ['testme_8',['testMe',['../classJavadoc__Test.html#a0c472683ed25ff096e8a9edfb18d550c',1,'Javadoc_Test::testMe()'],['../classQTstyle__Test.html#a8840748753118dd468e8368a28e49c62',1,'QTstyle_Test::testMe()']]],
   ['testmetoo_9',['testMeToo',['../classJavadoc__Test.html#ac2b39cabbe80957ae3e8bc2bd4e887f6',1,'Javadoc_Test::testMeToo()'],['../classQTstyle__Test.html#ad5b201f097a720d44bf976c2f27efbda',1,'QTstyle_Test::testMeToo()']]],
-  ['textinputevent_10',['TextInputEvent',['../structJEM_1_1TextInputEvent.html',1,'JEM']]],
+  ['textinputevent_10',['TextInputEvent',['../structJEM_1_1Event_1_1TextInputEvent.html',1,'JEM::Event']]],
   ['the_20fifth_20group_11',['The Fifth Group',['../group__group5.html',1,'']]],
   ['the_20first_20group_12',['The First Group',['../group__group1.html',1,'']]],
   ['the_20fourth_20group_13',['The Fourth Group',['../group__group4.html',1,'']]],

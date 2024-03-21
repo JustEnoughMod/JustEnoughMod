@@ -1,13 +1,13 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="Node000000" href="$classJEM_1_1AppModule.html" title=" " alt="" coords="5,104,132,129"/>
-<area shape="rect" id="Node000001" href="$classJEM_1_1EventManager.html" title=" " alt="" coords="180,5,328,31"/>
-<area shape="poly" id="edge6_Node000000_Node000001" title=" " alt="" coords="95,93,134,66,179,40,207,28,209,33,181,44,137,70,98,98"/>
-<area shape="rect" id="Node000002" href="$classJEM_1_1PluginLoader.html" title=" " alt="" coords="185,55,323,80"/>
-<area shape="poly" id="edge7_Node000000_Node000002" title=" " alt="" coords="129,98,204,78,206,83,131,103"/>
-<area shape="rect" id="Node000003" href="$classJEM_1_1Renderer.html" title=" " alt="" coords="197,104,311,129"/>
-<area shape="poly" id="edge8_Node000000_Node000003" title=" " alt="" coords="146,114,197,114,197,119,146,119"/>
-<area shape="rect" id="Node000004" href="$classJEM_1_1TaskManager.html" title=" " alt="" coords="184,153,324,179"/>
-<area shape="poly" id="edge9_Node000000_Node000004" title=" " alt="" coords="131,130,206,151,204,156,129,135"/>
-<area shape="rect" id="Node000005" href="$classJEM_1_1Window.html" title=" " alt="" coords="201,203,307,228"/>
-<area shape="poly" id="edge10_Node000000_Node000005" title=" " alt="" coords="99,135,137,162,181,188,211,200,209,205,179,192,134,166,96,140"/>
+<area shape="rect" id="Node000001" href="$classJEM_1_1EventManager.html" title=" " alt="" coords="199,5,347,31"/>
+<area shape="poly" id="edge6_Node000000_Node000001" title=" " alt="" coords="94,93,133,65,179,40,210,28,212,33,181,44,136,70,97,98"/>
+<area shape="rect" id="Node000002" href="$classJEM_1_1Plugin_1_1PluginLoader.html" title=" " alt="" coords="180,55,367,80"/>
+<area shape="poly" id="edge7_Node000000_Node000002" title=" " alt="" coords="134,98,219,77,220,83,136,103"/>
+<area shape="rect" id="Node000003" href="$classJEM_1_1Renderer.html" title=" " alt="" coords="217,104,330,129"/>
+<area shape="poly" id="edge8_Node000000_Node000003" title=" " alt="" coords="146,114,216,114,216,119,146,119"/>
+<area shape="rect" id="Node000004" href="$classJEM_1_1TaskManager.html" title=" " alt="" coords="203,153,343,179"/>
+<area shape="poly" id="edge9_Node000000_Node000004" title=" " alt="" coords="136,130,220,151,219,156,134,135"/>
+<area shape="rect" id="Node000005" href="$classJEM_1_1Window.html" title=" " alt="" coords="220,203,327,228"/>
+<area shape="poly" id="edge10_Node000000_Node000005" title=" " alt="" coords="98,136,136,163,181,188,221,202,219,207,179,192,133,167,95,140"/>
 </map>

@@ -13,5 +13,5 @@ var searchData=
   ['exactly_10',['What is JEM exactly?',['../md_docs_2FAQ.html#autotoc_md1',1,'']]],
   ['example_11',['example',['../classExample__Test.html#a22a62b12c65fd5e43b6eadaabb21ebb0',1,'Example_Test::example()'],['../classInclude__Test.html#aa286655e8f7f6a8ad203ef5fd8548b81',1,'Include_Test::example()'],['../classTag.html#acc641ffae34e2c4c03a6edf0a513be28',1,'Tag::example()']]],
   ['example_5ftest_12',['Example_Test',['../classExample__Test.html',1,'']]],
-  ['exitevent_13',['ExitEvent',['../structJEM_1_1ExitEvent.html',1,'JEM']]]
+  ['exitevent_13',['ExitEvent',['../structJEM_1_1Event_1_1ExitEvent.html',1,'JEM::Event']]]
 ];

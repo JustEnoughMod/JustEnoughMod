@@ -4,26 +4,30 @@ var annotated_dup =
       [ "PyClass", "classdocstring_1_1PyClass.html", "classdocstring_1_1PyClass" ]
     ] ],
     [ "JEM", null, [
+      [ "Event", null, [
+        [ "ExitEvent", "structJEM_1_1Event_1_1ExitEvent.html", null ],
+        [ "KeyPressedEvent", "structJEM_1_1Event_1_1KeyPressedEvent.html", null ],
+        [ "KeyReleasedEvent", "structJEM_1_1Event_1_1KeyReleasedEvent.html", null ],
+        [ "MouseButtonPressedEvent", "structJEM_1_1Event_1_1MouseButtonPressedEvent.html", null ],
+        [ "MouseButtonReleasedEvent", "structJEM_1_1Event_1_1MouseButtonReleasedEvent.html", null ],
+        [ "MouseMoveEvent", "structJEM_1_1Event_1_1MouseMoveEvent.html", null ],
+        [ "MouseWheelEvent", "structJEM_1_1Event_1_1MouseWheelEvent.html", null ],
+        [ "TextInputEvent", "structJEM_1_1Event_1_1TextInputEvent.html", null ]
+      ] ],
+      [ "Plugin", null, [
+        [ "Plugin", "classJEM_1_1Plugin_1_1Plugin.html", null ],
+        [ "PluginLoader", "classJEM_1_1Plugin_1_1PluginLoader.html", null ]
+      ] ],
       [ "Application", "classJEM_1_1Application.html", null ],
       [ "AppModule", "classJEM_1_1AppModule.html", null ],
       [ "EventManager", "classJEM_1_1EventManager.html", null ],
-      [ "ExitEvent", "structJEM_1_1ExitEvent.html", null ],
       [ "InstanceExtensions", "structJEM_1_1InstanceExtensions.html", null ],
-      [ "KeyPressedEvent", "structJEM_1_1KeyPressedEvent.html", null ],
-      [ "KeyReleasedEvent", "structJEM_1_1KeyReleasedEvent.html", null ],
       [ "Logger", "classJEM_1_1Logger.html", null ],
-      [ "MouseButtonPressedEvent", "structJEM_1_1MouseButtonPressedEvent.html", null ],
-      [ "MouseButtonReleasedEvent", "structJEM_1_1MouseButtonReleasedEvent.html", null ],
-      [ "MouseMoveEvent", "structJEM_1_1MouseMoveEvent.html", null ],
-      [ "MouseWheelEvent", "structJEM_1_1MouseWheelEvent.html", null ],
-      [ "Plugin", "classJEM_1_1Plugin.html", null ],
-      [ "PluginLoader", "classJEM_1_1PluginLoader.html", null ],
       [ "queue", "classJEM_1_1queue.html", null ],
       [ "Renderer", "classJEM_1_1Renderer.html", null ],
       [ "Task", "classJEM_1_1Task.html", null ],
       [ "TaskManager", "classJEM_1_1TaskManager.html", null ],
       [ "TaskPool", "classJEM_1_1TaskPool.html", null ],
-      [ "TextInputEvent", "structJEM_1_1TextInputEvent.html", null ],
       [ "Version", "classJEM_1_1Version.html", null ],
       [ "Window", "classJEM_1_1Window.html", null ]
     ] ],

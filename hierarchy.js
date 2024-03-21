@@ -9,7 +9,7 @@ var hierarchy =
     [ "Afterdoc_Test", "classAfterdoc__Test.html", null ],
     [ "JEM::AppModule", "classJEM_1_1AppModule.html", [
       [ "JEM::EventManager", "classJEM_1_1EventManager.html", null ],
-      [ "JEM::PluginLoader", "classJEM_1_1PluginLoader.html", null ],
+      [ "JEM::Plugin::PluginLoader", "classJEM_1_1Plugin_1_1PluginLoader.html", null ],
       [ "JEM::Renderer", "classJEM_1_1Renderer.html", null ],
       [ "JEM::TaskManager", "classJEM_1_1TaskManager.html", null ],
       [ "JEM::Window", "classJEM_1_1Window.html", null ]
@@ -31,19 +31,19 @@ var hierarchy =
     [ "Example_Test", "classExample__Test.html", [
       [ "Tag", "classTag.html", null ]
     ] ],
-    [ "JEM::ExitEvent", "structJEM_1_1ExitEvent.html", null ],
+    [ "JEM::Event::ExitEvent", "structJEM_1_1Event_1_1ExitEvent.html", null ],
     [ "Fn_Test", "classFn__Test.html", null ],
     [ "Include_Test", "classInclude__Test.html", null ],
     [ "JEM::InstanceExtensions", "structJEM_1_1InstanceExtensions.html", null ],
     [ "Javadoc_Test", "classJavadoc__Test.html", null ],
-    [ "JEM::KeyPressedEvent", "structJEM_1_1KeyPressedEvent.html", null ],
-    [ "JEM::KeyReleasedEvent", "structJEM_1_1KeyReleasedEvent.html", null ],
+    [ "JEM::Event::KeyPressedEvent", "structJEM_1_1Event_1_1KeyPressedEvent.html", null ],
+    [ "JEM::Event::KeyReleasedEvent", "structJEM_1_1Event_1_1KeyReleasedEvent.html", null ],
     [ "JEM::Logger", "classJEM_1_1Logger.html", null ],
     [ "Memgrp_Test", "classMemgrp__Test.html", null ],
-    [ "JEM::MouseButtonPressedEvent", "structJEM_1_1MouseButtonPressedEvent.html", null ],
-    [ "JEM::MouseButtonReleasedEvent", "structJEM_1_1MouseButtonReleasedEvent.html", null ],
-    [ "JEM::MouseMoveEvent", "structJEM_1_1MouseMoveEvent.html", null ],
-    [ "JEM::MouseWheelEvent", "structJEM_1_1MouseWheelEvent.html", null ],
+    [ "JEM::Event::MouseButtonPressedEvent", "structJEM_1_1Event_1_1MouseButtonPressedEvent.html", null ],
+    [ "JEM::Event::MouseButtonReleasedEvent", "structJEM_1_1Event_1_1MouseButtonReleasedEvent.html", null ],
+    [ "JEM::Event::MouseMoveEvent", "structJEM_1_1Event_1_1MouseMoveEvent.html", null ],
+    [ "JEM::Event::MouseWheelEvent", "structJEM_1_1Event_1_1MouseWheelEvent.html", null ],
     [ "Object", "structObject.html", [
       [ "Vehicle", "structVehicle.html", [
         [ "Car", "structCar.html", null ],
@@ -52,7 +52,7 @@ var hierarchy =
     ] ],
     [ "Overload_Test", "classOverload__Test.html", null ],
     [ "Par_Test", "classPar__Test.html", null ],
-    [ "JEM::Plugin", "classJEM_1_1Plugin.html", null ],
+    [ "JEM::Plugin::Plugin", "classJEM_1_1Plugin_1_1Plugin.html", null ],
     [ "docstring.PyClass", "classdocstring_1_1PyClass.html", null ],
     [ "pyexample.PyClass", "classpyexample_1_1PyClass.html", null ],
     [ "QTstyle_Test", "classQTstyle__Test.html", null ],
@@ -68,6 +68,6 @@ var hierarchy =
     [ "Test< void *, 200 >", "classTest_3_01void_01_5_00_01200_01_4.html", [
       [ "Test< T * >", "classTest_3_01T_01_5_01_4.html", null ]
     ] ],
-    [ "JEM::TextInputEvent", "structJEM_1_1TextInputEvent.html", null ],
+    [ "JEM::Event::TextInputEvent", "structJEM_1_1Event_1_1TextInputEvent.html", null ],
     [ "JEM::Version", "classJEM_1_1Version.html", null ]
 ];

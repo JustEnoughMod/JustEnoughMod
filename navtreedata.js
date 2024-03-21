@@ -82,7 +82,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "AppModule_8hpp_source.html",
-"structJEM_1_1KeyReleasedEvent.html"
+"structJEM_1_1Event_1_1MouseButtonPressedEvent.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

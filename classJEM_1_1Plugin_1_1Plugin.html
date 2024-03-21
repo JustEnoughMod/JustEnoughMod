@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>JustEnoughMod: JEM::MouseWheelEvent Struct Reference</title>
+<title>JustEnoughMod: JEM::Plugin::Plugin Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -83,7 +83,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){initNavTree('structJEM_1_1MouseWheelEvent.html',''); initResizable(); });
+$(function(){initNavTree('classJEM_1_1Plugin_1_1Plugin.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -110,30 +110,42 @@ $(function(){initNavTree('structJEM_1_1MouseWheelEvent.html',''); initResizable(
 
 <div class="header">
   <div class="summary">
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="structJEM_1_1MouseWheelEvent-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">JEM::MouseWheelEvent Struct Reference</div></div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classJEM_1_1Plugin_1_1Plugin-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">JEM::Plugin::Plugin Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a32b2b934c5c431887375360b579fd73b" id="r_a32b2b934c5c431887375360b579fd73b"><td class="memItemLeft" align="right" valign="top"><a id="a32b2b934c5c431887375360b579fd73b" name="a32b2b934c5c431887375360b579fd73b"></a>
-<a class="el" href="classJEM_1_1queue.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><b>x</b></td></tr>
-<tr class="separator:a32b2b934c5c431887375360b579fd73b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9a5d86eee1a78b2741e42d1b6a88d2d" id="r_ae9a5d86eee1a78b2741e42d1b6a88d2d"><td class="memItemLeft" align="right" valign="top"><a id="ae9a5d86eee1a78b2741e42d1b6a88d2d" name="ae9a5d86eee1a78b2741e42d1b6a88d2d"></a>
-<a class="el" href="classJEM_1_1queue.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><b>y</b></td></tr>
-<tr class="separator:ae9a5d86eee1a78b2741e42d1b6a88d2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a4fdcc7ef1035ff72f4b918b90829cac6" id="r_a4fdcc7ef1035ff72f4b918b90829cac6"><td class="memItemLeft" align="right" valign="top"><a id="a4fdcc7ef1035ff72f4b918b90829cac6" name="a4fdcc7ef1035ff72f4b918b90829cac6"></a>
+<a class="el" href="classJEM_1_1queue.html">virtual</a> <a class="el" href="classJEM_1_1queue.html">constexpr</a> <a class="el" href="classJEM_1_1queue.html">auto</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getPluginName</b> () -&gt; <a class="el" href="classJEM_1_1queue.html">const</a> <a class="el" href="classJEM_1_1queue.html">char</a> *=0</td></tr>
+<tr class="separator:a4fdcc7ef1035ff72f4b918b90829cac6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b0413d4a9346d18f9c2152d3d2f4568" id="r_a0b0413d4a9346d18f9c2152d3d2f4568"><td class="memItemLeft" align="right" valign="top"><a id="a0b0413d4a9346d18f9c2152d3d2f4568" name="a0b0413d4a9346d18f9c2152d3d2f4568"></a>
+<a class="el" href="classJEM_1_1queue.html">virtual</a> <a class="el" href="classJEM_1_1queue.html">constexpr</a> <a class="el" href="classJEM_1_1queue.html">auto</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getPluginVersion</b> () -&gt; <a class="el" href="classJEM_1_1Version.html">Version</a></td></tr>
+<tr class="separator:a0b0413d4a9346d18f9c2152d3d2f4568"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b8c5cc503f5941fb2c13ca6314c4542" id="r_a7b8c5cc503f5941fb2c13ca6314c4542"><td class="memItemLeft" align="right" valign="top"><a id="a7b8c5cc503f5941fb2c13ca6314c4542" name="a7b8c5cc503f5941fb2c13ca6314c4542"></a>
+<a class="el" href="classJEM_1_1queue.html">virtual</a> <a class="el" href="classJEM_1_1queue.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> ()=0</td></tr>
+<tr class="separator:a7b8c5cc503f5941fb2c13ca6314c4542"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ddbb588013f33f73fda6c75553d051d" id="r_a2ddbb588013f33f73fda6c75553d051d"><td class="memItemLeft" align="right" valign="top"><a id="a2ddbb588013f33f73fda6c75553d051d" name="a2ddbb588013f33f73fda6c75553d051d"></a>
+<a class="el" href="classJEM_1_1queue.html">virtual</a> <a class="el" href="classJEM_1_1queue.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> ()=0</td></tr>
+<tr class="separator:a2ddbb588013f33f73fda6c75553d051d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebf9501a10e0273aa9e7e64d4a796120" id="r_aebf9501a10e0273aa9e7e64d4a796120"><td class="memItemLeft" align="right" valign="top"><a id="aebf9501a10e0273aa9e7e64d4a796120" name="aebf9501a10e0273aa9e7e64d4a796120"></a>
+<a class="el" href="classJEM_1_1queue.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>load</b> ()</td></tr>
+<tr class="separator:aebf9501a10e0273aa9e7e64d4a796120"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc21e8a9cb62d665c8809a6acb0db234" id="r_acc21e8a9cb62d665c8809a6acb0db234"><td class="memItemLeft" align="right" valign="top"><a id="acc21e8a9cb62d665c8809a6acb0db234" name="acc21e8a9cb62d665c8809a6acb0db234"></a>
+<a class="el" href="classJEM_1_1queue.html">auto</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getLogger</b> () <a class="el" href="classJEM_1_1queue.html">const</a> -&gt; std::shared_ptr&lt; <a class="el" href="classJEM_1_1Logger.html">Logger</a> &gt;</td></tr>
+<tr class="separator:acc21e8a9cb62d665c8809a6acb0db234"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>include/event/<a class="el" href="Event_8hpp_source.html">Event.hpp</a></li>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>include/plugin/<a class="el" href="Plugin_8hpp_source.html">Plugin.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>JEM</b></li><li class="navelem"><a class="el" href="structJEM_1_1MouseWheelEvent.html">MouseWheelEvent</a></li>
+    <li class="navelem"><b>JEM</b></li><li class="navelem"><b>Plugin</b></li><li class="navelem"><a class="el" href="classJEM_1_1Plugin_1_1Plugin.html">Plugin</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>
