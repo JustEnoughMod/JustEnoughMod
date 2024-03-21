@@ -3,7 +3,7 @@
 
 #include <event/Key.hpp>
 
-namespace JEM {
+namespace JEM::Event {
   struct ExitEvent {};
 
   struct MouseMoveEvent {
@@ -35,6 +35,6 @@ namespace JEM {
   struct TextInputEvent {
       unsigned int unicode;
   };
-} // namespace JEM
+} // namespace JEM::Event
 
 #endif

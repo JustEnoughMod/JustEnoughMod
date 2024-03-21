@@ -8,7 +8,7 @@ void JEM::Application::init(char *path) {
   m_eventManager = std::make_shared<EventManager>(shared_from_this());
   m_window = std::make_shared<Window>(shared_from_this(), "JustEnoughMod", 1000, 600);
   m_renderer = std::make_shared<Renderer>(shared_from_this());
-  m_pluginLoader = std::make_shared<PluginLoader>(shared_from_this());
+  m_pluginLoader = std::make_shared<Plugin::PluginLoader>(shared_from_this());
 
   getSystemLogger()->info("Running JustEnoughMod Version {}", static_cast<std::string>(getAppVersion()));
 
@@ -40,20 +40,20 @@ void JEM::Application::run() {
         break;
       }
 
-      if (std::any_cast<ExitEvent>(&anyEvent) != nullptr) {
+      if (std::any_cast<Event::ExitEvent>(&anyEvent) != nullptr) {
         getSystemLogger()->debug("Quit Event recieved, Application will close");
         m_quit = true;
-      } else if (auto *const event = std::any_cast<MouseButtonPressedEvent>(&anyEvent)) {
+      } else if (auto *const event = std::any_cast<Event::MouseButtonPressedEvent>(&anyEvent)) {
         getSystemLogger()->debug("Mouse Pressed Button: {}", static_cast<int>(event->button));
-      } else if (auto *const event = std::any_cast<MouseButtonReleasedEvent>(&anyEvent)) {
+      } else if (auto *const event = std::any_cast<Event::MouseButtonReleasedEvent>(&anyEvent)) {
         getSystemLogger()->debug("Mouse Released Button: {}", static_cast<int>(event->button));
-      } else if (auto *const event = std::any_cast<KeyPressedEvent>(&anyEvent)) {
+      } else if (auto *const event = std::any_cast<Event::KeyPressedEvent>(&anyEvent)) {
         getSystemLogger()->debug("Key Pressed: {}", static_cast<int>(event->key));
-      } else if (auto *const event = std::any_cast<KeyReleasedEvent>(&anyEvent)) {
+      } else if (auto *const event = std::any_cast<Event::KeyReleasedEvent>(&anyEvent)) {
         getSystemLogger()->debug("Key Released: {}", static_cast<int>(event->key));
-      } else if (auto *const event = std::any_cast<TextInputEvent>(&anyEvent)) {
+      } else if (auto *const event = std::any_cast<Event::TextInputEvent>(&anyEvent)) {
         getSystemLogger()->debug("Text Input: {}", static_cast<char>(event->unicode));
-      } else if (auto *const event = std::any_cast<MouseWheelEvent>(&anyEvent)) {
+      } else if (auto *const event = std::any_cast<Event::MouseWheelEvent>(&anyEvent)) {
         getSystemLogger()->debug("Mouse Wheel X: {}, Y: {}", event->x, event->y);
       }
     }

@@ -8,7 +8,7 @@
 
 #include <utility>
 
-namespace JEM {
+namespace JEM::Plugin {
   class PluginLoader : public AppModule {
     public:
       explicit PluginLoader(std::shared_ptr<Application> app) : AppModule(app) {}
@@ -25,6 +25,6 @@ namespace JEM {
           m_dylibVec; // add dylib object to vector so that the Plugin doesn't outlive the Loader
       std::vector<std::shared_ptr<Plugin>> m_pluginVec;
   };
-} // namespace JEM
+} // namespace JEM::Plugin
 
 #endif

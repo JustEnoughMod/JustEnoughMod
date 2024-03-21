@@ -84,38 +84,38 @@ auto JEM::Window::errorCallback(int error_code, const char *description) -> void
 
 auto JEM::Window::cursorPosCallback(GLFWwindow *window, double xpos, double ypos) -> void {
   auto *thisWindow = reinterpret_cast<Window *>(glfwGetWindowUserPointer(window));
-  thisWindow->getApp()->getEventManager()->push(MouseMoveEvent{xpos, ypos});
+  thisWindow->getApp()->getEventManager()->push(Event::MouseMoveEvent{xpos, ypos});
 }
 
 auto JEM::Window::windowCloseCallback(GLFWwindow *window) -> void {
   auto *thisWindow = reinterpret_cast<Window *>(glfwGetWindowUserPointer(window));
-  thisWindow->getApp()->getEventManager()->push(ExitEvent{});
+  thisWindow->getApp()->getEventManager()->push(Event::ExitEvent{});
 }
 
 auto JEM::Window::mouseButtonCallback(GLFWwindow *window, int button, int action, int /*mods*/) -> void {
   auto *thisWindow = reinterpret_cast<Window *>(glfwGetWindowUserPointer(window));
   if (action == GLFW_PRESS) {
-    thisWindow->getApp()->getEventManager()->push(MouseButtonPressedEvent{static_cast<Mouse>(button)});
+    thisWindow->getApp()->getEventManager()->push(Event::MouseButtonPressedEvent{static_cast<Mouse>(button)});
   } else if (action == GLFW_RELEASE) {
-    thisWindow->getApp()->getEventManager()->push(MouseButtonReleasedEvent{static_cast<Mouse>(button)});
+    thisWindow->getApp()->getEventManager()->push(Event::MouseButtonReleasedEvent{static_cast<Mouse>(button)});
   }
 }
 
 auto JEM::Window::scrollCallback(GLFWwindow *window, double xoffset, double yoffset) -> void {
   auto *thisWindow = reinterpret_cast<Window *>(glfwGetWindowUserPointer(window));
-  thisWindow->getApp()->getEventManager()->push(MouseWheelEvent{xoffset, yoffset});
+  thisWindow->getApp()->getEventManager()->push(Event::MouseWheelEvent{xoffset, yoffset});
 }
 
 auto JEM::Window::keyCallback(GLFWwindow *window, int key, int /*scancode*/, int action, int /*mods*/) -> void {
   auto *thisWindow = reinterpret_cast<Window *>(glfwGetWindowUserPointer(window));
   if (action == GLFW_PRESS) {
-    thisWindow->getApp()->getEventManager()->push(KeyPressedEvent{static_cast<Key>(key)});
+    thisWindow->getApp()->getEventManager()->push(Event::KeyPressedEvent{static_cast<Key>(key)});
   } else if (action == GLFW_RELEASE) {
-    thisWindow->getApp()->getEventManager()->push(KeyReleasedEvent{static_cast<Key>(key)});
+    thisWindow->getApp()->getEventManager()->push(Event::KeyReleasedEvent{static_cast<Key>(key)});
   }
 }
 
 auto JEM::Window::charCallback(GLFWwindow *window, unsigned int codepoint) -> void {
   auto *thisWindow = reinterpret_cast<Window *>(glfwGetWindowUserPointer(window));
-  thisWindow->getApp()->getEventManager()->push(TextInputEvent{codepoint});
+  thisWindow->getApp()->getEventManager()->push(Event::TextInputEvent{codepoint});
 }

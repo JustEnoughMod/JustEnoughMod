@@ -33,7 +33,7 @@ namespace JEM {
         return m_renderer;
       }
 
-      [[nodiscard]] auto getPluginLoader() const -> std::shared_ptr<PluginLoader> {
+      [[nodiscard]] auto getPluginLoader() const -> std::shared_ptr<Plugin::PluginLoader> {
         return m_pluginLoader;
       }
 
@@ -44,7 +44,7 @@ namespace JEM {
     private:
       std::shared_ptr<Window> m_window;
       std::shared_ptr<Renderer> m_renderer;
-      std::shared_ptr<PluginLoader> m_pluginLoader;
+      std::shared_ptr<Plugin::PluginLoader> m_pluginLoader;
       std::shared_ptr<EventManager> m_eventManager;
       std::shared_ptr<TaskManager> m_taskManager;
 

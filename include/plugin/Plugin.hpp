@@ -8,11 +8,11 @@
 #include <memory>
 
 #define JEM_PLUGIN_DEF(plugin)                                                                                         \
-  extern "C" auto _createPlugin()->Plugin * {                                                                          \
+  extern "C" auto _createPlugin()->JEM::Plugin::Plugin * {                                                             \
     return new plugin();                                                                                               \
   }
 
-namespace JEM {
+namespace JEM::Plugin {
   class Plugin {
     public:
       virtual ~Plugin() = default;
@@ -38,6 +38,6 @@ namespace JEM {
     private:
       std::shared_ptr<Logger> m_logger;
   };
-} // namespace JEM
+} // namespace JEM::Plugin
 
 #endif
