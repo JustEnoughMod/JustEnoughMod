@@ -30,6 +30,8 @@ jobs:
         CC: clang
         CXX: clang++
 
+name: Build Action
+
 on:
   pull_request:
   push:

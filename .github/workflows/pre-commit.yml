@@ -13,6 +13,8 @@ jobs:
     - uses: pre-commit-ci/lite-action@v1.0.2
       if: always()
 
+name: Pre-commit Action
+
 on:
   pull_request:
   push:
